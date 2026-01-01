@@ -2,6 +2,40 @@
 
 export type SkillCategory = 'Development' | 'Business' | 'Tools' | 'Languages'
 
+// --- TYPER & INTERFACES ---
+
+export interface Attachment {
+  name: string
+  url: string
+  type: 'link' | 'file'
+}
+
+export interface Reference {
+  name: string
+  role: string
+  company: string
+  contact?: string
+  quote?: string
+  image?: string
+}
+
+// Uppdaterad för att stödja alla grafer
+export type AchievementType = 'stat' | 'progress' | 'donut' | 'bar' | 'graph'
+
+export interface Achievement {
+  type: AchievementType
+  label: string
+  value: string | number
+  subtext?: string
+
+  // För progress/donut
+  target?: number
+  current?: number
+
+  // För bar/graph
+  data?: { label: string; value: number; color?: string }[]
+}
+
 export interface Skill {
   id: string
   name: string
@@ -18,6 +52,9 @@ export interface Experience {
   summary: string
   description: string[]
   relatedSkills: string[]
+  achievements?: Achievement[]
+  attachments?: Attachment[]
+  references?: Reference[]
 }
 
 export interface Education {
@@ -28,6 +65,7 @@ export interface Education {
   summary: string
   details?: string[]
   relatedSkills?: string[]
+  attachments?: Attachment[]
 }
 
 export interface Certificate {
@@ -36,6 +74,7 @@ export interface Certificate {
   date: string
   url?: string
   relatedSkills?: string[]
+  attachments?: Attachment[]
 }
 
 export interface Project {
@@ -44,6 +83,7 @@ export interface Project {
   imgSrc?: string
   href?: string
   relatedSkills: string[]
+  attachments?: Attachment[]
 }
 
 export interface Award {
@@ -89,8 +129,129 @@ export const SKILLS: Record<string, Skill> = {
 
 export const getSkills = (ids: string[]) => ids.map((id) => SKILLS[id]).filter(Boolean)
 
-// --- 2. ERFARENHET ---
+// --- 2. ERFARENHET (DEMO AV ALLA GRAFER) ---
 export const experienceData: Experience[] = [
+  {
+    id: 'handelsforetagen',
+    title: 'President & CEO',
+    company: 'HandelsFöretagen',
+    location: 'Göteborg',
+    range: 'Jan 2023 - Nu',
+    url: 'https://handels.se',
+    summary: 'Leder Nordens största studentdrivna koncern och dess tillväxtresa.',
+    description: [
+      'Strategiskt ansvar för 7 dotterbolag och över 180 medarbetare.',
+      'Levererade starkaste Q3 någonsin med kraftig intäktstillväxt.',
+    ],
+    relatedSkills: ['leadership', 'strategy', 'budget', 'sales', 'analysis'],
+    achievements: [
+      // 1. STAT CARD (Enkel siffra)
+      {
+        type: 'stat',
+        value: '95%',
+        label: 'Intäktstillväxt',
+        subtext: 'Q3 YoY (Rekordår)',
+      },
+      // 2. TREND GRAPH (Area chart) - Visar utveckling över tid
+      {
+        type: 'graph',
+        label: 'Omsättningstillväxt',
+        value: '+2.4M',
+        subtext: 'Ackumulerad försäljning 2024 (SEK)',
+        data: [
+          { label: 'Jan', value: 100 },
+          { label: 'Feb', value: 120 },
+          { label: 'Mar', value: 180 },
+          { label: 'Apr', value: 250 },
+          { label: 'Maj', value: 300 },
+          { label: 'Jun', value: 450 }, // Stor ökning
+          { label: 'Jul', value: 480 },
+        ],
+      },
+      // 3. BAR CHART (Staplar) - Jämför kategorier
+      {
+        type: 'bar',
+        label: 'Resultat per Dotterbolag',
+        value: 'Q3',
+        subtext: 'Försäljning i TKR',
+        data: [
+          { label: 'Consulting', value: 850 },
+          { label: 'Rekrytering', value: 620 },
+          { label: 'Event', value: 450 },
+          { label: 'IT', value: 300 },
+        ],
+      },
+      // 4. STAT CARD (Personal)
+      {
+        type: 'stat',
+        value: '180+',
+        label: 'Anställda',
+        subtext: 'Total personalstyrka i koncernen',
+      },
+    ],
+    attachments: [
+      { name: 'Årsredovisning 2024.pdf', url: '#', type: 'file' },
+      { name: 'Artikel i Dagens Industri', url: 'https://di.se', type: 'link' },
+    ],
+    references: [
+      {
+        name: 'Anna Andersson',
+        role: 'Styrelseordförande',
+        company: 'HandelsFöretagen',
+        quote:
+          'Simon är en visionär ledare som transformerade vår säljprocess och ökade lönsamheten markant.',
+        contact: 'anna.andersson@example.com',
+      },
+    ],
+  },
+  {
+    id: 'handelsconsulting',
+    title: 'Management Consultant',
+    company: 'HandelsConsulting',
+    location: 'Göteborg',
+    range: 'Jan 2025 - Jul 2025',
+    summary: 'Fokus på strategi, kundinsikter och digital transformation.',
+    description: [
+      'Arbetade med organisationsutveckling för stora företag.',
+      'Överträffade säljmål snabbt och erbjöds roll som Business Area Manager.',
+    ],
+    relatedSkills: ['strategy', 'sales', 'analysis', 'leadership'],
+    achievements: [
+      // 5. PROGRESS BAR (Måluppfyllelse)
+      {
+        type: 'progress',
+        label: 'Säljmål Q1',
+        value: '150%',
+        current: 150000,
+        target: 100000,
+        subtext: '150tkr av 100tkr mål på 5 veckor',
+      },
+      // 6. DONUT CHART (Cirkel)
+      {
+        type: 'donut',
+        label: 'Debiteringsgrad',
+        value: '85%',
+        current: 85,
+        target: 100,
+        subtext: 'Snitt under perioden',
+      },
+      {
+        type: 'stat',
+        value: 'BAM',
+        label: 'Befordran',
+        subtext: 'Erbjuden Business Area Manager',
+      },
+    ],
+    references: [
+      {
+        name: 'Johan Svensson',
+        role: 'Senior Partner',
+        company: 'HandelsConsulting',
+        quote: 'En av de skarpaste konsulterna vi haft. Levererar alltid över förväntan.',
+        contact: 'johan@handelsconsulting.se',
+      },
+    ],
+  },
   {
     id: 'campuslyan',
     title: 'Founding CEO/CTO',
@@ -103,21 +264,27 @@ export const experienceData: Experience[] = [
       'Ansvarar för teknisk arkitektur och affärsstrategi.',
     ],
     relatedSkills: ['leadership', 'strategy', 'next', 'ts', 'figma'],
-  },
-  {
-    id: 'handelsforetagen',
-    title: 'President & CEO',
-    company: 'HandelsFöretagen',
-    location: 'Göteborg',
-    range: 'Jan 2023 - Nu',
-    url: 'https://handels.se',
-    summary: 'Leder Nordens största studentdrivna koncern och dess tillväxtresa.',
-    description: [
-      'Levererade starkaste Q3 någonsin med 95% intäktstillväxt.',
-      'Ansvarar för en organisation med över 160 medarbetare.',
-      'Strategisk planering för 7 dotterbolag som levererar tjänster till ledande svenska företag.',
+    achievements: [
+      {
+        type: 'stat',
+        value: '6',
+        label: 'Ingenjörer',
+        subtext: 'Storlek på utvecklingsteamet',
+      },
+      // Trend för användare
+      {
+        type: 'graph',
+        label: 'Användartillväxt',
+        value: '2.5k',
+        subtext: 'Aktiva studenter på plattformen',
+        data: [
+          { label: 'Okt', value: 100 },
+          { label: 'Nov', value: 800 },
+          { label: 'Dec', value: 1500 },
+          { label: 'Jan', value: 2500 },
+        ],
+      },
     ],
-    relatedSkills: ['leadership', 'strategy', 'budget', 'sales', 'analysis'],
   },
   {
     id: 'volvo',
@@ -131,20 +298,14 @@ export const experienceData: Experience[] = [
       'Teknisk stack inkluderade Kotlin, Java, Python och System Weaver.',
     ],
     relatedSkills: ['kotlin', 'java', 'python', 'figma', 'systemweaver'],
-  },
-  {
-    id: 'handelsconsulting',
-    title: 'Management Consultant',
-    company: 'HandelsConsulting',
-    location: 'Göteborg',
-    range: 'Jan 2025 - Jul 2025',
-    summary: 'Fokus på strategi, kundinsikter och digital transformation.',
-    description: [
-      'Befordrad efter att ha överträffat säljmålet med 150% på 5 veckor.',
-      'Arbetade med organisationsutveckling för stora företag.',
-      'Fick erbjudande om rollen som Business Area Manager.',
+    achievements: [
+      {
+        type: 'stat',
+        value: '2',
+        label: 'Prototyper',
+        subtext: 'Levererade koncept för förarmiljö',
+      },
     ],
-    relatedSkills: ['strategy', 'sales', 'analysis', 'leadership'],
   },
   {
     id: 'stunote',
@@ -158,6 +319,20 @@ export const experienceData: Experience[] = [
       'Utvecklade hela tech-stacken i Next.js, TypeScript och MySQL.',
     ],
     relatedSkills: ['next', 'ts', 'js', 'sql', 'php', 'tailwind', 'figma'],
+    achievements: [
+      // Stapeldiagram för tech-stack fördelning (bara som exempel)
+      {
+        type: 'bar',
+        label: 'Codebase Distribution',
+        value: '20k+',
+        subtext: 'Rader kod',
+        data: [
+          { label: 'TS/JS', value: 12000 },
+          { label: 'SQL', value: 3000 },
+          { label: 'CSS', value: 5000 },
+        ],
+      },
+    ],
   },
   {
     id: 'forsvarsmakten',
@@ -171,6 +346,14 @@ export const experienceData: Experience[] = [
       'Ledde tekniska operationer i fält.',
     ],
     relatedSkills: ['leadership', 'analysis'],
+    achievements: [
+      {
+        type: 'stat',
+        value: '100%',
+        label: 'Drifttid',
+        subtext: 'Under kritiska övningar',
+      },
+    ],
   },
 ]
 
@@ -214,6 +397,7 @@ export const educationData: Education[] = [
       'Medlem i Chalmers Börssällskap och Chalmers AI Society.',
     ],
     relatedSkills: ['c', 'catia', 'matlab', 'python'],
+    attachments: [{ name: 'Betygsutdrag.pdf', url: '#', type: 'file' }],
   },
   {
     school: 'Handelshögskolan vid Göteborgs Universitet',
@@ -251,7 +435,7 @@ export const certificationsData: Certificate[] = [
   },
 ]
 
-// --- 6. UTMÄRKELSER & FÖRENINGAR (Ny) ---
+// --- 6. UTMÄRKELSER & FÖRENINGAR ---
 export const awardsData: Award[] = [
   {
     title: 'Nova Member',
@@ -272,7 +456,7 @@ export const awardsData: Award[] = [
   },
 ]
 
-// --- 7. SPRÅK (Ny) ---
+// --- 7. SPRÅK ---
 export const languagesData: Language[] = [
   { language: 'Svenska', proficiency: 'Modersmål' },
   { language: 'Engelska', proficiency: 'Flytande' },

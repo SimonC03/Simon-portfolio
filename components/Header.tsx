@@ -3,8 +3,8 @@ import headerNavLinks from '@/data/headerNavLinks'
 import Link from './Link'
 import MobileNav from './MobileNav'
 import ThemeSwitch from './ThemeSwitch'
-import SearchButton from './SearchButton'
-import Image from './Image' // Importera Image-komponenten
+// import SearchButton from './SearchButton'  <-- Borttagen
+import Image from './Image'
 
 const Header = () => {
   return (
@@ -13,7 +13,6 @@ const Header = () => {
         <Link href="/" aria-label={siteMetadata.headerTitle}>
           <div className="flex items-center justify-between">
             <div className="mr-3">
-              {/* HÄR ÄR ÄNDRINGEN: Vi använder Image istället för Logo */}
               <Image
                 src={siteMetadata.siteLogo}
                 alt="Profilbild"
@@ -44,7 +43,18 @@ const Header = () => {
               {link.title}
             </Link>
           ))}
-        <SearchButton />
+
+        {/* --- CV-KNAPP --- */}
+        <Link
+          href="/static/cv.pdf"
+          target="_blank"
+          className="bg-primary-500 hover:bg-primary-700 focus:ring-primary-500 dark:bg-primary-600 dark:hover:bg-primary-500 hidden rounded-md px-4 py-2 font-medium text-white shadow-sm focus:ring-2 focus:ring-offset-2 sm:block"
+        >
+          Mitt CV
+        </Link>
+
+        {/* <SearchButton />  <-- Borttagen härifrån */}
+
         <ThemeSwitch />
         <MobileNav />
       </div>
