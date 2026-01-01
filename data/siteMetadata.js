@@ -2,9 +2,9 @@
 const siteMetadata = {
   title: 'Simon Carlén – Portfolio',
   author: 'Simon Carlén',
-  headerTitle: 'Simon Portfolio',
+  headerTitle: 'Simon Carlén',
   description:
-    'President & CEO @ HandelsFöretagen | Double Degree Student in Mechatronics Engineering & Business Administration',
+    'Double Degree Student | Tech & Management. Erfarenhet inom strategi, affärsutveckling och fullstack-utveckling.',
   language: 'sv-SE', // Ändrat till svenska
   theme: 'system', // system, dark or light
   siteUrl: 'https://simon-portfolio.vercel.app', // Byt ut om du skaffar egen domän senare

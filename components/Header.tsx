@@ -28,20 +28,27 @@ const Header = () => {
           )}
         </div>
       </Link>
-      <div className="flex items-center space-x-4 leading-5 sm:-mr-6 sm:space-x-6">
-        <div className="no-scrollbar hidden max-w-40 items-center gap-x-4 overflow-x-auto sm:flex md:max-w-72 lg:max-w-96">
+      <div className="flex items-center space-x-4 leading-5 sm:space-x-6">
+        {/* ÄNDRINGAR HÄR: 
+            1. Tog bort 'max-w-40', 'no-scrollbar', 'overflow-x-auto'.
+            2. Ändrade 'sm:flex' till 'md:flex'. Detta gör att menyn göms på små skärmar 
+               (där hamburgermenyn tar över) och visas fullt ut på medium+ skärmar.
+            3. Använder 'gap-x-6' för snyggt avstånd.
+        */}
+        <div className="hidden items-center gap-x-6 md:flex">
           {headerNavLinks
             .filter((link) => link.href !== '/')
             .map((link) => (
               <Link
                 key={link.title}
                 href={link.href}
-                className="hover:text-primary-500 dark:hover:text-primary-400 m-1 font-medium text-gray-900 dark:text-gray-100"
+                className="hover:text-primary-500 dark:hover:text-primary-400 font-medium text-gray-900 dark:text-gray-100"
               >
                 {link.title}
               </Link>
             ))}
         </div>
+
         <SearchButton />
         <ThemeSwitch />
         <MobileNav />
