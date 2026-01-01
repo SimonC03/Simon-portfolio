@@ -259,11 +259,21 @@ export const projectsData: Project[] = [
 // --- 4. UTBILDNING (Dubbel examen) ---
 export const educationData: Education[] = [
   {
+    school: 'Handelshögskolan vid Göteborgs Universitet',
+    degree: 'BSc Business Administration',
+    location: 'Göteborg',
+    year: '2024 - 2027',
+    summary:
+      'Jag har byggt en stark grund inom organisatoriskt ledarskap, marknadsföring, extern redovisning, managementkontroll och ekonomi. Denna erfarenhet har gett mig värdefulla färdigheter inom affärsstrategi, finansiell styrning och ekonomisk analys, vilket har förberett mig för att hantera komplexa affärsutmaningar och aktivt bidra till organisatorisk tillväxt.',
+    relatedSkills: ['strategy', 'analysis', 'budget', 'management'],
+  },
+  {
     school: 'Chalmers Tekniska Högskola',
     degree: 'BSc Mechatronics & Automation Engineering',
     location: 'Göteborg',
     year: '2023 - 2026',
-    summary: 'Fokus på systemteknik, C/C++ programmering och reglerteknik.',
+    summary:
+      'Jag har byggt upp kompetens inom systemteknik, programmering i C/C++ och dynamisk systemdesign. Jag har arbetat med CAD-modellering i Catia V5 samt PLC-programmering för automationslösningar. Min utbildning har gett mig en stark grund inom reglerteknik, robotik och artificiell intelligens, med fokus på att integrera mekaniska, elektriska och mjukvarubaserade system för att lösa komplexa tekniska utmaningar. Mitt mål är att tillämpa denna kunskap inom automation, smart teknik och hållbara lösningar – där jag kombinerar teknisk kompetens med strategisk förståelse för att driva innovation som gör verklig skillnad.',
     details: [
       'Expertis inom CAD-modellering (CATIA V5) och PLC-programmering.',
       'Aktiv medlem i Chalmers Börssällskap och Chalmers AI Society.',
@@ -271,12 +281,12 @@ export const educationData: Education[] = [
     relatedSkills: ['c', 'catia', 'matlab', 'python'],
   },
   {
-    school: 'Handelshögskolan vid Göteborgs Universitet',
-    degree: 'BSc Business Administration',
-    location: 'Göteborg',
-    year: '2024 - 2027',
-    summary: 'Inriktning på strategi, ekonomisk styrning och ledarskap.',
-    relatedSkills: ['strategy', 'analysis', 'budget', 'management'],
+    school: 'Linköpings universitet',
+    degree: 'Fristående Kurser',
+    location: 'Distans',
+    year: '2024 - 2024',
+    summary: '',
+    relatedSkills: ['Entreprenörskap', 'Artificiell intelligens', 'budget', 'management'],
   },
 ]
 
