@@ -1,7 +1,7 @@
 import { educationData, certificationsData } from '@/data/cvData'
-import { GenPageMetadata } from 'app/seo'
+import { genPageMetadata } from 'app/seo'
 
-export const metadata = GenPageMetadata({ title: 'Utbildning & Certifikat' })
+export const metadata = genPageMetadata({ title: 'Utbildning & Certifikat' })
 
 export default function EducationPage() {
   return (

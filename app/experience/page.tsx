@@ -1,7 +1,7 @@
 import { experienceData } from '@/data/cvData'
-import { GenPageMetadata } from 'app/seo'
+import { genPageMetadata } from 'app/seo'
 
-export const metadata = GenPageMetadata({ title: 'Erfarenhet' })
+export const metadata = genPageMetadata({ title: 'Erfarenhet' })
 
 export default function ExperiencePage() {
   return (

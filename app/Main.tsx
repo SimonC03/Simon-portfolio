@@ -4,6 +4,7 @@ import { experienceData, educationData } from '@/data/cvData' // Importera din n
 import projectsData from '@/data/projectsData'
 import Card from '@/components/Card'
 import SocialIcon from '@/components/social-icons'
+import Image from '@/components/Image'
 
 export default function Home() {
   return (
@@ -26,9 +27,12 @@ export default function Home() {
               </div>
             </div>
             <div className="relative h-32 w-32 sm:h-40 sm:w-40">
-              <img
+              {/* Byt ut <img> mot <Image> för automatisk optimering */}
+              <Image
                 src={siteMetadata.siteLogo}
                 alt="Avatar"
+                width={160}
+                height={160}
                 className="rounded-full border-2 border-gray-200 shadow-lg dark:border-gray-700"
               />
             </div>
