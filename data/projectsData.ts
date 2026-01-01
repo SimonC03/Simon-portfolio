@@ -1,3 +1,5 @@
+// data/projectsData.ts
+
 interface Project {
   title: string
   description: string
@@ -7,30 +9,18 @@ interface Project {
 
 const projectsData: Project[] = [
   {
-    title: 'StuNote',
-    description: `Grundare & Fullstack-utvecklare. En innovativ plattform för studiematerial, andrahandsböcker och AI-genererade quiz för tentaplugg. Byggd från grunden med modern webbteknik.
-    Tech stack: Next.js, TypeScript, MySQL, PHP, TailwindCSS.`,
-    imgSrc: '/static/images/stunote.png', // Lägg en bild som heter stunote.png i public/static/images
-    href: 'https://stunote.se', // Byt till rätt länk om den finns, annars ta bort raden
+    title: 'Simon Portfolio',
+    description: `Min personliga portföljsida byggd med Next.js 14, Tailwind CSS och TypeScript. 
+    Visar min erfarenhet, utbildning och mina projekt. Integrerad med GitHub Actions för CI/CD.`,
+    imgSrc: '/static/images/twitter-card.png', // Byt gärna till en skärmdump av din sida
+    href: 'https://github.com/SimonC03/Simon-portfolio',
   },
   {
-    title: 'Handels Företagen',
-    description: `VD & Koncernchef. Leder Nordens största studentdrivna bolagskoncern med 180+ anställda studenter över 7 dotterbolag. Ansvarig för strategisk transformation som resulterade i 95% omsättningstillväxt under Q3.`,
-    imgSrc: '/static/images/handels-foretagen.png',
-    href: 'https://handelsforetagen.se',
-  },
-  {
-    title: 'CampusLyan',
-    description: `Grundande VD & CTO. Leder ett ingenjörsteam på sex personer som utvecklar en modern plattform för att lösa bostadsbristen för studenter. Kombinerar teknisk utveckling med affärsutveckling.`,
-    imgSrc: '/static/images/campuslyan.png',
+    title: 'Annat Skolprojekt',
+    description: `Beskrivning av ett projekt du gjort i skolan, t.ex. inom mekatronik eller programmering.
+    Vad använde du för teknik? Vad var resultatet?`,
+    imgSrc: '/static/images/time-machine.jpg',
     href: '#',
-  },
-  {
-    title: 'Volvo Buses - Virtual Verification',
-    description: `Platform Development Internship. Arbetade med virtuell verifiering och apputveckling av visualiseringskoncept för "softbuttons" i nästa generations bussplattformar.
-    Tech stack: Kotlin, Java, Python, Figma.`,
-    imgSrc: '/static/images/volvo.png',
-    href: 'https://www.volvobuses.com',
   },
 ]
 

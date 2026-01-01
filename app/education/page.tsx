@@ -1,6 +1,7 @@
-import { genPageMetadata } from 'app/seo'
+import { educationData, certificationsData } from '@/data/cvData'
+import { GenPageMetadata } from 'app/seo'
 
-export const metadata = genPageMetadata({ title: 'Utbildning' })
+export const metadata = GenPageMetadata({ title: 'Utbildning & Certifikat' })
 
 export default function EducationPage() {
   return (
@@ -11,38 +12,41 @@ export default function EducationPage() {
         </h1>
       </div>
 
-      <div className="container py-8">
-        <div className="mb-10 flex flex-col md:flex-row">
-          <div className="mb-2 md:mb-0 md:w-1/4">
-            <span className="font-medium text-gray-500 dark:text-gray-400">2023 – 2026</span>
-          </div>
-          <div className="md:w-3/4">
-            <h3 className="text-xl font-bold text-gray-900 dark:text-gray-100">
-              BSc Mechatronics & Automation Engineering
-            </h3>
-            <span className="text-primary-500 mb-2 block">Chalmers University of Technology</span>
-            <p className="text-gray-600 dark:text-gray-300">
-              Systemteknik, robotik och AI. Har arbetat med integration av mekanik och mjukvara
-              (C/C++, Python).
-            </p>
-          </div>
-        </div>
-
-        <div className="mb-10 flex flex-col md:flex-row">
-          <div className="mb-2 md:mb-0 md:w-1/4">
-            <span className="font-medium text-gray-500 dark:text-gray-400">2024 – 2027</span>
-          </div>
-          <div className="md:w-3/4">
-            <h3 className="text-xl font-bold text-gray-900 dark:text-gray-100">
-              BSc Business Administration
-            </h3>
-            <span className="text-primary-500 mb-2 block">
-              School of Business, Economics and Law
+      {/* Skolor */}
+      <div className="py-8">
+        {educationData.map((d) => (
+          <div key={d.school} className="border-primary-500 mb-8 flex flex-col border-l-4 pl-6">
+            <h2 className="text-2xl font-bold text-gray-900 dark:text-gray-100">{d.school}</h2>
+            <div className="text-lg font-semibold text-gray-700 dark:text-gray-300">{d.degree}</div>
+            <span className="mb-2 text-sm text-gray-500">
+              {d.year} | {d.location}
             </span>
-            <p className="text-gray-600 dark:text-gray-300">
-              Ekonomistyrning, marknadsföring och strategiskt ledarskap.
-            </p>
+            <p className="text-gray-600 dark:text-gray-400">{d.summary}</p>
+            {d.details && (
+              <ul className="mt-2 list-disc pl-4 text-sm text-gray-500 dark:text-gray-400">
+                {d.details.map((detail, i) => (
+                  <li key={i}>{detail}</li>
+                ))}
+              </ul>
+            )}
           </div>
+        ))}
+      </div>
+
+      {/* Certifikat Sektion */}
+      <div className="border-t border-gray-200 pt-8 dark:border-gray-700">
+        <h2 className="mb-6 text-2xl font-bold text-gray-900 dark:text-gray-100">
+          Certifikat & Utmärkelser
+        </h2>
+        <div className="grid grid-cols-1 gap-4 md:grid-cols-2">
+          {certificationsData.map((c) => (
+            <div key={c.title} className="rounded-lg bg-gray-50 p-4 dark:bg-gray-800">
+              <h3 className="font-bold text-gray-900 dark:text-gray-100">{c.title}</h3>
+              <p className="text-sm text-gray-500">
+                {c.issuer} • {c.date}
+              </p>
+            </div>
+          ))}
         </div>
       </div>
     </div>
