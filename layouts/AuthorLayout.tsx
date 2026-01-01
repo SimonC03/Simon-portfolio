@@ -2,7 +2,8 @@ import { ReactNode } from 'react'
 import type { Authors } from 'contentlayer/generated'
 import SocialIcon from '@/components/social-icons'
 import Image from '@/components/Image'
-import { skillsData } from '@/data/cvData' // Vi importerar din skills-data här
+import { skillsData, SKILLS } from '@/data/cvData' // <--- 1. Importera SKILLS
+import HardSkillRating from '@/components/HardSkillRating' // <--- 2. Importera komponenten
 
 interface Props {
   children: ReactNode
@@ -11,6 +12,9 @@ interface Props {
 
 export default function AuthorLayout({ children, content }: Props) {
   const { name, avatar, occupation, company, email, twitter, bluesky, linkedin, github } = content
+
+  // <--- 3. Välj ut vilka 5 skills du vill highlighta här
+  const topSkills = ['next', 'ts', 'strategy', 'leadership', 'figma']
 
   return (
     <>
@@ -42,15 +46,29 @@ export default function AuthorLayout({ children, content }: Props) {
               <SocialIcon kind="x" href={twitter} />
               <SocialIcon kind="bluesky" href={bluesky} />
             </div>
+
+            {/* <--- 4. NY SEKTION: TOP SKILLS --- */}
+            <div className="mt-10 w-full space-y-4">
+              <h3 className="text-center text-xs font-bold tracking-wider text-gray-500 uppercase dark:text-gray-400">
+                Top Skills
+              </h3>
+              <div className="flex flex-col space-y-2">
+                {topSkills.map((id) => {
+                  const skill = SKILLS[id]
+                  if (!skill) return null
+                  return <HardSkillRating key={id} skill={skill} />
+                })}
+              </div>
+            </div>
           </div>
 
           {/* Huvudinnehåll */}
           <div className="prose dark:prose-invert max-w-none pt-8 pb-8 xl:col-span-2">
             {children}
 
-            {/* --- NY SEKTION: FÄRDIGHETER --- */}
+            {/* Den gamla sektionen kan ligga kvar här under om du vill visa alla skills också */}
             <div className="mt-12 border-t border-gray-200 pt-8 dark:border-gray-700">
-              <h2 className="mb-6 text-2xl font-bold">Färdigheter & Verktyg</h2>
+              <h2 className="mb-6 text-2xl font-bold">Alla Färdigheter & Verktyg</h2>
               <div className="grid grid-cols-1 gap-6 sm:grid-cols-2">
                 {skillsData.map((group) => (
                   <div key={group.category}>

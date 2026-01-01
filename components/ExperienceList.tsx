@@ -1,16 +1,15 @@
 'use client'
 
 import { useState } from 'react'
-import { Experience } from '@/data/cvData'
+import { Experience, SKILLS } from '@/data/cvData' // Importera SKILLS
 import Modal from './Modal'
 import AchievementsWidget from './achievements'
 import AttachmentSection from './AttachmentSection'
 import ReferencesSection from './ReferencesSection'
+import HardSkillRating from './HardSkillRating' // Importera komponenten
 
 export default function ExperienceList({ experiences }: { experiences: Experience[] }) {
   const [selected, setSelected] = useState<Experience | null>(null)
-
-  // Flikar: 'overview' | 'achievements' | 'attachments' | 'references'
   const [activeTab, setActiveTab] = useState<string>('overview')
 
   const openModal = (exp: Experience) => {
@@ -18,7 +17,6 @@ export default function ExperienceList({ experiences }: { experiences: Experienc
     setActiveTab('overview')
   }
 
-  // Hantera tangentbord (Enter eller Space öppnar modalen)
   const handleKeyDown = (e: React.KeyboardEvent, exp: Experience) => {
     if (e.key === 'Enter' || e.key === ' ') {
       e.preventDefault()
@@ -97,7 +95,6 @@ export default function ExperienceList({ experiences }: { experiences: Experienc
                 isActive={activeTab === 'overview'}
                 onClick={() => setActiveTab('overview')}
               />
-
               {selected.achievements && selected.achievements.length > 0 && (
                 <TabButton
                   label="Prestationer"
@@ -105,7 +102,6 @@ export default function ExperienceList({ experiences }: { experiences: Experienc
                   onClick={() => setActiveTab('achievements')}
                 />
               )}
-
               {selected.references && selected.references.length > 0 && (
                 <TabButton
                   label="Referenser"
@@ -113,7 +109,6 @@ export default function ExperienceList({ experiences }: { experiences: Experienc
                   onClick={() => setActiveTab('references')}
                 />
               )}
-
               {selected.attachments && selected.attachments.length > 0 && (
                 <TabButton
                   label="Bilagor"
@@ -149,47 +144,45 @@ export default function ExperienceList({ experiences }: { experiences: Experienc
                     </ul>
                   </div>
 
+                  {/* --- SKILLS SEKTION (Vertikal Lista) --- */}
                   {selected.relatedSkills && (
                     <div className="mt-8 border-t border-gray-100 pt-6 dark:border-gray-800">
-                      <h4 className="mb-3 text-xs font-bold tracking-wider text-gray-400 uppercase">
-                        Skills & Verktyg
+                      <h4 className="mb-4 text-xs font-bold tracking-wider text-gray-400 uppercase">
+                        Hard Skills & Kompetensnivå
                       </h4>
-                      <div className="flex flex-wrap gap-2">
-                        {selected.relatedSkills.map((skill) => (
-                          <span
-                            key={skill}
-                            className="inline-flex items-center rounded-md bg-gray-50 px-2.5 py-1 text-xs font-medium text-gray-600 ring-1 ring-gray-500/10 ring-inset dark:bg-gray-800 dark:text-gray-300 dark:ring-gray-700"
-                          >
-                            {skill}
-                          </span>
-                        ))}
+
+                      {/* Flex-col för en vertikal lista av rader */}
+                      <div className="flex flex-col space-y-2">
+                        {selected.relatedSkills.map((skillId) => {
+                          const skill = SKILLS[skillId]
+                          if (!skill) return null
+                          return <HardSkillRating key={skillId} skill={skill} />
+                        })}
                       </div>
                     </div>
                   )}
+                  {/* ------------------------------------- */}
                 </div>
               )}
 
-              {/* PRESTATIONER */}
+              {/* ÖVRIGA FLIKAR (Samma som förut) */}
               {activeTab === 'achievements' && selected.achievements && (
                 <div className="animate-in fade-in slide-in-from-bottom-2 duration-300">
                   <div className="mb-4">
                     <h3 className="text-lg font-bold text-gray-900 dark:text-gray-100">
                       Nyckeltal & Resultat
                     </h3>
-                    <p className="text-sm text-gray-500">Visualisering av mina resultat.</p>
                   </div>
                   <AchievementsWidget achievements={selected.achievements} />
                 </div>
               )}
 
-              {/* REFERENSER */}
               {activeTab === 'references' && selected.references && (
                 <div className="animate-in fade-in slide-in-from-bottom-2 duration-300">
                   <ReferencesSection references={selected.references} />
                 </div>
               )}
 
-              {/* BILAGOR */}
               {activeTab === 'attachments' && selected.attachments && (
                 <div className="animate-in fade-in slide-in-from-bottom-2 duration-300">
                   <AttachmentSection attachments={selected.attachments} />
