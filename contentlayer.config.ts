@@ -30,6 +30,10 @@ export const Authors = defineDocumentType(() => ({
     email: { type: 'string' },
     linkedin: { type: 'string' },
     github: { type: 'string' },
+    // --- LÄGG TILL DESSA FÖR ATT FIXA FELET ---
+    twitter: { type: 'string' },
+    bluesky: { type: 'string' },
+    // ------------------------------------------
     layout: { type: 'string' },
   },
   computedFields,
@@ -37,7 +41,7 @@ export const Authors = defineDocumentType(() => ({
 
 export default makeSource({
   contentDirPath: 'data',
-  documentTypes: [Authors], // Endast Authors (Om mig) är kvar
+  documentTypes: [Authors],
   mdx: {
     cwd: process.cwd(),
     remarkPlugins: [remarkExtractFrontmatter, remarkGfm, remarkCodeTitles, remarkImgToJsx],
