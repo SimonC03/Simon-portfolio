@@ -1,6 +1,6 @@
 import Link from '@/components/Link'
 import siteMetadata from '@/data/siteMetadata'
-import { experienceData, projectsData } from '@/data/cvData'
+import { experienceData, educationData, projectsData, certificationsData } from '@/data/cvData'
 import Card from '@/components/Card'
 import Image from '@/components/Image'
 
@@ -13,7 +13,7 @@ export default function Home() {
           <div className="flex flex-col-reverse items-start sm:flex-row sm:items-center sm:justify-between">
             <div className="mt-4 max-w-2xl sm:mt-0">
               <h1 className="text-3xl leading-9 font-extrabold tracking-tight text-gray-900 sm:text-4xl sm:leading-10 md:text-6xl md:leading-14 dark:text-gray-100">
-                Hej, jag är {siteMetadata.author.split(' ')[0]}
+                Hej, jag är {siteMetadata.author.split(' ')[0]} 👋
               </h1>
               <p className="mt-4 text-lg leading-7 text-gray-500 dark:text-gray-400">
                 {siteMetadata.description}
@@ -46,7 +46,7 @@ export default function Home() {
           </div>
         </div>
 
-        {/* --- SENASTE ERFARENHET --- */}
+        {/* --- SEKTION 1: SENASTE ERFARENHET --- */}
         <div className="py-10">
           <div className="mb-6 flex items-center justify-between">
             <h2 className="text-2xl font-bold tracking-tight text-gray-900 dark:text-gray-100">
@@ -59,10 +59,10 @@ export default function Home() {
               Se alla &rarr;
             </Link>
           </div>
-          <div className="grid gap-8 md:grid-cols-2">
+          <div className="grid gap-6 md:grid-cols-2">
             {experienceData.slice(0, 2).map((d) => (
               <div
-                key={d.id}
+                key={d.company}
                 className="rounded-lg border border-gray-200 p-6 shadow-sm dark:border-gray-700 dark:bg-gray-800/50"
               >
                 <h3 className="text-xl font-bold text-gray-900 dark:text-gray-100">{d.title}</h3>
@@ -70,14 +70,44 @@ export default function Home() {
                 <p className="mt-1 mb-3 text-sm text-gray-500">
                   {d.range} | {d.location}
                 </p>
-                <p className="text-gray-600 dark:text-gray-400">{d.summary}</p>
+                <p className="line-clamp-3 text-gray-600 dark:text-gray-400">{d.summary}</p>
               </div>
             ))}
           </div>
         </div>
 
-        {/* --- UTVALDA PROJEKT --- */}
-        <div className="py-10">
+        {/* --- SEKTION 2: UTBILDNING (Ny) --- */}
+        <div className="border-t border-gray-200 py-8 dark:border-gray-700">
+          <div className="mb-6 flex items-center justify-between">
+            <h2 className="text-2xl font-bold tracking-tight text-gray-900 dark:text-gray-100">
+              Utbildning
+            </h2>
+            <Link href="/education" className="text-primary-500 hover:text-primary-600 font-medium">
+              Se alla &rarr;
+            </Link>
+          </div>
+          <div className="space-y-4">
+            {educationData.slice(0, 2).map((edu) => (
+              <div
+                key={edu.school}
+                className="flex flex-col sm:flex-row sm:items-center sm:justify-between"
+              >
+                <div>
+                  <h3 className="text-lg font-bold text-gray-900 dark:text-gray-100">
+                    {edu.school}
+                  </h3>
+                  <p className="text-gray-600 dark:text-gray-400">{edu.degree}</p>
+                </div>
+                <span className="mt-1 text-sm whitespace-nowrap text-gray-500 sm:mt-0">
+                  {edu.year}
+                </span>
+              </div>
+            ))}
+          </div>
+        </div>
+
+        {/* --- SEKTION 3: PROJEKT --- */}
+        <div className="border-t border-gray-200 py-10 dark:border-gray-700">
           <div className="mb-6 flex items-center justify-between">
             <h2 className="text-2xl font-bold tracking-tight text-gray-900 dark:text-gray-100">
               Utvalda Projekt
@@ -96,6 +126,35 @@ export default function Home() {
                 href={d.href}
               />
             ))}
+          </div>
+        </div>
+
+        {/* --- SEKTION 4: MERITER & CERTIFIKAT (Ny) --- */}
+        <div className="border-t border-gray-200 py-10 dark:border-gray-700">
+          <div className="mb-6 flex items-center justify-between">
+            <h2 className="text-2xl font-bold tracking-tight text-gray-900 dark:text-gray-100">
+              Meriter & Certifikat
+            </h2>
+            <Link href="/meriter" className="text-primary-500 hover:text-primary-600 font-medium">
+              Se alla &rarr;
+            </Link>
+          </div>
+          <div className="flex flex-wrap gap-4">
+            {certificationsData.slice(0, 3).map((cert) => (
+              <div
+                key={cert.title}
+                className="flex items-center gap-2 rounded-md bg-gray-50 px-3 py-2 text-sm dark:bg-gray-800"
+              >
+                <span className="text-xl">📜</span>
+                <span className="font-medium text-gray-900 dark:text-gray-100">{cert.title}</span>
+              </div>
+            ))}
+            <Link
+              href="/meriter"
+              className="flex items-center gap-2 rounded-md border border-dashed border-gray-300 px-3 py-2 text-sm text-gray-500 hover:bg-gray-50 dark:border-gray-600 dark:hover:bg-gray-800"
+            >
+              + Fler meriter
+            </Link>
           </div>
         </div>
       </div>

@@ -8,7 +8,7 @@ const siteMetadata = {
   theme: 'system',
   siteUrl: 'https://simon-portfolio.vercel.app',
   siteRepo: 'https://github.com/SimonC03/Simon-portfolio',
-  siteLogo: `${process.env.BASE_PATH || ''}/static/images/logo.png`,
+  siteLogo: `${process.env.BASE_PATH || ''}/static/images/profile.jpg`,
   socialBanner: `${process.env.BASE_PATH || ''}/static/images/twitter-card.png`,
 
   email: 'simon.carlen1@gmail.com', // Notera: .com enligt CV, inte .se
