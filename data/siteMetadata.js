@@ -11,25 +11,13 @@ const siteMetadata = {
   siteLogo: `${process.env.BASE_PATH || ''}/static/images/profile.jpg`,
   socialBanner: `${process.env.BASE_PATH || ''}/static/images/twitter-card.png`,
 
-  email: 'simon.carlen1@gmail.com', // Notera: .com enligt CV, inte .se
+  email: 'simon.carlen1@gmail.com',
   github: 'https://github.com/SimonC03',
   linkedin: 'https://www.linkedin.com/in/simon-carl%C3%A9n/',
 
   locale: 'sv-SE',
   stickyNav: false,
 
-  analytics: {
-    umamiAnalytics: {
-      umamiWebsiteId: process.env.NEXT_UMAMI_ID,
-    },
-  },
-  newsletter: { provider: null },
-  comments: { provider: null },
-  search: {
-    provider: 'kbar',
-    kbarConfig: {
-      searchDocumentsPath: `${process.env.BASE_PATH || ''}/search.json`,
-    },
-  },
+  // Raderad: analytics, newsletter, comments, search
 }
 module.exports = siteMetadata
