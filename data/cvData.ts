@@ -1,6 +1,6 @@
 // data/cvData.ts
 
-export type SkillCategory = 'Development' | 'Business' | 'Tools' | 'Languages'
+export type SkillCategory = 'Development' | 'Business' | 'Tools' | 'Languages' | 'Engineering'
 
 // --- TYPER & INTERFACES ---
 
@@ -19,7 +19,6 @@ export interface Reference {
   image?: string
 }
 
-// Uppdaterad för att stödja alla grafer
 export type AchievementType = 'stat' | 'progress' | 'donut' | 'bar' | 'graph'
 
 export interface Achievement {
@@ -40,7 +39,7 @@ export interface Skill {
   id: string
   name: string
   category: SkillCategory
-  proficiency?: number
+  proficiency?: number // Skala 1-5 för plupp-komponenten
 }
 
 export interface Experience {
@@ -98,142 +97,68 @@ export interface Language {
   proficiency: string
 }
 
-// --- 1. SKILLS ---
+// --- 1. SKILLS (Baserat på CV & LinkedIn) ---
 export const SKILLS: Record<string, Skill> = {
   // Development
-  react: { id: 'react', name: 'React', category: 'Development', proficiency: 5 },
-  next: { id: 'next', name: 'Next.js', category: 'Development', proficiency: 5 },
-  ts: { id: 'ts', name: 'TypeScript', category: 'Development', proficiency: 4 },
-  js: { id: 'js', name: 'JavaScript', category: 'Development', proficiency: 5 },
-  python: { id: 'python', name: 'Python', category: 'Development', proficiency: 3 },
-  c: { id: 'c', name: 'C / C++', category: 'Development', proficiency: 2 },
+  next: { id: 'next', name: 'Next.js', category: 'Development', proficiency: 4 },
+  react: { id: 'react', name: 'React', category: 'Development', proficiency: 3 },
+  ts: { id: 'ts', name: 'TypeScript', category: 'Development', proficiency: 3 },
+  js: { id: 'js', name: 'JavaScript', category: 'Development', proficiency: 4 },
+  python: { id: 'python', name: 'Python', category: 'Development', proficiency: 4 },
+  kotlin: { id: 'kotlin', name: 'Kotlin', category: 'Development', proficiency: 3 },
+  java: { id: 'java', name: 'Java', category: 'Development', proficiency: 3 },
+  sql: { id: 'sql', name: 'SQL (Postgre/MySQL)', category: 'Development', proficiency: 3 },
+  c: { id: 'c', name: 'C / C++', category: 'Development', proficiency: 4 },
+  php: { id: 'php', name: 'PHP', category: 'Development', proficiency: 3 },
+  tailwind: { id: 'tailwind', name: 'Tailwind CSS', category: 'Development', proficiency: 3 },
 
-  // ... fyll i resten av dina skills ...
-  figma: { id: 'figma', name: 'Figma', category: 'Tools', proficiency: 4 },
+  // Engineering & Tools
+  catia: { id: 'catia', name: 'CATIA V5', category: 'Engineering', proficiency: 5 },
+  matlab: { id: 'matlab', name: 'MATLAB', category: 'Engineering', proficiency: 3 },
+  figma: { id: 'figma', name: 'Figma / Canva', category: 'Tools', proficiency: 3 },
+  git: { id: 'git', name: 'Git', category: 'Tools', proficiency: 3 },
+  systemweaver: { id: 'systemweaver', name: 'System Weaver', category: 'Tools', proficiency: 2 },
+
+  // Business
+  strategy: { id: 'strategy', name: 'Strategi', category: 'Business', proficiency: 4 },
+  leadership: { id: 'leadership', name: 'Ledarskap', category: 'Business', proficiency: 4 },
+  sales: { id: 'sales', name: 'Försäljning', category: 'Business', proficiency: 4 },
+  budget: { id: 'budget', name: 'Budgetansvar', category: 'Business', proficiency: 4 },
+  analysis: { id: 'analysis', name: 'Analys', category: 'Business', proficiency: 4 },
+  management: { id: 'management', name: 'Management', category: 'Business', proficiency: 4 },
 }
 
 export const getSkills = (ids: string[]) => ids.map((id) => SKILLS[id]).filter(Boolean)
 
-// --- 2. ERFARENHET (DEMO AV ALLA GRAFER) ---
+// --- 2. ERFARENHET (Uppdaterad från LinkedIn/CV) ---
 export const experienceData: Experience[] = [
   {
     id: 'handelsforetagen',
     title: 'President & CEO',
-    company: 'HandelsFöretagen',
+    company: 'Handels Företagen',
     location: 'Göteborg',
-    range: 'Jan 2023 - Nu',
+    range: 'Maj 2025 - Nu',
     url: 'https://handels.se',
-    summary: 'Leder Nordens största studentdrivna koncern och dess tillväxtresa.',
+    summary:
+      'Leder Nordens största studentdrivna bolagskoncern med fokus på juridik, ekonomi och marknadsföring.',
     description: [
-      'Strategiskt ansvar för 7 dotterbolag och över 180 medarbetare.',
-      'Levererade starkaste Q3 någonsin med kraftig intäktstillväxt.',
+      'Strategiskt ansvar för sju dotterbolag och över 160 medarbetare.',
+      'Levererade koncernens starkaste Q3 någonsin med 95% intäktstillväxt YoY.',
+      'Ansvarig för tvärbolagligt samarbete och långsiktig tillväxt.',
     ],
-    relatedSkills: ['leadership', 'strategy', 'budget', 'sales', 'analysis'],
+    relatedSkills: ['leadership', 'strategy', 'management', 'budget', 'analysis'],
     achievements: [
-      // 1. STAT CARD (Enkel siffra)
       {
         type: 'stat',
         value: '95%',
         label: 'Intäktstillväxt',
-        subtext: 'Q3 YoY (Rekordår)',
-      },
-      // 2. TREND GRAPH (Area chart) - Visar utveckling över tid
-      {
-        type: 'graph',
-        label: 'Omsättningstillväxt',
-        value: '+2.4M',
-        subtext: 'Ackumulerad försäljning 2024 (SEK)',
-        data: [
-          { label: 'Jan', value: 100 },
-          { label: 'Feb', value: 120 },
-          { label: 'Mar', value: 180 },
-          { label: 'Apr', value: 250 },
-          { label: 'Maj', value: 300 },
-          { label: 'Jun', value: 450 }, // Stor ökning
-          { label: 'Jul', value: 480 },
-        ],
-      },
-      // 3. BAR CHART (Staplar) - Jämför kategorier
-      {
-        type: 'bar',
-        label: 'Resultat per Dotterbolag',
-        value: 'Q3',
-        subtext: 'Försäljning i TKR',
-        data: [
-          { label: 'Consulting', value: 850 },
-          { label: 'Rekrytering', value: 620 },
-          { label: 'Event', value: 450 },
-          { label: 'IT', value: 300 },
-        ],
-      },
-      // 4. STAT CARD (Personal)
-      {
-        type: 'stat',
-        value: '180+',
-        label: 'Anställda',
-        subtext: 'Total personalstyrka i koncernen',
-      },
-    ],
-    attachments: [
-      { name: 'Årsredovisning 2024.pdf', url: '#', type: 'file' },
-      { name: 'Artikel i Dagens Industri', url: 'https://di.se', type: 'link' },
-    ],
-    references: [
-      {
-        name: 'Anna Andersson',
-        role: 'Styrelseordförande',
-        company: 'HandelsFöretagen',
-        quote:
-          'Simon är en visionär ledare som transformerade vår säljprocess och ökade lönsamheten markant.',
-        contact: 'anna.andersson@example.com',
-      },
-    ],
-  },
-  {
-    id: 'handelsconsulting',
-    title: 'Management Consultant',
-    company: 'HandelsConsulting',
-    location: 'Göteborg',
-    range: 'Jan 2025 - Jul 2025',
-    summary: 'Fokus på strategi, kundinsikter och digital transformation.',
-    description: [
-      'Arbetade med organisationsutveckling för stora företag.',
-      'Överträffade säljmål snabbt och erbjöds roll som Business Area Manager.',
-    ],
-    relatedSkills: ['strategy', 'sales', 'analysis', 'leadership'],
-    achievements: [
-      // 5. PROGRESS BAR (Måluppfyllelse)
-      {
-        type: 'progress',
-        label: 'Säljmål Q1',
-        value: '150%',
-        current: 150000,
-        target: 100000,
-        subtext: '150tkr av 100tkr mål på 5 veckor',
-      },
-      // 6. DONUT CHART (Cirkel)
-      {
-        type: 'donut',
-        label: 'Debiteringsgrad',
-        value: '85%',
-        current: 85,
-        target: 100,
-        subtext: 'Snitt under perioden',
+        subtext: 'Bästa Q3 någonsin',
       },
       {
         type: 'stat',
-        value: 'BAM',
-        label: 'Befordran',
-        subtext: 'Erbjuden Business Area Manager',
-      },
-    ],
-    references: [
-      {
-        name: 'Johan Svensson',
-        role: 'Senior Partner',
-        company: 'HandelsConsulting',
-        quote: 'En av de skarpaste konsulterna vi haft. Levererar alltid över förväntan.',
-        contact: 'johan@handelsconsulting.se',
+        value: '160+',
+        label: 'Medarbetare',
+        subtext: 'Under mitt ledarskap',
       },
     ],
   },
@@ -242,34 +167,13 @@ export const experienceData: Experience[] = [
     title: 'Founding CEO/CTO',
     company: 'CampusLyan',
     location: 'Göteborg',
-    range: 'Okt 2025 - Nu',
-    summary: 'Leder ett ingenjörsteam som utvecklar en modern plattform för studentbostäder.',
+    range: 'Okt 2026 - Nu',
+    summary: 'Grundare och teknisk ledare för en modern plattform för studentbostäder.',
     description: [
-      'Leder ett team på sex personer inom produktutveckling.',
-      'Ansvarar för teknisk arkitektur och affärsstrategi.',
+      'Leder ett ingenjörsteam på sex personer genom produktutvecklingen.',
+      'Ansvarig för teknisk arkitektur och affärsstrategi.',
     ],
-    relatedSkills: ['leadership', 'strategy', 'next', 'ts', 'figma'],
-    achievements: [
-      {
-        type: 'stat',
-        value: '6',
-        label: 'Ingenjörer',
-        subtext: 'Storlek på utvecklingsteamet',
-      },
-      // Trend för användare
-      {
-        type: 'graph',
-        label: 'Användartillväxt',
-        value: '2.5k',
-        subtext: 'Aktiva studenter på plattformen',
-        data: [
-          { label: 'Okt', value: 100 },
-          { label: 'Nov', value: 800 },
-          { label: 'Dec', value: 1500 },
-          { label: 'Jan', value: 2500 },
-        ],
-      },
-    ],
+    relatedSkills: ['next', 'ts', 'leadership', 'strategy', 'figma'],
   },
   {
     id: 'volvo',
@@ -277,20 +181,26 @@ export const experienceData: Experience[] = [
     company: 'Volvo Buses',
     location: 'Göteborg',
     range: 'Jun 2025 - Aug 2025',
-    summary: 'Arbetade med virtuell verifiering och apputveckling för nästa generations bussar.',
+    summary: 'Arbetade med virtuell verifiering och apputveckling för framtida bussplattformar.',
     description: [
-      'Utvecklade visualiseringskoncept för "softbuttons".',
-      'Teknisk stack inkluderade Kotlin, Java, Python och System Weaver.',
+      'Utvecklade visualiseringskoncept för "softbuttons" i nästa generations förarmiljö.',
+      'Teknisk stack inkluderade Kotlin, Java, Python, Figma och System Weaver.',
     ],
-    relatedSkills: ['kotlin', 'java', 'python', 'figma', 'systemweaver'],
-    achievements: [
-      {
-        type: 'stat',
-        value: '2',
-        label: 'Prototyper',
-        subtext: 'Levererade koncept för förarmiljö',
-      },
+    relatedSkills: ['kotlin', 'java', 'python', 'systemweaver', 'c', 'figma'],
+  },
+  {
+    id: 'handelsconsulting',
+    title: 'Management Consultant',
+    company: 'HandelsConsulting',
+    location: 'Göteborg',
+    range: 'Jan 2025 - Jul 2025',
+    summary:
+      'Fokus på strategi, kundinsikter, operativ ledning och digital transformation för stora företag.',
+    description: [
+      'Överträffade försäljningsmålet på 3 månader med 150% inom mina första fem veckor.',
+      'Erbjuden roll som Business Area Manager efter exceptionella resultat.',
     ],
+    relatedSkills: ['strategy', 'sales', 'analysis', 'management', 'leadership'],
   },
   {
     id: 'stunote',
@@ -298,58 +208,35 @@ export const experienceData: Experience[] = [
     company: 'StuNote',
     location: 'Göteborg',
     range: 'Apr 2024 - Mar 2025',
-    summary: 'Grundade en innovativ plattform för studiematerial och AI-quiz.',
+    summary: 'Innovativ plattform för studiematerial, marknadsplats för böcker och AI-quiz.',
     description: [
-      'Byggde en marknadsplats för begagnad kurslitteratur och studiemedel.',
-      'Utvecklade hela tech-stacken i Next.js, TypeScript och MySQL.',
+      'Fullstack-utveckling i Next.js, TypeScript, MySQL, PHP och TailwindCSS.',
+      'Design och användarupplevelse utvecklad i Figma.',
     ],
-    relatedSkills: ['next', 'ts', 'js', 'sql', 'php', 'tailwind', 'figma'],
-    achievements: [
-      // Stapeldiagram för tech-stack fördelning (bara som exempel)
-      {
-        type: 'bar',
-        label: 'Codebase Distribution',
-        value: '20k+',
-        subtext: 'Rader kod',
-        data: [
-          { label: 'TS/JS', value: 12000 },
-          { label: 'SQL', value: 3000 },
-          { label: 'CSS', value: 5000 },
-        ],
-      },
-    ],
+    relatedSkills: ['next', 'ts', 'sql', 'php', 'tailwind', 'figma'],
   },
   {
     id: 'forsvarsmakten',
     title: 'System Technician Group Leader',
     company: 'Försvarsmakten',
-    location: 'Sverige',
+    location: 'Halmstad / Sverige',
     range: 'Aug 2022 - Jun 2023',
-    summary: 'Specialist på radiosystem och teknisk drift.',
+    summary: 'Specialist på radiosystem och ansvarig för teknisk drift och kommunikation.',
     description: [
       'Ansvarade för felsökning och prestandaoptimering av kommunikationssystem.',
-      'Ledde tekniska operationer i fält.',
+      'Ledde tekniska operationer och personal i krävande miljöer.',
     ],
     relatedSkills: ['leadership', 'analysis'],
-    achievements: [
-      {
-        type: 'stat',
-        value: '100%',
-        label: 'Drifttid',
-        subtext: 'Under kritiska övningar',
-      },
-    ],
   },
 ]
 
-// --- 3. PROJEKT ---
+// --- 3. PROJEKT (Baserat på portfölj & LinkedIn) ---
 export const projectsData: Project[] = [
   {
     title: 'StuNote Platform',
-    description:
-      'En fullskalig plattform för studenter med marknadsplats för böcker och AI-genererade quiz för tentaplugget.',
+    description: 'En fullskalig plattform för studenter med marknadsplats för böcker och AI-quiz.',
     imgSrc: '/static/images/project-stunote.jpg',
-    href: '#',
+    href: 'https://stunote.se',
     relatedSkills: ['next', 'ts', 'sql', 'tailwind'],
   },
   {
@@ -358,18 +245,18 @@ export const projectsData: Project[] = [
       'Modern bostadsplattform för studenter. Leder utvecklingen av både frontend och backend.',
     imgSrc: '/static/images/project-campuslyan.jpg',
     href: '#',
-    relatedSkills: ['react', 'figma', 'strategy'],
+    relatedSkills: ['next', 'ts', 'sql', 'tailwind', 'figma', 'strategy', 'leadership'],
   },
   {
     title: 'Simon Portfolio',
     description: 'Min personliga portföljsida byggd med Next.js, Contentlayer och Tailwind CSS.',
-    imgSrc: '/static/images/twitter-card.png',
+    imgSrc: '/static/images/portfolio-card.png',
     href: 'https://github.com/SimonC03/Simon-portfolio',
     relatedSkills: ['next', 'ts', 'tailwind'],
   },
 ]
 
-// --- 4. UTBILDNING ---
+// --- 4. UTBILDNING (Dubbel examen) ---
 export const educationData: Education[] = [
   {
     school: 'Chalmers Tekniska Högskola',
@@ -379,34 +266,32 @@ export const educationData: Education[] = [
     summary: 'Fokus på systemteknik, C/C++ programmering och reglerteknik.',
     details: [
       'Expertis inom CAD-modellering (CATIA V5) och PLC-programmering.',
-      'Medlem i Chalmers Börssällskap och Chalmers AI Society.',
+      'Aktiv medlem i Chalmers Börssällskap och Chalmers AI Society.',
     ],
     relatedSkills: ['c', 'catia', 'matlab', 'python'],
-    attachments: [{ name: 'Betygsutdrag.pdf', url: '#', type: 'file' }],
   },
   {
     school: 'Handelshögskolan vid Göteborgs Universitet',
-    degree: 'Kandidat i Företagsekonomi',
+    degree: 'BSc Business Administration',
     location: 'Göteborg',
-    year: 'Pågående',
-    summary: 'Dubbel examen med fokus på strategi och ekonomi.',
-    relatedSkills: ['strategy', 'analysis', 'budget'],
+    year: '2024 - 2027',
+    summary: 'Inriktning på strategi, ekonomisk styrning och ledarskap.',
+    relatedSkills: ['strategy', 'analysis', 'budget', 'management'],
   },
 ]
 
 // --- 5. CERTIFIKAT & LICENSER ---
 export const certificationsData: Certificate[] = [
   {
-    title: 'Certified Board Member',
-    issuer: 'Styrelseakademien',
-    date: '2023',
+    title: 'McKinsey Forward Program',
+    issuer: 'McKinsey & Company',
+    date: '2024',
     relatedSkills: ['leadership', 'strategy'],
   },
   {
     title: 'Skyddsvaktsbevis',
     issuer: 'Försvarsmakten',
     date: '2022',
-    relatedSkills: ['leadership'],
   },
   {
     title: 'Heta Arbeten',
@@ -428,16 +313,14 @@ export const awardsData: Award[] = [
     summary: 'Top 3% Talent. Utvald medlem i globalt talangnätverk.',
   },
   {
-    title: 'Styrelseledamot & Medlem',
-    organization: 'Chalmers Börssällskap (CBS)',
+    title: 'Adlerbertska Stiftelsernas Stipendium',
+    organization: 'Chalmers Tekniska Högskola',
+    summary: 'Tilldelad stipendium 2024 och 2025.',
   },
   {
-    title: 'Medlem',
-    organization: 'Unga Aktiesparare',
-  },
-  {
-    title: 'Medlem',
-    organization: 'Chalmers AI Society',
+    title: 'Hedersmedalj - Värdeordet "Driv"',
+    organization: 'Handels Consulting',
+    summary: 'Erkännande för exceptionellt driv och engagemang.',
   },
 ]
 
@@ -452,10 +335,14 @@ export const languagesData: Language[] = [
 export const skillsData = [
   {
     category: 'Programmering',
-    items: ['TypeScript', 'React', 'Next.js', 'Python', 'C/C++', 'SQL', 'Kotlin', 'Java', 'PHP'],
+    items: ['TypeScript', 'React', 'Next.js', 'Python', 'C/C++', 'SQL', 'Kotlin', 'Java'],
   },
   {
-    category: 'Verktyg & Design',
-    items: ['Git', 'Figma', 'Canva', 'CATIA V5', 'MATLAB', 'System Weaver'],
+    category: 'Teknik & Design',
+    items: ['CATIA V5', 'MATLAB', 'Figma', 'System Weaver', 'Git', 'Tailwind CSS'],
+  },
+  {
+    category: 'Affär & Ledarskap',
+    items: ['Strategi', 'Management', 'Ledarskap', 'Försäljning', 'Budgetansvar', 'Analys'],
   },
 ]
