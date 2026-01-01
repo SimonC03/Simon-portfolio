@@ -1,7 +1,7 @@
-import rss from './rss.mjs'
+// scripts/postbuild.mjs
 
 async function postbuild() {
-  await rss()
+  console.log('RSS generation skipped for portfolio site.')
 }
 
 postbuild()
