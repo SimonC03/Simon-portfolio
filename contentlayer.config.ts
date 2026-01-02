@@ -18,6 +18,24 @@ const computedFields: ComputedFields = {
   },
 }
 
+// 1. Definiera Projects-schemat
+export const Projects = defineDocumentType(() => ({
+  name: 'Projects',
+  filePathPattern: 'projects/**/*.mdx', // Letar efter filer i data/projects/
+  contentType: 'mdx',
+  fields: {
+    title: { type: 'string', required: true },
+    summary: { type: 'string', required: true },
+    date: { type: 'date', required: true },
+    tags: { type: 'list', of: { type: 'string' } },
+    imgSrc: { type: 'string' },
+    demoUrl: { type: 'string' },
+    githubUrl: { type: 'string' },
+  },
+  computedFields,
+}))
+
+// ... behåll Authors-definitionen som den är ...
 export const Authors = defineDocumentType(() => ({
   name: 'Authors',
   filePathPattern: 'authors/**/*.mdx',
@@ -30,10 +48,8 @@ export const Authors = defineDocumentType(() => ({
     email: { type: 'string' },
     linkedin: { type: 'string' },
     github: { type: 'string' },
-    // --- LÄGG TILL DESSA FÖR ATT FIXA FELET ---
     twitter: { type: 'string' },
     bluesky: { type: 'string' },
-    // ------------------------------------------
     layout: { type: 'string' },
   },
   computedFields,
@@ -41,7 +57,8 @@ export const Authors = defineDocumentType(() => ({
 
 export default makeSource({
   contentDirPath: 'data',
-  documentTypes: [Authors],
+  // 2. VIKTIGT: Lägg till Projects i listan här!
+  documentTypes: [Authors, Projects],
   mdx: {
     cwd: process.cwd(),
     remarkPlugins: [remarkExtractFrontmatter, remarkGfm, remarkCodeTitles, remarkImgToJsx],

@@ -244,7 +244,7 @@ export const projectsData: Project[] = [
     description:
       'Modern bostadsplattform för studenter. Leder utvecklingen av både frontend och backend.',
     imgSrc: '/static/images/project-campuslyan.jpg',
-    href: '#',
+    href: '/projects/campuslyan',
     relatedSkills: ['next', 'ts', 'sql', 'tailwind', 'figma', 'strategy', 'leadership'],
   },
   {
