@@ -12,7 +12,6 @@ const siteMetadata = {
   socialBanner: `${process.env.BASE_PATH || ''}/static/images/twitter-card.png`,
 
   email: 'simon.carlen1@gmail.com',
-  github: 'https://github.com/SimonC03',
   linkedin: 'https://www.linkedin.com/in/simon-carl%C3%A9n/',
 
   locale: 'sv-SE',

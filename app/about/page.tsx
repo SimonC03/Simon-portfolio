@@ -89,7 +89,6 @@ export default function AboutPage() {
             {/* Socials & Actions */}
             <div className="mt-6 flex flex-wrap justify-center gap-4 md:justify-start">
               <SocialIcon kind="mail" href={`mailto:${author.email}`} size={6} />
-              <SocialIcon kind="github" href={author.github} size={6} />
               <SocialIcon kind="linkedin" href={author.linkedin} size={6} />
 
               <Link

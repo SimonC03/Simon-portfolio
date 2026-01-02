@@ -154,7 +154,7 @@ export const experienceData: Experience[] = [
     summary:
       'Leder Nordens största studentdrivna bolagskoncern med fokus på juridik, ekonomi och marknadsföring.',
     description: [
-      'Strategiskt ansvar för sju dotterbolag och över 160 medarbetare.',
+      'Strategiskt ansvar för sju dotterbolag och över 180 medarbetare.',
       'Levererade koncernens starkaste Q3 någonsin med 95% intäktstillväxt YoY.',
       'Ansvarig för tvärbolagligt samarbete och långsiktig tillväxt.',
     ],
