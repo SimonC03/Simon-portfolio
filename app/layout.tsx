@@ -1,10 +1,6 @@
 import 'css/tailwind.css'
-// Raderad: import 'pliny/search/algolia.css'
-// Raderad: import 'remark-github-blockquote-alert/alert.css'
 
 import { Space_Grotesk } from 'next/font/google'
-// Raderad: Analytics
-// Raderad: SearchProvider
 import Header from '@/components/Header'
 import SectionContainer from '@/components/SectionContainer'
 import Footer from '@/components/Footer'
@@ -31,12 +27,11 @@ export const metadata: Metadata = {
     url: './',
     siteName: siteMetadata.title,
     images: [siteMetadata.socialBanner],
-    locale: 'sv_SE', // Ändrat till svenska om du vill
+    locale: 'sv_SE',
     type: 'website',
   },
   alternates: {
     canonical: './',
-    // Raderad: RSS feed link
   },
   robots: {
     index: true,
@@ -91,12 +86,9 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
       <meta name="msapplication-TileColor" content="#000000" />
       <meta name="theme-color" media="(prefers-color-scheme: light)" content="#fff" />
       <meta name="theme-color" media="(prefers-color-scheme: dark)" content="#000" />
-      {/* Raderad: RSS link */}
       <body className="bg-white pl-[calc(100vw-100%)] text-black antialiased dark:bg-gray-950 dark:text-white">
         <ThemeProviders>
-          {/* Raderad: Analytics och SearchProvider wrappers */}
           <SectionContainer>
-            {/* Om Header använder sökfunktion kan den behöva justeras också, men SearchProvider tas bort här */}
             <Header />
             <main className="mb-auto">{children}</main>
             <Footer />
