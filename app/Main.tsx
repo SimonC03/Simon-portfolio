@@ -1,13 +1,14 @@
 import Link from '@/components/Link'
 import siteMetadata from '@/data/siteMetadata'
-import {
-  experienceData,
-  educationData,
-  projectsData,
-  certificationsData,
-  referencesData,
-} from '@/data/cvData'
 import Image from '@/components/Image'
+
+// --- NYA IMPORTER ---
+import { homeContent } from '@/data/ui/home'
+import { experienceData } from '@/data/resume/experience'
+import { educationData } from '@/data/resume/education'
+import { projectsData } from '@/data/projects/projects'
+import { certificationsData } from '@/data/resume/certificates'
+import { referencesData } from '@/data/references/references'
 
 export default function Home() {
   // --- DATA-FILTRERING ---

@@ -1,6 +1,6 @@
-import { projectsData } from '@/data/cvData'
+import { projectsData } from '@/data/projects/projects'
+import Card from '@/components/Card'
 import { genPageMetadata } from 'app/seo'
-import ProjectGallery from '@/components/ProjectGallery' // Importera den nya komponenten
 
 export const metadata = genPageMetadata({ title: 'Projekt' })
 
@@ -12,13 +12,21 @@ export default function Projects() {
           Projekt
         </h1>
         <p className="text-lg leading-7 text-gray-500 dark:text-gray-400">
-          Här är ett urval av projekt jag arbetat med. Klicka för mer information.
+          Ett urval av vad jag byggt och skapat.
         </p>
       </div>
-
-      {/* Här använder vi ProjectGallery istället för att loopa Cards manuellt */}
       <div className="container py-12">
-        <ProjectGallery projects={projectsData} />
+        <div className="-m-4 flex flex-wrap">
+          {projectsData.map((d) => (
+            <Card
+              key={d.title}
+              title={d.title}
+              description={d.description}
+              imgSrc={d.imgSrc}
+              href={`/projects/${d.slug}`} // Länka till den dynamiska sidan
+            />
+          ))}
+        </div>
       </div>
     </div>
   )

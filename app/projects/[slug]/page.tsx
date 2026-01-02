@@ -1,132 +1,89 @@
-import { allProjects } from 'contentlayer/generated'
-import { MDXLayoutRenderer } from 'pliny/mdx-components'
+import { projectsData } from '@/data/projects/projects'
 import { notFound } from 'next/navigation'
-import { genPageMetadata } from 'app/seo'
-import Link from '@/components/Link'
 import Image from '@/components/Image'
-import { SKILLS } from '@/data/cvData'
-import HardSkillRating from '@/components/HardSkillRating'
+import Tag from '@/components/Tag'
 
-// Generera statiska params för alla projekt vid build
+// Generera statiska parametrar för alla projekt vid build
 export async function generateStaticParams() {
-  return allProjects.map((p) => ({ slug: p.slug }))
+  return projectsData.map((p) => ({
+    slug: p.slug,
+  }))
 }
 
-// Generera metadata för SEO
-export async function generateMetadata({ params }: { params: { slug: string } }) {
-  const project = allProjects.find((p) => p.slug === params.slug)
-  if (!project) return
-  return genPageMetadata({ title: project.title, description: project.summary })
+export const generateMetadata = ({ params }: { params: { slug: string } }) => {
+  const project = projectsData.find((p) => p.slug === params.slug)
+  if (!project) return {}
+  return { title: project.title, description: project.description }
 }
 
-// Själva sidan
 export default function ProjectPage({ params }: { params: { slug: string } }) {
-  const project = allProjects.find((p) => p.slug === params.slug)
+  const project = projectsData.find((p) => p.slug === params.slug)
 
   if (!project) {
     return notFound()
   }
 
-  // Mappa tags (som nu bör vara ID:n, t.ex. 'next', 'ts') till SKILLS-objektet
-  const projectSkills =
-    project.tags?.map((tagId) => SKILLS[tagId]).filter((skill) => skill !== undefined) || []
-
   return (
-    <article className="mx-auto max-w-5xl px-4 py-10 sm:px-6 xl:px-0">
-      {/* --- TOP NAV --- */}
-      <div className="mb-8 border-b border-gray-200 pb-8 dark:border-gray-700">
-        <Link
-          href="/projects"
-          className="text-primary-500 hover:text-primary-600 dark:hover:text-primary-400 mb-4 inline-block text-sm font-medium"
-        >
-          &larr; Tillbaka till alla projekt
-        </Link>
-        <h1 className="text-3xl leading-9 font-extrabold tracking-tight text-gray-900 sm:text-4xl sm:leading-10 md:text-5xl md:leading-14 dark:text-gray-100">
-          {project.title}
-        </h1>
-        <div className="mt-2 text-lg leading-7 text-gray-500 dark:text-gray-400">
-          {project.summary}
+    <div className="xl:divide-y xl:divide-gray-200 xl:dark:divide-gray-700">
+      <header className="pt-6 xl:pb-6">
+        <div className="space-y-1 text-center">
+          <h1 className="text-3xl leading-9 font-extrabold tracking-tight text-gray-900 sm:text-4xl sm:leading-10 md:text-5xl md:leading-14 dark:text-gray-100">
+            {project.title}
+          </h1>
         </div>
-      </div>
+      </header>
 
-      <div className="grid grid-cols-1 gap-10 xl:grid-cols-4 xl:gap-x-12">
-        {/* --- VÄNSTER KOLUMN (METADATA & SKILLS) --- */}
-        <div className="xl:col-span-1">
-          <div className="rounded-xl border border-gray-100 bg-gray-50 p-6 shadow-sm xl:sticky xl:top-24 dark:border-gray-700 dark:bg-gray-800/40">
-            {/* Metadata */}
-            <div className="mb-6 space-y-4">
-              <div>
-                <h3 className="text-xs font-bold tracking-wider text-gray-500 uppercase">Datum</h3>
-                <time
-                  dateTime={project.date}
-                  className="text-sm font-medium text-gray-900 dark:text-gray-200"
-                >
-                  {new Date(project.date).toLocaleDateString('sv-SE', {
-                    year: 'numeric',
-                    month: 'long',
-                  })}
-                </time>
-              </div>
-
-              {/* Länkar (om de finns i din contentlayer config, annars kan du lägga till dem) */}
-              {(project.demoUrl || project.githubUrl) && (
-                <div className="flex flex-col gap-2 pt-2">
-                  {project.demoUrl && (
-                    <Link
-                      href={project.demoUrl}
-                      className="text-primary-600 dark:text-primary-400 text-sm font-medium hover:underline"
-                    >
-                      Se mer här &rarr;
-                    </Link>
-                  )}
-                  {project.githubUrl && (
-                    <Link
-                      href={project.githubUrl}
-                      className="text-sm font-medium text-gray-600 hover:text-gray-900 dark:text-gray-400 dark:hover:text-gray-200"
-                    >
-                      GitHub repository ↗
-                    </Link>
-                  )}
-                </div>
-              )}
+      <div
+        className="divide-y divide-gray-200 pb-8 xl:grid xl:grid-cols-4 xl:gap-x-6 xl:divide-y-0 dark:divide-gray-700"
+        style={{ gridTemplateRows: 'auto 1fr' }}
+      >
+        {/* Vänster kolumn: Bild och Meta */}
+        <div className="pt-6 xl:pt-11">
+          {project.imgSrc && (
+            <div className="mb-6">
+              <Image
+                src={project.imgSrc}
+                alt={project.title}
+                width={600}
+                height={400}
+                className="rounded-lg object-cover shadow-lg"
+              />
             </div>
-
-            {/* Hard Skills Section */}
-            {projectSkills.length > 0 && (
-              <div className="border-t border-gray-200 pt-6 dark:border-gray-700">
-                <h3 className="mb-4 text-xs font-bold tracking-wider text-gray-500 uppercase">
-                  Teknisk Kompetens
-                </h3>
-                <div className="flex flex-col gap-3">
-                  {projectSkills.map((skill) => (
-                    <HardSkillRating key={skill.id} skill={skill} />
-                  ))}
-                </div>
+          )}
+          <div className="text-sm font-medium text-gray-500 dark:text-gray-400">
+            <div className="mb-4">
+              <h2 className="text-xs tracking-wide text-gray-500 uppercase dark:text-gray-400">
+                Tekniker
+              </h2>
+              <div className="mt-2 flex flex-wrap gap-2">
+                {project.relatedSkills.map((skill) => (
+                  <Tag key={skill} text={skill} />
+                ))}
               </div>
+            </div>
+            {project.href && (
+              <a
+                href={project.href}
+                target="_blank"
+                className="text-primary-500 hover:text-primary-600 font-bold"
+              >
+                Besök projektet &rarr;
+              </a>
             )}
           </div>
         </div>
 
-        {/* --- HÖGER KOLUMN (INNEHÅLL) --- */}
-        <div className="xl:col-span-3">
-          {project.imgSrc && (
-            <div className="mb-10 overflow-hidden rounded-xl border border-gray-200 shadow-md dark:border-gray-700">
-              <Image
-                src={project.imgSrc}
-                alt={project.title}
-                width={1200}
-                height={630}
-                className="h-auto w-full object-cover"
-                priority
-              />
-            </div>
-          )}
-
-          <div className="prose dark:prose-invert max-w-none pb-8">
-            <MDXLayoutRenderer code={project.body.code} />
+        {/* Höger kolumn: Beskrivning */}
+        <div className="divide-y divide-gray-200 xl:col-span-3 xl:row-span-2 xl:pb-0 dark:divide-gray-700">
+          <div className="prose dark:prose-invert max-w-none pt-10 pb-8">
+            {project.fullDescription.map((paragraph, i) => (
+              <p key={i} className="mb-4 text-lg leading-relaxed text-gray-700 dark:text-gray-300">
+                {paragraph}
+              </p>
+            ))}
           </div>
         </div>
       </div>
-    </article>
+    </div>
   )
 }

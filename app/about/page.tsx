@@ -1,152 +1,68 @@
-import { allAuthors } from 'contentlayer/generated'
-import { MDXLayoutRenderer } from 'pliny/mdx-components'
-import { notFound } from 'next/navigation'
-import Image from '@/components/Image'
-import Link from '@/components/Link'
+import { aboutContent } from '@/data/ui/about'
+import { skillsData } from '@/data/resume/skills'
 import SocialIcon from '@/components/social-icons'
-import { SKILLS } from '@/data/cvData'
-import HardSkillRating from '@/components/HardSkillRating'
+import Image from '@/components/Image'
+import { genPageMetadata } from 'app/seo'
 
-// --- DATA: VISION & FRAMTID ---
-const VISION_GOALS = [
-  {
-    emoji: '🔭',
-    title: 'Vision',
-    desc: 'Att bygga produkter som överbryggar gapet mellan komplex teknik och verklig affärsnytta.',
-  },
-  {
-    emoji: '🧠',
-    title: 'Utveckling',
-    desc: 'Fördjupning inom AI-agenter och automatiserade affärsflöden.',
-  },
-  {
-    emoji: '⚖️',
-    title: 'Balans',
-    desc: 'Prestation i kombination med långsiktig hälsa och hållbarhet.',
-  },
-]
+export const metadata = genPageMetadata({ title: 'Om mig' })
 
-// --- DATA: INTRESSEN ---
-const INTERESTS = [
-  'Teknologistrategi',
-  'Startups',
-  'Investeringar',
-  'Psykologi',
-  'Löpning',
-  'Matlagning',
-]
-
-// --- DATA: STATISTIK ---
-const STATS = [
-  { label: 'Erfarenhet', value: '3+ år' },
-  { label: 'Projekt', value: '12 st' },
-  { label: 'Kaffe', value: '∞' },
-]
-
-export const metadata = {
-  title: 'Om mig',
-  description: 'Min bakgrund, min vision och mina kompetenser.',
-}
-
-export default function AboutPage() {
-  const author = allAuthors.find((p) => p.slug === 'default')
-  if (!author) return notFound()
-
-  // Gruppera skills för vänsterspalten
-  const strategySkills = [SKILLS.strategy, SKILLS.leadership, SKILLS.analysis].filter(Boolean)
-  const techSkills = [SKILLS.next, SKILLS.ts, SKILLS.python, SKILLS.sql].filter(Boolean)
-  const toolSkills = [SKILLS.figma, SKILLS.catia, SKILLS.git].filter(Boolean)
+export default function About() {
+  const { name, avatar, occupation, company, email, twitter, linkedin, github, biography } =
+    aboutContent
 
   return (
-    <div className="mx-auto max-w-5xl px-4 py-12 sm:px-6 lg:px-8">
-      {/* --- HERO SECTION --- */}
-      <div className="mb-12 border-b border-gray-200 pb-12 dark:border-gray-700">
-        <div className="flex flex-col items-center gap-8 text-center md:flex-row md:items-start md:text-left">
-          <div className="relative h-40 w-40 shrink-0 overflow-hidden rounded-full border-4 border-white shadow-lg md:h-48 md:w-48 dark:border-gray-800">
-            {author.avatar && (
-              <Image
-                src={author.avatar}
-                alt="Avatar"
-                width={192}
-                height={192}
-                className="h-full w-full object-cover"
-                priority
-              />
-            )}
-          </div>
-          <div className="flex-1 pt-4">
-            <h1 className="text-4xl font-extrabold tracking-tight text-gray-900 sm:text-5xl dark:text-gray-100">
-              {author.name}
-            </h1>
-            <p className="text-primary-600 dark:text-primary-400 mt-2 text-xl font-medium">
-              {author.occupation}
-            </p>
-            <p className="mt-4 max-w-2xl text-lg text-gray-600 dark:text-gray-300">
-              Jag kombinerar ingenjörskonst med affärsstrategi. Här kan du läsa om min resa och vart
-              jag är på väg.
-            </p>
-
-            {/* Socials & Actions */}
-            <div className="mt-6 flex flex-wrap justify-center gap-4 md:justify-start">
-              <SocialIcon kind="mail" href={`mailto:${author.email}`} size={6} />
-              <SocialIcon kind="linkedin" href={author.linkedin} size={6} />
-
-              <Link
-                href="/static/cv.pdf"
-                target="_blank"
-                className="ml-4 inline-flex items-center rounded-full bg-gray-900 px-5 py-2 text-sm font-bold text-white transition hover:bg-gray-700 dark:bg-white dark:text-gray-900 dark:hover:bg-gray-200"
-              >
-                Ladda ner CV
-              </Link>
-            </div>
-          </div>
-        </div>
+    <div className="divide-y divide-gray-200 dark:divide-gray-700">
+      <div className="space-y-2 pt-6 pb-8 md:space-y-5">
+        <h1 className="text-3xl leading-9 font-extrabold tracking-tight text-gray-900 sm:text-4xl sm:leading-10 md:text-6xl md:leading-14 dark:text-gray-100">
+          Om mig
+        </h1>
       </div>
-
-      <div className="grid grid-cols-1 gap-12 lg:grid-cols-3">
-        {/* --- VÄNSTER KOLUMN (Sidebar) --- */}
-        <div className="space-y-8 lg:col-span-1">
-          {/*  KOMPETENSPROFIL */}
-          <div className="space-y-6">
-            <div className="pt-6">
-              <h3 className="mb-4 text-xs font-bold tracking-wider text-gray-500 uppercase">
-                Strategi & Ledarskap
-              </h3>
-              <div className="flex flex-col gap-2">
-                {strategySkills.map((skill) => (
-                  <HardSkillRating key={skill.id} skill={skill} />
-                ))}
-              </div>
-            </div>
-
-            <div className="border-t border-gray-200 pt-6 dark:border-gray-700">
-              <h3 className="mb-4 text-xs font-bold tracking-wider text-gray-500 uppercase">
-                Teknisk Utveckling
-              </h3>
-              <div className="flex flex-col gap-2">
-                {techSkills.map((skill) => (
-                  <HardSkillRating key={skill.id} skill={skill} />
-                ))}
-              </div>
-            </div>
-
-            <div className="border-t border-gray-200 pt-6 dark:border-gray-700">
-              <h3 className="mb-4 text-xs font-bold tracking-wider text-gray-500 uppercase">
-                Verktyg & Design
-              </h3>
-              <div className="flex flex-col gap-2">
-                {toolSkills.map((skill) => (
-                  <HardSkillRating key={skill.id} skill={skill} />
-                ))}
-              </div>
-            </div>
+      <div className="items-start space-y-2 xl:grid xl:grid-cols-3 xl:space-y-0 xl:gap-x-8">
+        {/* Vänster kolumn: Profilkort */}
+        <div className="flex flex-col items-center pt-8">
+          <Image
+            src={avatar}
+            alt="Avatar"
+            width={192}
+            height={192}
+            className="h-48 w-48 rounded-full object-cover"
+          />
+          <h3 className="pt-4 pb-2 text-2xl leading-8 font-bold tracking-tight">{name}</h3>
+          <div className="text-gray-500 dark:text-gray-400">{occupation}</div>
+          <div className="text-gray-500 dark:text-gray-400">{company}</div>
+          <div className="flex space-x-3 pt-6">
+            <SocialIcon kind="mail" href={`mailto:${email}`} />
+            <SocialIcon kind="github" href={github} />
+            <SocialIcon kind="linkedin" href={linkedin} />
+            <SocialIcon kind="twitter" href={twitter} />
           </div>
         </div>
 
-        {/* --- HÖGER KOLUMN (Main Content) --- */}
-        <div className="lg:col-span-2">
-          <div className="prose dark:prose-invert max-w-none">
-            <MDXLayoutRenderer code={author.body.code} />
+        {/* Höger kolumn: Biografi & Skills */}
+        <div className="prose dark:prose-invert max-w-none pt-8 pb-8 xl:col-span-2">
+          {biography.map((paragraph, index) => (
+            <p key={index}>{paragraph}</p>
+          ))}
+
+          <h3 className="mt-8 text-2xl font-bold">Färdigheter</h3>
+          <div className="mt-4 grid grid-cols-1 gap-6 sm:grid-cols-2">
+            {skillsData.map((group) => (
+              <div key={group.category}>
+                <h4 className="mb-2 font-semibold text-gray-900 dark:text-gray-100">
+                  {group.category}
+                </h4>
+                <div className="flex flex-wrap gap-2">
+                  {group.items.map((skill) => (
+                    <span
+                      key={skill}
+                      className="bg-primary-100 text-primary-800 dark:bg-primary-900 dark:text-primary-200 inline-block rounded px-2 py-1 text-xs font-medium"
+                    >
+                      {skill}
+                    </span>
+                  ))}
+                </div>
+              </div>
+            ))}
           </div>
         </div>
       </div>
