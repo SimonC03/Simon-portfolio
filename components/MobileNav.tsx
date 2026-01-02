@@ -1,107 +1,125 @@
 'use client'
 
-import { Dialog, DialogPanel, Transition, TransitionChild } from '@headlessui/react'
-import { disableBodyScroll, enableBodyScroll, clearAllBodyScrollLocks } from 'body-scroll-lock'
-import { Fragment, useState, useEffect, useRef } from 'react'
+import { useState, useEffect } from 'react'
 import Link from './Link'
 import headerNavLinks from '@/data/headerNavLinks'
 
 const MobileNav = () => {
   const [navShow, setNavShow] = useState(false)
-  const navRef = useRef(null)
+
+  // Hantera scroll-låsning
+  useEffect(() => {
+    if (navShow) {
+      document.body.style.overflow = 'hidden'
+    } else {
+      document.body.style.overflow = 'auto'
+    }
+    return () => {
+      document.body.style.overflow = 'auto'
+    }
+  }, [navShow])
 
   const onToggleNav = () => {
-    setNavShow((status) => {
-      if (status) {
-        enableBodyScroll(navRef.current)
-      } else {
-        // Prevent scrolling
-        disableBodyScroll(navRef.current)
-      }
-      return !status
-    })
+    setNavShow((status) => !status)
   }
 
-  useEffect(() => {
-    return clearAllBodyScrollLocks
-  })
+  const mainLinks = headerNavLinks.filter((link) => link.title !== 'Kontakt')
 
   return (
-    <>
-      <button aria-label="Toggle Menu" onClick={onToggleNav} className="sm:hidden">
+    // ÄNDRING: xl:hidden (var sm:hidden)
+    // Detta gör att hamburgermenyn visas på ALLT under 1280px
+    <div className="xl:hidden">
+      <button
+        type="button"
+        className="mr-1 ml-1 h-8 w-8 rounded py-1"
+        aria-label="Toggle Menu"
+        onClick={onToggleNav}
+      >
         <svg
           xmlns="http://www.w3.org/2000/svg"
           viewBox="0 0 20 20"
           fill="currentColor"
-          className="hover:text-primary-500 dark:hover:text-primary-400 h-8 w-8 text-gray-900 dark:text-gray-100"
+          className="text-gray-900 dark:text-gray-100"
         >
-          <path
-            fillRule="evenodd"
-            d="M3 5a1 1 0 011-1h12a1 1 0 110 2H4a1 1 0 01-1-1zM3 10a1 1 0 011-1h12a1 1 0 110 2H4a1 1 0 01-1-1zM3 15a1 1 0 011-1h12a1 1 0 110 2H4a1 1 0 01-1-1z"
-            clipRule="evenodd"
-          />
+          {navShow ? (
+            <path
+              fillRule="evenodd"
+              d="M4.293 4.293a1 1 0 011.414 0L10 8.586l4.293-4.293a1 1 0 111.414 1.414L11.414 10l4.293 4.293a1 1 0 01-1.414 1.414L10 11.414l-4.293 4.293a1 1 0 01-1.414-1.414L8.586 10 4.293 5.707a1 1 0 010-1.414z"
+              clipRule="evenodd"
+            />
+          ) : (
+            <path
+              fillRule="evenodd"
+              d="M3 5a1 1 0 011-1h12a1 1 0 110 2H4a1 1 0 01-1-1zM3 10a1 1 0 011-1h12a1 1 0 110 2H4a1 1 0 01-1-1zM3 15a1 1 0 011-1h12a1 1 0 110 2H4a1 1 0 01-1-1z"
+              clipRule="evenodd"
+            />
+          )}
         </svg>
       </button>
-      <Transition appear show={navShow} as={Fragment} unmount={false}>
-        <Dialog as="div" onClose={onToggleNav} unmount={false}>
-          <TransitionChild
-            as={Fragment}
-            enter="ease-out duration-300"
-            enterFrom="opacity-0"
-            enterTo="opacity-100"
-            leave="ease-in duration-200"
-            leaveFrom="opacity-100"
-            leaveTo="opacity-0"
-            unmount={false}
-          >
-            <div className="fixed inset-0 z-60 bg-black/25" />
-          </TransitionChild>
 
-          <TransitionChild
-            as={Fragment}
-            enter="transition ease-in-out duration-300 transform"
-            enterFrom="translate-x-full opacity-0"
-            enterTo="translate-x-0 opacity-95"
-            leave="transition ease-in duration-200 transform"
-            leaveFrom="translate-x-0 opacity-95"
-            leaveTo="translate-x-full opacity-0"
-            unmount={false}
+      {/* --- MENY-OVERLAY --- */}
+      <div
+        className={`fixed top-0 left-0 z-50 h-full w-full transform bg-white/95 backdrop-blur-sm transition-transform duration-300 ease-in-out dark:bg-gray-950/95 ${
+          navShow ? 'translate-x-0' : 'translate-x-full'
+        }`}
+      >
+        <div className="flex justify-end">
+          <button
+            className="mt-11 mr-5 h-8 w-8 rounded"
+            aria-label="Toggle Menu"
+            onClick={onToggleNav}
           >
-            <DialogPanel className="fixed top-0 left-0 z-70 h-full w-full bg-white/95 duration-300 dark:bg-gray-950/98">
-              <nav
-                ref={navRef}
-                className="mt-8 flex h-full basis-0 flex-col items-start overflow-y-auto pt-2 pl-12 text-left"
-              >
-                {headerNavLinks.map((link) => (
-                  <Link
-                    key={link.title}
-                    href={link.href}
-                    className="hover:text-primary-500 dark:hover:text-primary-400 mb-4 py-2 pr-4 text-2xl font-bold tracking-widest text-gray-900 outline outline-0 dark:text-gray-100"
-                    onClick={onToggleNav}
-                  >
-                    {link.title}
-                  </Link>
-                ))}
-              </nav>
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              viewBox="0 0 20 20"
+              fill="currentColor"
+              className="text-gray-900 dark:text-gray-100"
+            >
+              <path
+                fillRule="evenodd"
+                d="M4.293 4.293a1 1 0 011.414 0L10 8.586l4.293-4.293a1 1 0 111.414 1.414L11.414 10l4.293 4.293a1 1 0 01-1.414 1.414L10 11.414l-4.293 4.293a1 1 0 01-1.414-1.414L8.586 10 4.293 5.707a1 1 0 010-1.414z"
+                clipRule="evenodd"
+              />
+            </svg>
+          </button>
+        </div>
 
-              <button
-                className="hover:text-primary-500 dark:hover:text-primary-400 fixed top-7 right-4 z-80 h-16 w-16 p-4 text-gray-900 dark:text-gray-100"
-                aria-label="Toggle Menu"
-                onClick={onToggleNav}
-              >
-                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor">
-                  <path
-                    fillRule="evenodd"
-                    d="M4.293 4.293a1 1 0 011.414 0L10 8.586l4.293-4.293a1 1 0 111.414 1.414L11.414 10l4.293 4.293a1 1 0 01-1.414 1.414L10 11.414l-4.293 4.293a1 1 0 01-1.414-1.414L8.586 10 4.293 5.707a1 1 0 010-1.414z"
-                    clipRule="evenodd"
-                  />
-                </svg>
-              </button>
-            </DialogPanel>
-          </TransitionChild>
-        </Dialog>
-      </Transition>
-    </>
+        <nav className="fixed mt-8 flex h-full w-full flex-col justify-between overflow-y-auto px-12 pb-24">
+          <div className="space-y-4">
+            {mainLinks.map((link) => (
+              <div key={link.title} className="border-b border-gray-100 py-4 dark:border-gray-800">
+                <Link
+                  href={link.href}
+                  className="hover:text-primary-500 dark:hover:text-primary-400 text-2xl font-bold tracking-wide text-gray-900 dark:text-gray-100"
+                  onClick={onToggleNav}
+                >
+                  {link.title}
+                </Link>
+              </div>
+            ))}
+          </div>
+
+          <div className="mt-8 flex flex-col gap-4 pb-12">
+            <Link
+              href="/static/cv.pdf"
+              target="_blank"
+              onClick={onToggleNav}
+              className="flex items-center justify-center rounded-full border border-gray-300 bg-white py-3 text-lg font-bold text-gray-900 shadow-sm transition-colors hover:bg-gray-50 dark:border-gray-700 dark:bg-gray-800 dark:text-gray-100 dark:hover:bg-gray-700"
+            >
+              <span className="mr-2">📄</span> Mitt CV
+            </Link>
+
+            <Link
+              href="/contact"
+              onClick={onToggleNav}
+              className="bg-primary-600 hover:bg-primary-700 focus:ring-primary-500 flex items-center justify-center rounded-full py-3 text-lg font-bold text-white shadow-md transition-colors focus:ring-2 focus:outline-none"
+            >
+              Kontakta mig
+            </Link>
+          </div>
+        </nav>
+      </div>
+    </div>
   )
 }
 

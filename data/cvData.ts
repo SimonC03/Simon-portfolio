@@ -83,6 +83,12 @@ export interface Certificate {
   attachments?: Attachment[]
 }
 
+export interface Membership {
+  organization: string
+  role?: string
+  summary?: string
+}
+
 export interface Project {
   title: string
   description: string
@@ -310,19 +316,38 @@ export const certificationsData: Certificate[] = [
 // --- 6. UTMÄRKELSER & FÖRENINGAR ---
 export const awardsData: Award[] = [
   {
-    title: 'Nova Member',
-    organization: 'Nova Talent',
-    summary: 'Top 3% Talent. Utvald medlem i globalt talangnätverk.',
-  },
-  {
     title: 'Adlerbertska Stiftelsernas Stipendium',
     organization: 'Chalmers Tekniska Högskola',
-    summary: 'Tilldelad stipendium 2024 och 2025.',
+    summary: 'Tilldelad stipendium 2024 och 2025 för goda studieresultat.',
   },
   {
     title: 'Hedersmedalj - Värdeordet "Driv"',
     organization: 'Handels Consulting',
-    summary: 'Erkännande för exceptionellt driv och engagemang.',
+    summary: 'Erkännande för exceptionellt driv och engagemang internt.',
+  },
+  {
+    title: 'Bästa Uppsats (Exempel)',
+    organization: 'Handelshögskolan',
+    summary: 'Belönad för kandidatuppsats inom organisation.',
+  },
+]
+
+// --- 7. FÖRENINGAR & NÄTVERK (Ny kategori) ---
+export const membershipsData: Award[] = [
+  {
+    title: 'Nova Member',
+    organization: 'Nova Talent',
+    summary: 'Utvald medlem i globalt talangnätverk (Top 3% Talent).',
+  },
+  {
+    title: 'Chalmers AI Society',
+    organization: 'Chalmers',
+    summary: 'Aktiv medlem med fokus på maskininlärning och etik.',
+  },
+  {
+    title: 'Aktiespararna',
+    organization: 'Ungdom',
+    summary: 'Medlem och aktiv deltagare i event.',
   },
 ]
 
@@ -346,5 +371,27 @@ export const skillsData = [
   {
     category: 'Affär & Ledarskap',
     items: ['Strategi', 'Management', 'Ledarskap', 'Försäljning', 'Budgetansvar', 'Analys'],
+  },
+]
+export const referencesData: Reference[] = [
+  {
+    name: 'Anna Andersson', // Byt ut mot riktiga namn
+    role: 'Senior Project Manager',
+    company: 'Volvo Buses',
+    quote:
+      'Simon visade ett otroligt driv under sin tid hos oss. Han satte sig snabbt in i komplexa system och levererade över förväntan. Jag kan varmt rekommendera honom för framtida uppdrag.',
+  },
+  {
+    name: 'Johan Johansson',
+    role: 'VD',
+    company: 'HandelsConsulting',
+    quote:
+      'En av de mest talangfulla konsulter jag arbetat med. Simon kombinerar teknisk förståelse med affärsnytta på ett unikt sätt.',
+  },
+  {
+    name: 'Maria Svensson',
+    role: 'Kursansvarig',
+    company: 'Chalmers Tekniska Högskola',
+    quote: 'Simon var en ledande figur i projektarbetet och visade stor mognad i sitt ledarskap.',
   },
 ]

@@ -3,62 +3,75 @@ import headerNavLinks from '@/data/headerNavLinks'
 import Link from './Link'
 import MobileNav from './MobileNav'
 import ThemeSwitch from './ThemeSwitch'
-// import SearchButton from './SearchButton'  <-- Borttagen
 import Image from './Image'
 
 const Header = () => {
   return (
-    <header className="flex items-center justify-between py-10">
-      <div>
-        <Link href="/" aria-label={siteMetadata.headerTitle}>
-          <div className="flex items-center justify-between">
-            <div className="mr-3">
-              <Image
-                src={siteMetadata.siteLogo}
-                alt="Profilbild"
-                width={48}
-                height={48}
-                className="h-12 w-12 rounded-full border border-gray-200 object-cover dark:border-gray-700"
-              />
-            </div>
-            {typeof siteMetadata.headerTitle === 'string' ? (
-              <div className="hidden h-6 text-2xl font-semibold sm:block">
-                {siteMetadata.headerTitle}
-              </div>
-            ) : (
-              siteMetadata.headerTitle
-            )}
-          </div>
-        </Link>
-      </div>
-      <div className="flex items-center space-x-4 leading-5 sm:space-x-6">
-        {headerNavLinks
-          .filter((link) => link.href !== '/')
-          .map((link) => (
+    <div className="mx-auto max-w-7xl px-4 sm:px-6 xl:px-0">
+      <header className="flex items-center justify-between py-10">
+        <div>
+          <Link href="/" aria-label={siteMetadata.headerTitle}>
+            {/* Använder span för att undvika hydration errors */}
+            <span className="flex items-center justify-between">
+              <span className="mr-3">
+                <Image
+                  src={siteMetadata.siteLogo}
+                  alt="Profilbild"
+                  width={48}
+                  height={48}
+                  className="h-12 w-12 rounded-full border border-gray-200 object-cover dark:border-gray-700"
+                />
+              </span>
+              {typeof siteMetadata.headerTitle === 'string' ? (
+                <span className="hidden h-6 text-2xl font-semibold sm:block">
+                  {siteMetadata.headerTitle}
+                </span>
+              ) : (
+                siteMetadata.headerTitle
+              )}
+            </span>
+          </Link>
+        </div>
+
+        <div className="flex items-center space-x-4 leading-5 sm:space-x-6">
+          {/* TEXTLÄNKAR - Visas NU bara på XL (1280px) och uppåt */}
+          {headerNavLinks
+            .filter((link) => link.href !== '/' && link.href !== '/contact')
+            .map((link) => (
+              <Link
+                key={link.title}
+                href={link.href}
+                // ÄNDRING: xl:block (var sm:block)
+                className="hover:text-primary-500 dark:hover:text-primary-400 hidden font-medium text-gray-900 transition-colors xl:block dark:text-gray-100"
+              >
+                {link.title}
+              </Link>
+            ))}
+
+          {/* KNAPP-GRUPP - Visas NU bara på XL (1280px) och uppåt */}
+          {/* ÄNDRING: xl:flex (var sm:flex) */}
+          <div className="hidden items-center gap-3 pl-2 xl:flex">
             <Link
-              key={link.title}
-              href={link.href}
-              className="hidden font-medium text-gray-900 sm:block dark:text-gray-100"
+              href="/static/cv.pdf"
+              target="_blank"
+              className="group inline-flex items-center justify-center rounded-full bg-white px-5 py-2 text-sm font-bold text-gray-900 shadow-sm ring-1 ring-gray-300 transition-all ring-inset hover:bg-gray-50 dark:bg-gray-800 dark:text-gray-100 dark:ring-gray-700 dark:hover:bg-gray-700"
             >
-              {link.title}
+              <span className="mr-2">📄</span> Mitt CV
             </Link>
-          ))}
 
-        {/* --- CV-KNAPP --- */}
-        <Link
-          href="/static/cv.pdf"
-          target="_blank"
-          className="bg-primary-500 hover:bg-primary-700 focus:ring-primary-500 dark:bg-primary-600 dark:hover:bg-primary-500 hidden rounded-md px-4 py-2 font-medium text-white shadow-sm focus:ring-2 focus:ring-offset-2 sm:block"
-        >
-          Mitt CV
-        </Link>
+            <Link
+              href="/contact"
+              className="bg-primary-600 hover:bg-primary-700 focus:ring-primary-500 dark:bg-primary-600 dark:hover:bg-primary-500 inline-flex items-center justify-center rounded-full px-5 py-2 text-sm font-bold text-white shadow-sm transition-all hover:shadow-md focus:ring-2 focus:ring-offset-2 focus:outline-none"
+            >
+              Kontakta mig
+            </Link>
+          </div>
 
-        {/* <SearchButton />  <-- Borttagen härifrån */}
-
-        <ThemeSwitch />
-        <MobileNav />
-      </div>
-    </header>
+          <ThemeSwitch />
+          <MobileNav />
+        </div>
+      </header>
+    </div>
   )
 }
 

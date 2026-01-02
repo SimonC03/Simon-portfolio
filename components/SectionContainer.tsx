@@ -6,6 +6,8 @@ interface Props {
 
 export default function SectionContainer({ children }: Props) {
   return (
-    <section className="mx-auto max-w-3xl px-4 sm:px-6 xl:max-w-5xl xl:px-0">{children}</section>
+    // Ändrat från max-w-5xl till max-w-7xl
+    // Detta gör att hela sidan (header + innehåll) kan bli bredare på stora skärmar
+    <section className="mx-auto max-w-7xl px-4 sm:px-6 xl:px-0">{children}</section>
   )
 }
