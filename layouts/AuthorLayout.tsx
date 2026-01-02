@@ -2,8 +2,9 @@ import { ReactNode } from 'react'
 import type { Authors } from 'contentlayer/generated'
 import SocialIcon from '@/components/social-icons'
 import Image from '@/components/Image'
-import { skillsData, SKILLS } from '@/data/resume/skills' // <--- 1. Importera SKILLS
-import HardSkillRating from '@/components/HardSkillRating' // <--- 2. Importera komponenten
+// 1. Vi importerar bara SKILLS, eftersom skillsData inte finns i din fil längre
+import { SKILLS } from '@/data/resume/skills'
+import HardSkillRating from '@/components/HardSkillRating'
 
 interface Props {
   children: ReactNode
@@ -13,8 +14,19 @@ interface Props {
 export default function AuthorLayout({ children, content }: Props) {
   const { name, avatar, occupation, company, email, twitter, bluesky, linkedin, github } = content
 
-  // <--- 3. Välj ut vilka 5 skills du vill highlighta här
-  const topSkills = ['next', 'ts', 'strategy', 'leadership', 'figma']
+  // 2. Uppdaterade ID:n för att matcha din SKILLS-fil ('nextjs' och 'typescript')
+  const topSkillsIds = ['nextjs', 'typescript', 'strategy', 'leadership', 'figma']
+
+  // Hjälpfunktion för att hitta rätt skill-objekt i arrayen
+  const getSkill = (id: string) => SKILLS.find((s) => s.id === id)
+
+  // 3. Skapa skillsData dynamiskt genom att gruppera SKILLS på kategori
+  // Detta ersätter den saknade exporten 'skillsData'
+  const uniqueCategories = Array.from(new Set(SKILLS.map((s) => s.category)))
+  const skillsData = uniqueCategories.map((category) => ({
+    category,
+    items: SKILLS.filter((s) => s.category === category).map((s) => s.name),
+  }))
 
   return (
     <>
@@ -33,7 +45,7 @@ export default function AuthorLayout({ children, content }: Props) {
                 alt="avatar"
                 width={192}
                 height={192}
-                className="h-48 w-48 rounded-full"
+                className="h-48 w-48 rounded-full object-cover"
               />
             )}
             <h3 className="pt-4 pb-2 text-2xl leading-8 font-bold tracking-tight">{name}</h3>
@@ -47,14 +59,15 @@ export default function AuthorLayout({ children, content }: Props) {
               <SocialIcon kind="bluesky" href={bluesky} />
             </div>
 
-            {/* <--- 4. NY SEKTION: TOP SKILLS --- */}
+            {/* --- TOP SKILLS SEKTION --- */}
             <div className="mt-10 w-full space-y-4">
               <h3 className="text-center text-xs font-bold tracking-wider text-gray-500 uppercase dark:text-gray-400">
                 Top Skills
               </h3>
-              <div className="flex flex-col space-y-2">
-                {topSkills.map((id) => {
-                  const skill = SKILLS[id]
+              <div className="flex flex-col gap-2">
+                {topSkillsIds.map((id) => {
+                  const skill = getSkill(id)
+                  // Om skill inte hittas (t.ex. felstavat ID), rendera inget
                   if (!skill) return null
                   return <HardSkillRating key={id} skill={skill} />
                 })}
@@ -66,7 +79,7 @@ export default function AuthorLayout({ children, content }: Props) {
           <div className="prose dark:prose-invert max-w-none pt-8 pb-8 xl:col-span-2">
             {children}
 
-            {/* Den gamla sektionen kan ligga kvar här under om du vill visa alla skills också */}
+            {/* Alla färdigheter (Dynamiskt genererad lista) */}
             <div className="mt-12 border-t border-gray-200 pt-8 dark:border-gray-700">
               <h2 className="mb-6 text-2xl font-bold">Alla Färdigheter & Verktyg</h2>
               <div className="grid grid-cols-1 gap-6 sm:grid-cols-2">
@@ -76,12 +89,12 @@ export default function AuthorLayout({ children, content }: Props) {
                       {group.category}
                     </h3>
                     <div className="flex flex-wrap gap-2">
-                      {group.items.map((skill) => (
+                      {group.items.map((skillName) => (
                         <span
-                          key={skill}
+                          key={skillName}
                           className="rounded-md bg-gray-100 px-3 py-1 text-sm text-gray-700 dark:bg-gray-800 dark:text-gray-300"
                         >
-                          {skill}
+                          {skillName}
                         </span>
                       ))}
                     </div>
