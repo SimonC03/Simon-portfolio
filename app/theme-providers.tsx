@@ -2,19 +2,22 @@
 
 import { ThemeProvider } from 'next-themes'
 import siteMetadata from '@/data/siteMetadata'
-import { SearchProvider } from 'pliny/search' // <--- Matchar din index.d.ts
+import { SearchProvider } from 'pliny/search'
 import KBarActions from '@/components/KBarActions'
 
 export function ThemeProviders({ children }: { children: React.ReactNode }) {
   return (
     <ThemeProvider attribute="class" defaultTheme={siteMetadata.theme} enableSystem>
-      {/* SearchProvider tar 'searchConfig' och 'children', precis som din fil visar */}
-      <SearchProvider searchConfig={siteMetadata.search}>
-        {/* KBarActions ligger nu tryggt inuti providern */}
-        <KBarActions />
-
-        {children}
-      </SearchProvider>
+      {/* Kontrollera om search finns definierat i siteMetadata innan vi renderar */}
+      {siteMetadata.search ? (
+        <SearchProvider searchConfig={siteMetadata.search}>
+          <KBarActions />
+          {children}
+        </SearchProvider>
+      ) : (
+        /* Om sök inte är aktiverat, rendera bara innehållet som vanligt */
+        children
+      )}
     </ThemeProvider>
   )
 }
