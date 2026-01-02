@@ -1,4 +1,4 @@
-import { Reference } from '@/data/cvData'
+import { Reference } from '@/data/types' // <-- ÄNDRAD
 
 const ReferencesSection = ({ references }: { references: Reference[] }) => {
   if (!references || references.length === 0) return null

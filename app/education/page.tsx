@@ -1,4 +1,4 @@
-import { educationData } from '@/data/cvData'
+import { educationData } from '@/data/resume/education' // Ändrad import
 import { genPageMetadata } from 'app/seo'
 import EducationList from '@/components/EducationList'
 

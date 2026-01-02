@@ -1,4 +1,4 @@
-import { Skill } from '@/data/cvData'
+import { Skill } from '@/data/types' // <-- ÄNDRAD
 
 interface Props {
   skill: Skill

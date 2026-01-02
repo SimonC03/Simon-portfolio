@@ -1,14 +1,13 @@
 'use client'
 
-import { useState, KeyboardEvent } from 'react' // Importera KeyboardEvent
-import { Certificate } from '@/data/cvData'
+import { useState, KeyboardEvent } from 'react'
+import { Certificate } from '@/data/types' // <-- ÄNDRAD: Från cvData till types
 import Modal from './Modal'
 import AttachmentSection from './AttachmentSection'
 
 export default function CertificateList({ certificates }: { certificates: Certificate[] }) {
   const [selected, setSelected] = useState<Certificate | null>(null)
 
-  // Hantera Enter/Space tryck
   const handleKeyDown = (e: KeyboardEvent, cert: Certificate) => {
     if (e.key === 'Enter' || e.key === ' ') {
       e.preventDefault()
@@ -23,10 +22,10 @@ export default function CertificateList({ certificates }: { certificates: Certif
           <div
             key={cert.title}
             onClick={() => setSelected(cert)}
-            onKeyDown={(e) => handleKeyDown(e, cert)} // Lägg till
-            role="button" // Lägg till
-            tabIndex={0} // Lägg till
-            className="hover:border-primary-500 focus:ring-primary-500 cursor-pointer rounded-lg border border-gray-200 p-5 transition-all hover:shadow-md focus:ring-2 focus:outline-none dark:border-gray-700 dark:bg-gray-800/40" // La till focus-ring för tydlighet
+            onKeyDown={(e) => handleKeyDown(e, cert)}
+            role="button"
+            tabIndex={0}
+            className="hover:border-primary-500 focus:ring-primary-500 cursor-pointer rounded-lg border border-gray-200 p-5 transition-all hover:shadow-md focus:ring-2 focus:outline-none dark:border-gray-700 dark:bg-gray-800/40"
           >
             <div className="mb-2 flex items-center gap-3">
               <div className="bg-primary-100 dark:bg-primary-900/30 flex h-10 w-10 items-center justify-center rounded-full text-xl">

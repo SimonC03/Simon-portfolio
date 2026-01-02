@@ -94,6 +94,12 @@ export interface Award {
   summary?: string
 }
 
+export interface Membership {
+  organization: string
+  role: string
+  summary: string
+}
+
 export interface Language {
   language: string
   proficiency: string

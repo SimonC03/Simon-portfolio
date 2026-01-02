@@ -1,10 +1,10 @@
 'use client'
 
 import { useState, useMemo } from 'react'
-import { Project, SKILLS } from '@/data/cvData'
+import { Project } from '@/data/types' // <-- ÄNDRAD
+import { SKILLS } from '@/data/resume/skills' // <-- ÄNDRAD
 import Image from './Image'
 import Link from './Link'
-// import SpotlightCard from './SpotlightCard' <-- Borttagen
 
 export default function ProjectGallery({ projects }: { projects: Project[] }) {
   const [activeFilter, setActiveFilter] = useState<string | null>(null)
@@ -50,11 +50,9 @@ export default function ProjectGallery({ projects }: { projects: Project[] }) {
         ))}
       </div>
 
-      {/* --- Grid utan SpotlightCard --- */}
       <div className="grid grid-cols-1 gap-6 md:grid-cols-2">
         {filteredProjects.map((project) => (
           <Link key={project.title} href={project.href || '#'} className="block h-full">
-            {/* Ersatte SpotlightCard med en vanlig div som har border och hover-effekt */}
             <div className="group flex h-full flex-col overflow-hidden rounded-xl border border-gray-200 bg-white shadow-sm transition-all hover:shadow-md dark:border-gray-700 dark:bg-gray-800">
               {project.imgSrc && (
                 <div className="relative h-48 w-full overflow-hidden bg-gray-100 dark:bg-gray-800">
@@ -76,7 +74,6 @@ export default function ProjectGallery({ projects }: { projects: Project[] }) {
                   {project.description}
                 </p>
 
-                {/* Skills/Taggar */}
                 <div className="mt-auto flex flex-wrap gap-2">
                   {project.relatedSkills.slice(0, 3).map((id) => (
                     <span

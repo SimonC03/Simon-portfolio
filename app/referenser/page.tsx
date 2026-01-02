@@ -1,6 +1,5 @@
-import { referencesData } from '@/data/cvData'
+import { referencesData } from '@/data/references/references' // Ändrad import
 import { genPageMetadata } from 'app/seo'
-
 export const metadata = genPageMetadata({ title: 'Referenser' })
 
 export default function ReferencesPage() {

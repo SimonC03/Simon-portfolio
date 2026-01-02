@@ -1,5 +1,5 @@
 // app/experience/page.tsx
-import { experienceData } from '@/data/cvData'
+import { experienceData } from '@/data/resume/experience' // Ändrad import
 import { genPageMetadata } from 'app/seo'
 import ExperienceList from '@/components/ExperienceList'
 

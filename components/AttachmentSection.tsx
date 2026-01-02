@@ -1,4 +1,4 @@
-import { Attachment } from '@/data/cvData'
+import { Attachment } from '@/data/types' // <-- ÄNDRAD
 
 const AttachmentSection = ({ attachments }: { attachments: Attachment[] }) => {
   if (!attachments || attachments.length === 0) return null

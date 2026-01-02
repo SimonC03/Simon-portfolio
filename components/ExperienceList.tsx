@@ -1,15 +1,17 @@
 'use client'
 
 import { useState } from 'react'
-import { Experience, SKILLS } from '@/data/cvData'
+import { Experience } from '@/data/types' // <-- ÄNDRAD
+import { SKILLS } from '@/data/resume/skills' // <-- ÄNDRAD
 import Modal from './Modal'
 import AchievementsWidget from './achievements'
 import AttachmentSection from './AttachmentSection'
 import ReferencesSection from './ReferencesSection'
 import HardSkillRating from './HardSkillRating'
-import Link from 'next/link' // Om du vill länka till företaget
+import Link from 'next/link'
 
 export default function ExperienceList({ experiences }: { experiences: Experience[] }) {
+  // ... (Resten av koden är densamma)
   const [selected, setSelected] = useState<Experience | null>(null)
   const [activeTab, setActiveTab] = useState<string>('overview')
 
@@ -71,7 +73,6 @@ export default function ExperienceList({ experiences }: { experiences: Experienc
       >
         {selected && (
           <div className="flex h-full flex-col">
-            {/* --- HEADER HERO SECTION --- */}
             <div className="mb-6 rounded-lg bg-gray-50 p-6 dark:bg-gray-800/50">
               <div className="flex flex-col justify-between gap-4 md:flex-row md:items-start">
                 <div>
@@ -103,7 +104,6 @@ export default function ExperienceList({ experiences }: { experiences: Experienc
               </div>
             </div>
 
-            {/* --- TAB NAVIGERING --- */}
             <div className="no-scrollbar mb-6 flex overflow-x-auto border-b border-gray-200 dark:border-gray-700">
               <TabButton
                 label="Översikt"
@@ -133,11 +133,9 @@ export default function ExperienceList({ experiences }: { experiences: Experienc
               )}
             </div>
 
-            {/* --- INNEHÅLL --- */}
             <div className="min-h-[300px]">
               {activeTab === 'overview' && (
                 <div className="animate-in fade-in slide-in-from-bottom-2 grid grid-cols-1 gap-8 duration-300 md:grid-cols-3">
-                  {/* Vänster kolumn: Beskrivning (Tar upp 2/3) */}
                   <div className="md:col-span-2">
                     <h3 className="mb-3 text-lg font-bold text-gray-900 dark:text-gray-100">
                       Om rollen
@@ -159,7 +157,6 @@ export default function ExperienceList({ experiences }: { experiences: Experienc
                     </ul>
                   </div>
 
-                  {/* Höger kolumn: Skills & "Snabba fakta" (Tar upp 1/3) */}
                   <div className="md:col-span-1">
                     {selected.relatedSkills && (
                       <div className="rounded-xl border border-gray-100 bg-gray-50/50 p-5 dark:border-gray-800 dark:bg-gray-800/30">
@@ -179,7 +176,6 @@ export default function ExperienceList({ experiences }: { experiences: Experienc
                 </div>
               )}
 
-              {/* Övriga tabbar behålls som tidigare */}
               {activeTab === 'achievements' && selected.achievements && (
                 <div className="animate-in fade-in slide-in-from-bottom-2 duration-300">
                   <AchievementsWidget achievements={selected.achievements} />

@@ -1,12 +1,14 @@
 'use client'
 
 import { useState, KeyboardEvent } from 'react'
-import { Education, SKILLS } from '@/data/cvData'
+import { Education } from '@/data/types' // <-- ÄNDRAD
+import { SKILLS } from '@/data/resume/skills' // <-- ÄNDRAD
 import Modal from './Modal'
 import AttachmentSection from './AttachmentSection'
 import HardSkillRating from './HardSkillRating'
 
 export default function EducationList({ education }: { education: Education[] }) {
+  // ... (Resten av koden är densamma, behåll din logik)
   const [selected, setSelected] = useState<Education | null>(null)
   const [activeTab, setActiveTab] = useState<string>('overview')
 
@@ -24,6 +26,7 @@ export default function EducationList({ education }: { education: Education[] })
 
   return (
     <>
+      {/* Behåll din JSX exakt som den var */}
       <div className="space-y-4">
         {education.map((edu) => (
           <div
@@ -58,13 +61,10 @@ export default function EducationList({ education }: { education: Education[] })
       >
         {selected && (
           <div className="flex h-full flex-col">
-            {/* --- HEADER --- */}
             <div className="mb-6 rounded-lg bg-gray-50 p-6 dark:bg-gray-800/50">
               <h2 className="text-2xl font-extrabold text-gray-900 dark:text-gray-100">
                 {selected.degree}
               </h2>
-
-              {/* Metadata Rad */}
               <div className="mt-3 flex flex-wrap gap-x-6 gap-y-2 text-sm text-gray-600 dark:text-gray-400">
                 <div className="flex items-center gap-2">
                   <span className="text-lg">🎓</span>
@@ -81,7 +81,6 @@ export default function EducationList({ education }: { education: Education[] })
               </div>
             </div>
 
-            {/* --- TAB MENY --- */}
             <div className="no-scrollbar mb-6 flex overflow-x-auto border-b border-gray-200 dark:border-gray-700">
               <TabButton
                 label="Översikt"
@@ -104,9 +103,7 @@ export default function EducationList({ education }: { education: Education[] })
               )}
             </div>
 
-            {/* --- CONTENT --- */}
             <div className="min-h-[300px]">
-              {/* FLIK 1: ÖVERSIKT */}
               {activeTab === 'overview' && (
                 <div className="animate-in fade-in slide-in-from-bottom-2 grid grid-cols-1 gap-8 duration-300 md:grid-cols-3">
                   <div className="space-y-6 md:col-span-2">
@@ -135,7 +132,6 @@ export default function EducationList({ education }: { education: Education[] })
                     )}
                   </div>
 
-                  {/* Uppdaterad sektion för färdigheter */}
                   <div className="md:col-span-1">
                     {selected.relatedSkills && (
                       <div className="rounded-xl border border-gray-100 bg-gray-50/50 p-5 dark:border-gray-800 dark:bg-gray-800/30">
@@ -155,7 +151,6 @@ export default function EducationList({ education }: { education: Education[] })
                 </div>
               )}
 
-              {/* FLIK 2: KURSER */}
               {activeTab === 'courses' && selected.courses && (
                 <div className="animate-in fade-in slide-in-from-bottom-2 duration-300">
                   <div className="overflow-hidden rounded-lg border border-gray-200 dark:border-gray-700">
@@ -204,7 +199,6 @@ export default function EducationList({ education }: { education: Education[] })
                 </div>
               )}
 
-              {/* FLIK 3: BILAGOR */}
               {activeTab === 'attachments' && selected.attachments && (
                 <div className="animate-in fade-in slide-in-from-bottom-2 duration-300">
                   <AttachmentSection attachments={selected.attachments} />
