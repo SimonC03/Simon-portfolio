@@ -2,7 +2,7 @@ import { ReactNode } from 'react'
 import type { Authors } from 'contentlayer/generated'
 import SocialIcon from '@/components/social-icons'
 import Image from '@/components/Image'
-import { skillsData, SKILLS } from '@/data/cvData' // <--- 1. Importera SKILLS
+import { skillsData, SKILLS } from '@/data/resume/skills' // <--- 1. Importera SKILLS
 import HardSkillRating from '@/components/HardSkillRating' // <--- 2. Importera komponenten
 
 interface Props {
