@@ -37,7 +37,7 @@ export const certificationsData: Certificate[] = [
   },
 ]
 
-export const awards: Award[] = [
+export const awardsData: Award[] = [
   {
     title: 'Adlerbertska Stiftelsernas Stipendium',
     organization: 'Adlerbertska Stiftelserna',
@@ -60,7 +60,7 @@ export const awards: Award[] = [
   },
 ]
 
-export const memberships: Membership[] = [
+export const membershipsData: Membership[] = [
   {
     organization: 'Nova',
     role: 'Member',
