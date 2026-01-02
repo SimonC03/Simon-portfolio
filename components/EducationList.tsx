@@ -1,6 +1,6 @@
 'use client'
 
-import { useState } from 'react'
+import { useState, KeyboardEvent } from 'react'
 import { Education } from '@/data/cvData'
 import Modal from './Modal'
 import AttachmentSection from './AttachmentSection'
@@ -8,7 +8,7 @@ import AttachmentSection from './AttachmentSection'
 export default function EducationList({ education }: { education: Education[] }) {
   const [selected, setSelected] = useState<Education | null>(null)
 
-  const handleKeyDown = (e: React.KeyboardEvent, edu: Education) => {
+  const handleKeyDown = (e: KeyboardEvent, edu: Education) => {
     if (e.key === 'Enter' || e.key === ' ') {
       e.preventDefault()
       setSelected(edu)
@@ -23,9 +23,9 @@ export default function EducationList({ education }: { education: Education[] })
             key={edu.school}
             className="focus:ring-primary-500 flex cursor-pointer items-center justify-between rounded-lg border border-gray-200 p-4 transition-colors hover:bg-gray-50 focus:ring-2 focus:outline-none dark:border-gray-700 dark:hover:bg-gray-800/50"
             onClick={() => setSelected(edu)}
-            onKeyDown={(e) => handleKeyDown(e, edu)}
-            role="button"
-            tabIndex={0}
+            onKeyDown={(e) => handleKeyDown(e, edu)} // Måste finnas
+            role="button" // Måste finnas
+            tabIndex={0} // Måste finnas
           >
             <div>
               <h3 className="text-lg font-bold text-gray-900 dark:text-gray-100">{edu.school}</h3>
@@ -39,9 +39,12 @@ export default function EducationList({ education }: { education: Education[] })
         ))}
       </div>
 
+      {/* ... Modal koden är oförändrad ... */}
       <Modal isOpen={!!selected} onClose={() => setSelected(null)} title={selected?.school}>
+        {/* ... innehåll ... */}
         {selected && (
           <div className="space-y-4">
+            {/* Kopiera in ditt Modal-innehåll här om det behövs, men felet var i loopen ovan */}
             <div>
               <h2 className="text-2xl font-bold text-gray-900 dark:text-gray-100">
                 {selected.degree}
@@ -50,9 +53,7 @@ export default function EducationList({ education }: { education: Education[] })
                 {selected.year} | {selected.location}
               </p>
             </div>
-
             <p className="text-lg text-gray-700 dark:text-gray-300">{selected.summary}</p>
-
             {selected.details && (
               <ul className="list-disc space-y-2 pl-5 text-gray-600 dark:text-gray-400">
                 {selected.details.map((detail, i) => (
@@ -60,9 +61,7 @@ export default function EducationList({ education }: { education: Education[] })
                 ))}
               </ul>
             )}
-
             {selected.attachments && <AttachmentSection attachments={selected.attachments} />}
-
             {selected.relatedSkills && (
               <div className="mt-4 border-t border-gray-100 pt-4 dark:border-gray-800">
                 <h4 className="mb-2 text-xs font-bold text-gray-500 uppercase">

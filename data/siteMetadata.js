@@ -18,6 +18,14 @@ const siteMetadata = {
   locale: 'sv-SE',
   stickyNav: false,
 
-  // Raderad: analytics, newsletter, comments, search
+  // --- LÄGG TILL DETTA ---
+  search: {
+    provider: 'kbar', // Detta krävs för att CMD+K menyn ska fungera
+    kbarConfig: {
+      searchDocumentsPath: 'search.json', // Sökväg till sökindex (standard)
+    },
+  },
+  // -----------------------
 }
+
 module.exports = siteMetadata

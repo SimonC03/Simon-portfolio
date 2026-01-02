@@ -1,4 +1,3 @@
-// app/education/page.tsx
 import { educationData } from '@/data/cvData'
 import { genPageMetadata } from 'app/seo'
 import EducationList from '@/components/EducationList'
@@ -17,6 +16,7 @@ export default function EducationPage() {
         </p>
       </div>
       <div className="py-8">
+        {/* Denna rad är korrekt, se bara till att filen components/EducationList.tsx är uppdaterad */}
         <EducationList education={educationData} />
       </div>
     </div>

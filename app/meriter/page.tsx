@@ -1,5 +1,6 @@
-import { certificationsData, awardsData, languagesData, getSkills } from '@/data/cvData'
+import { certificationsData, awardsData, languagesData } from '@/data/cvData'
 import { genPageMetadata } from 'app/seo'
+import CertificateList from '@/components/CertificateList' // Importera den nya komponenten
 
 export const metadata = genPageMetadata({ title: 'Meriter & Övrigt' })
 
@@ -16,28 +17,17 @@ export default function MeriterPage() {
       </div>
 
       <div className="grid grid-cols-1 gap-12 py-8 md:grid-cols-2">
-        {/* --- KOLUMN 1: Certifikat & Licenser --- */}
+        {/* --- KOLUMN 1: Certifikat & Licenser (Nu med Modal) --- */}
         <div>
           <h2 className="mb-6 flex items-center text-2xl font-bold text-gray-900 dark:text-gray-100">
             <span className="mr-2">📜</span> Certifikat & Licenser
           </h2>
-          <div className="space-y-6">
-            {certificationsData.map((c) => (
-              <div
-                key={c.title}
-                className="rounded-lg border border-gray-200 p-4 shadow-sm dark:border-gray-700 dark:bg-gray-800/50"
-              >
-                <h3 className="font-bold text-gray-900 dark:text-gray-100">{c.title}</h3>
-                <p className="text-primary-500 text-sm">{c.issuer}</p>
-                <div className="mt-1 text-sm text-gray-500 dark:text-gray-400">
-                  {c.date && <span>Utfärdat: {c.date}</span>}
-                </div>
-              </div>
-            ))}
-          </div>
+
+          {/* Använd komponenten här */}
+          <CertificateList certificates={certificationsData} />
         </div>
 
-        {/* --- KOLUMN 2: Utmärkelser, Föreningar & Språk --- */}
+        {/* --- KOLUMN 2: Utmärkelser, Föreningar & Språk (Oförändrad) --- */}
         <div className="space-y-12">
           {/* Utmärkelser & Föreningar */}
           <div>
