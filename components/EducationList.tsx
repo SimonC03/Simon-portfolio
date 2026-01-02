@@ -1,9 +1,10 @@
 'use client'
 
 import { useState, KeyboardEvent } from 'react'
-import { Education } from '@/data/cvData'
+import { Education, SKILLS } from '@/data/cvData'
 import Modal from './Modal'
 import AttachmentSection from './AttachmentSection'
+import HardSkillRating from './HardSkillRating'
 
 export default function EducationList({ education }: { education: Education[] }) {
   const [selected, setSelected] = useState<Education | null>(null)
@@ -134,21 +135,19 @@ export default function EducationList({ education }: { education: Education[] })
                     )}
                   </div>
 
+                  {/* Uppdaterad sektion för färdigheter */}
                   <div className="md:col-span-1">
                     {selected.relatedSkills && (
-                      <div className="rounded-xl border border-gray-100 bg-white p-5 shadow-sm dark:border-gray-800 dark:bg-gray-900">
-                        <h4 className="mb-3 text-xs font-bold text-gray-400 uppercase">
+                      <div className="rounded-xl border border-gray-100 bg-gray-50/50 p-5 dark:border-gray-800 dark:bg-gray-800/30">
+                        <h4 className="mb-4 text-xs font-bold tracking-wider text-gray-500 uppercase">
                           Färdigheter
                         </h4>
-                        <div className="flex flex-wrap gap-2">
-                          {selected.relatedSkills.map((skill) => (
-                            <span
-                              key={skill}
-                              className="bg-primary-50 text-primary-700 ring-primary-700/10 dark:bg-primary-900/20 dark:text-primary-300 dark:ring-primary-500/30 inline-flex items-center rounded-md px-2.5 py-1 text-xs font-medium ring-1 ring-inset"
-                            >
-                              {skill}
-                            </span>
-                          ))}
+                        <div className="flex flex-col space-y-3">
+                          {selected.relatedSkills.map((skillId) => {
+                            const skill = SKILLS[skillId]
+                            if (!skill) return null
+                            return <HardSkillRating key={skillId} skill={skill} />
+                          })}
                         </div>
                       </div>
                     )}
