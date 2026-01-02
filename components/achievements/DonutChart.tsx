@@ -1,4 +1,4 @@
-import { Achievement } from '@/data/cvData'
+import { Achievement } from '@/data/types'
 
 export const DonutChart = ({ item }: { item: Achievement }) => {
   const radius = 30

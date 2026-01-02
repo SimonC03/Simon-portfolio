@@ -1,4 +1,4 @@
-import { Achievement } from '@/data/cvData'
+import { Achievement } from '@/data/types'
 import { StatCard } from './StatCard'
 import { ProgressBar } from './ProgressBar'
 import { DonutChart } from './DonutChart'

@@ -1,4 +1,4 @@
-import { Achievement } from '@/data/cvData'
+import { Achievement } from '@/data/types'
 
 export const ProgressBar = ({ item }: { item: Achievement }) => {
   const current = item.current || 0

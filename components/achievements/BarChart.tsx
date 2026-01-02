@@ -1,4 +1,4 @@
-import { Achievement } from '@/data/cvData'
+import { Achievement } from '@/data/types'
 
 export const BarChart = ({ item }: { item: Achievement }) => {
   if (!item.data) return null

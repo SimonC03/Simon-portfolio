@@ -1,4 +1,4 @@
-import { Achievement } from '@/data/cvData'
+import { Achievement } from '@/data/types'
 
 export const StatCard = ({ item }: { item: Achievement }) => (
   <div className="flex flex-col justify-between rounded-xl border border-gray-200 bg-white p-5 shadow-sm dark:border-gray-700 dark:bg-gray-800/50">

@@ -1,4 +1,4 @@
-import { Achievement } from '@/data/cvData'
+import { Achievement } from '@/data/types'
 
 export const TrendGraph = ({ item }: { item: Achievement }) => {
   if (!item.data || item.data.length < 2) return null
