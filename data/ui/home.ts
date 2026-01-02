@@ -1,32 +1,30 @@
-// data/ui/home.ts
-
 export const homeContent = {
   hero: {
     greeting: 'Hej, jag är',
     description:
-      'Jag är en driven ingenjör och ekonom som brinner för att bygga broar mellan komplex teknik och affärsnytta.',
-    primaryButton: 'Kontakt',
+      'Dubbelexamensstudent inom Mekatronik och Ekonomi samt VD för HandelsFöretagen. Jag drivs av att kombinera teknisk expertis med strategiska affärsinsikter för att lösa komplexa utmaningar och skapa verkligt värde.',
+    primaryButton: 'Kontakta mig',
     secondaryButton: 'Mer om mig',
   },
   sections: {
     about: {
       title: 'Vem är jag?',
       description:
-        'Jag är en driven ingenjör och ekonom som brinner för att bygga broar mellan komplex teknik och affärsnytta. Med en bakgrund inom både Chalmers och Handelshögskolan kombinerar jag analytisk skärpa med strategisk höjd. Just nu fokuserar jag på att utveckla moderna webbapplikationer och leda studentdrivna bolag.',
+        'Jag läser parallella kandidatexamina vid Chalmers tekniska högskola och Handelshögskolan i Göteborg. Som VD för Nordens största studentledda företagsgrupp leder jag över 180 kollegor och sju bolag. Min bakgrund spänner från management consulting och entreprenörskap till systemutveckling och militärt ledarskap.',
       link: 'Läs hela min story',
     },
     work: {
-      title: 'Nuläget',
-      subtitle: 'Arbete',
+      title: 'Erfarenhet',
+      subtitle: 'Karriär & Uppdrag',
       link: 'Visa hela CV',
     },
     education: {
-      subtitle: 'Studier',
-      link: 'Se alla utbildningar',
+      subtitle: 'Utbildning',
+      link: 'Se utbildningar',
     },
     projects: {
       title: 'Utvalda Projekt',
-      subtitle: 'Projekt',
+      subtitle: 'Portfolio',
       link: 'Visa alla projekt',
     },
   },

@@ -1,9 +1,10 @@
 import Image from '@/components/Image'
 import Link from '@/components/Link'
 import SocialIcon from '@/components/social-icons'
-import { SKILLS } from '@/data/resume/skills' // Uppdaterad import
+import { SKILLS } from '@/data/resume/skills'
 import HardSkillRating from '@/components/HardSkillRating'
-import { aboutContent } from '@/data/ui/about' // Uppdaterad import
+import { aboutContent } from '@/data/ui/about'
+import siteMetadata from '@/data/siteMetadata'
 
 export const metadata = {
   title: 'Om mig',
@@ -11,13 +12,36 @@ export const metadata = {
 }
 
 export default function AboutPage() {
-  // Vi använder nu aboutContent direkt istället för allAuthors
   const author = aboutContent
 
-  // Gruppera skills för vänsterspalten
-  const strategySkills = [SKILLS.strategy, SKILLS.leadership, SKILLS.analysis].filter(Boolean)
-  const techSkills = [SKILLS.next, SKILLS.ts, SKILLS.python, SKILLS.sql].filter(Boolean)
-  const toolSkills = [SKILLS.figma, SKILLS.catia, SKILLS.git].filter(Boolean)
+  // Hjälpsfunktion för att hitta skills från din array baserat på id
+  const getSkill = (id: string) => SKILLS.find((s) => s.id === id)
+
+  // Gruppera skills
+  const strategySkills = [
+    getSkill('strategy'),
+    getSkill('leadership'),
+    getSkill('consulting'),
+    getSkill('entrepreneurship'),
+  ].filter((s) => s !== undefined)
+
+  const techSkills = [
+    getSkill('nextjs'),
+    getSkill('typescript'),
+    getSkill('python'),
+    getSkill('sql'),
+  ].filter((s) => s !== undefined)
+
+  const toolSkills = [getSkill('figma'), getSkill('catia'), getSkill('git')].filter(
+    (s) => s !== undefined
+  )
+
+  // HÄR ÄR LÖSNINGEN: Vi definierar en typ istället för att använda 'any'
+  // Detta gör att ESLint slutar klaga.
+  const authorContact = author as { email?: string; linkedin?: string }
+
+  const email = authorContact.email || siteMetadata.email
+  const linkedin = authorContact.linkedin || siteMetadata.linkedin
 
   return (
     <div className="mx-auto max-w-5xl px-4 py-12 sm:px-6 lg:px-8">
@@ -41,17 +65,16 @@ export default function AboutPage() {
               {author.name}
             </h1>
             <p className="text-primary-600 dark:text-primary-400 mt-2 text-xl font-medium">
-              {author.occupation}
+              {author.title}
             </p>
             <p className="mt-4 max-w-2xl text-lg text-gray-600 dark:text-gray-300">
-              Jag kombinerar ingenjörskonst med affärsstrategi. Här kan du läsa om min resa och vart
-              jag är på väg.
+              Jag kombinerar ingenjörskonst med affärsstrategi.
             </p>
 
             {/* Socials & Actions */}
             <div className="mt-6 flex flex-wrap justify-center gap-4 md:justify-start">
-              <SocialIcon kind="mail" href={`mailto:${author.email}`} size={6} />
-              <SocialIcon kind="linkedin" href={author.linkedin} size={6} />
+              <SocialIcon kind="mail" href={`mailto:${email}`} size={6} />
+              <SocialIcon kind="linkedin" href={linkedin} size={6} />
 
               <Link
                 href="/static/cv.pdf"
@@ -75,9 +98,9 @@ export default function AboutPage() {
                 Strategi & Ledarskap
               </h3>
               <div className="flex flex-col gap-2">
-                {strategySkills.map((skill) => (
-                  <HardSkillRating key={skill.id} skill={skill} />
-                ))}
+                {strategySkills.map(
+                  (skill) => skill && <HardSkillRating key={skill.id} skill={skill} />
+                )}
               </div>
             </div>
 
@@ -86,9 +109,9 @@ export default function AboutPage() {
                 Teknisk Utveckling
               </h3>
               <div className="flex flex-col gap-2">
-                {techSkills.map((skill) => (
-                  <HardSkillRating key={skill.id} skill={skill} />
-                ))}
+                {techSkills.map(
+                  (skill) => skill && <HardSkillRating key={skill.id} skill={skill} />
+                )}
               </div>
             </div>
 
@@ -97,9 +120,9 @@ export default function AboutPage() {
                 Verktyg & Design
               </h3>
               <div className="flex flex-col gap-2">
-                {toolSkills.map((skill) => (
-                  <HardSkillRating key={skill.id} skill={skill} />
-                ))}
+                {toolSkills.map(
+                  (skill) => skill && <HardSkillRating key={skill.id} skill={skill} />
+                )}
               </div>
             </div>
           </div>
@@ -108,8 +131,8 @@ export default function AboutPage() {
         {/* --- HÖGER KOLUMN (Main Content) --- */}
         <div className="lg:col-span-2">
           <div className="prose dark:prose-invert max-w-none">
-            {/* Ersätter MDXLayoutRenderer med en enkel loop av din biografi-text */}
-            {author.biography.map((paragraph, index) => (
+            {/* Loopa igenom description-arrayen */}
+            {author.description.map((paragraph, index) => (
               <p key={index}>{paragraph}</p>
             ))}
           </div>

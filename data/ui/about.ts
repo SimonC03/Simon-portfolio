@@ -1,19 +1,10 @@
-// data/ui/about.ts
 export const aboutContent = {
-  name: 'Simon',
+  name: 'Simon Carlén',
+  title: 'Dubbelexamensstudent & VD',
   avatar: '/static/images/profile.jpg',
-  occupation: 'Engineering & Business Student',
-  company: 'Chalmers & GU',
-  email: 'simon@example.com',
-  twitter: 'https://twitter.com/Twitter',
-  linkedin: 'https://www.linkedin.com',
-  github: 'https://github.com',
-
-  // Här klistrar du in din långa biografi som vanlig text
-  heading: 'Vem är jag?',
-  biography: [
-    'Jag är en driven ingenjör och ekonom som brinner för att bygga broar mellan komplex teknik och affärsnytta.',
-    'Med en bakgrund inom både Chalmers och Handelshögskolan kombinerar jag analytisk skärpa med strategisk höjd. Just nu fokuserar jag på att utveckla moderna webbapplikationer och leda studentdrivna bolag.',
-    'När jag inte kodar eller pluggar gillar jag att...', // Fyll på med mer text här
+  description: [
+    'Jag studerar för närvarande en kandidatexamen i Mekatronik vid Chalmers tekniska högskola samt en Ekonomie kandidatexamen i Företagsekonomi vid Handelshögskolan i Göteborg. Min drivkraft ligger i att kombinera teknisk expertis med strategiska affärsinsikter för att lösa komplexa utmaningar och skapa verkligt värde.',
+    'Som VD och Koncernchef för HandelsFöretagen, Nordens största studentledda företagsgrupp, leder jag en dynamisk organisation med sju bolag och omkring 180 ambitiösa kollegor. I denna roll ansvarar jag för strategisk utveckling, bolagsöverskridande samverkan och långsiktig tillväxt.',
+    'Min bakgrund omfattar erfarenheter inom management consulting, entreprenörskap samt ledarskap genom såväl militärtjänst som akademiska uppdrag. Jag har dessutom ett starkt och långvarigt intresse för finans och aktiemarknaden, och är aktiv medlem i både Unga Aktiespararna och Chalmers Börssällskap.',
   ],
 }

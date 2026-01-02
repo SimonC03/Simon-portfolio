@@ -1,34 +1,52 @@
-// data/resume/education.ts
 import { Education } from '../types'
 
 export const educationData: Education[] = [
   {
-    school: 'Handelshögskolan vid Göteborgs Universitet',
+    school: 'School of Business, Economics and Law',
     degree: 'BSc Business Administration',
-    location: 'Göteborg',
+    location: 'Gothenburg, Sweden',
     year: '2024 - 2027',
-    summary: 'Jag har byggt en stark grund inom organisatoriskt ledarskap och ekonomi...',
-    details: ['Stipendium för bästa uppsats', 'Studentrepresentant i programrådet'],
-    courses: [
-      { name: 'Extern Redovisning', code: 'FEK101', credits: '7.5 hp', grade: 'VG' },
-      { name: 'Organisatoriskt Ledarskap', code: 'FEK102', credits: '7.5 hp', grade: 'VG' },
-      { name: 'Marknadsföring', code: 'FEK103', credits: '7.5 hp', grade: 'G' },
-      { name: 'Finansiell Styrning', code: 'FEK201', credits: '15 hp', grade: 'VG' },
+    summary: 'Pursuing a Bachelor’s degree in Business Administration.',
+    details: [
+      'Active in student organizations and business relations.',
+      'Combining business studies with engineering for a double degree.',
     ],
-    relatedSkills: ['strategy', 'analysis', 'budget', 'management'],
+    relatedSkills: ['Economics', 'Business Administration', 'Finance'],
   },
   {
-    school: 'Chalmers Tekniska Högskola',
+    school: 'Chalmers University of Technology',
     degree: 'BSc Mechatronics & Automation Engineering',
-    location: 'Göteborg',
+    location: 'Gothenburg, Sweden',
     year: '2023 - 2026',
-    summary: 'Jag har byggt upp kompetens inom systemteknik, programmering i C/C++...',
-    details: ['Expertis inom CAD-modellering (CATIA V5).', 'Aktiv medlem i Chalmers AI Society.'],
-    courses: [
-      { name: 'Mekatronik grundkurs', credits: '7.5 hp', grade: '5' },
-      { name: 'Linjär Algebra', credits: '7.5 hp', grade: '4' },
-      { name: 'Programmering i C', credits: '7.5 hp', grade: '5' },
+    summary:
+      'Engineering program focused on system engineering, C/C++ programming, and dynamic systems design.',
+    details: [
+      'Worked with Catia V5 for CAD modeling and PLC programming for automation.',
+      'Focus on combining technical expertise with strategic problem solving.',
     ],
-    relatedSkills: ['c', 'catia', 'matlab', 'python'],
+    courses: [
+      { name: 'Linear systems', grade: '5' },
+      { name: 'Computer programming', credits: '7.5 hp', grade: '5' },
+      { name: 'Electrical circuits', credits: '7.5 hp', grade: '5' },
+      { name: 'Linear algebra and differential equations', credits: '7.5 hp', grade: '5' },
+      { name: 'Introduction to computer engineering', credits: '7.5 hp', grade: '5' },
+      { name: 'Calculus', credits: '7.5 hp', grade: '5' },
+      { name: 'Mechanics', credits: '7.5 hp', grade: '4' },
+      { name: 'Logic control project', credits: '7.5 hp', grade: 'G' },
+      { name: 'Introduction to mechatronics', credits: '7.5 hp', grade: 'G' },
+    ],
+    relatedSkills: ['C', 'C++', 'Matlab', 'Electronics', 'Mechanics', 'PLC'],
+  },
+  {
+    school: 'Linköping University',
+    degree: 'Independent Courses',
+    location: 'Remote / Linköping',
+    year: 'Summer 2024',
+    summary: 'Summer courses focused on AI and Entrepreneurship.',
+    courses: [
+      { name: 'Elements of AI', credits: '2.0 hp', grade: 'G' },
+      { name: 'Innovation and Entrepreneurship', credits: '6.0 hp', grade: 'G' },
+    ],
+    relatedSkills: ['Artificial Intelligence', 'Entrepreneurship'],
   },
 ]

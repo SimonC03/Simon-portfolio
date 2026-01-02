@@ -15,7 +15,7 @@ const Header = () => {
             <span className="flex items-center justify-between">
               <span className="mr-3">
                 <Image
-                  src={siteMetadata.siteLogo}
+                  src={siteMetadata.image}
                   alt="Profilbild"
                   width={48}
                   height={48}

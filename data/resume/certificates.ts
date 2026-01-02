@@ -1,62 +1,84 @@
-// data/resume/certificates.ts
 import { Certificate, Award, Membership } from '../types'
 
 export const certificationsData: Certificate[] = [
   {
+    title: 'Certified Board Member',
+    issuer: 'Unknown',
+    date: '2024',
+    relatedSkills: ['Board Work', 'Governance'],
+  },
+  {
     title: 'McKinsey Forward Program',
     issuer: 'McKinsey & Company',
     date: '2024',
-    relatedSkills: ['leadership', 'strategy'],
+    relatedSkills: ['Leadership', 'Business Strategy'],
   },
   {
     title: 'Skyddsvaktsbevis',
     issuer: 'Försvarsmakten',
     date: '2022',
+    relatedSkills: ['Security', 'Defense'],
   },
   {
-    title: 'Heta Arbeten',
+    title: 'Heta arbeten',
     issuer: 'Brandskyddsföreningen',
-    date: '2022',
+    date: '2023',
+    relatedSkills: ['Safety'],
   },
   {
-    title: 'Körkort B + AM',
+    title: 'Driving Licence B + AM',
     issuer: 'Transportstyrelsen',
-    date: '',
+    date: '2021',
+  },
+  {
+    title: 'Logic Test',
+    issuer: 'Unknown',
+    date: '2024',
   },
 ]
 
-export const awardsData: Award[] = [
+export const awards: Award[] = [
   {
     title: 'Adlerbertska Stiftelsernas Stipendium',
-    organization: 'Chalmers Tekniska Högskola',
-    summary: 'Tilldelad stipendium 2024 och 2025 för goda studieresultat.',
+    organization: 'Adlerbertska Stiftelserna',
+    summary: 'Awarded twice (2024 & 2025) for academic achievements.',
+  },
+  {
+    title: 'Mastercard Stipendium',
+    organization: 'Chalmers Mastercard',
+    summary: 'Scholarship awarded for work on StuNote.',
+  },
+  {
+    title: 'Nova Top Talent',
+    organization: 'Nova',
+    summary: 'Recognized as Top 3% talent.',
   },
   {
     title: 'Hedersmedalj - Värdeordet "Driv"',
-    organization: 'Handels Consulting',
-    summary: 'Erkännande för exceptionellt driv och engagemang internt.',
-  },
-  {
-    title: 'Bästa Uppsats (Exempel)',
-    organization: 'Handelshögskolan',
-    summary: 'Belönad för kandidatuppsats inom organisation.',
+    organization: 'Försvarsmakten',
+    summary: 'Awarded for exceptional drive and motivation during military service.',
   },
 ]
 
-export const membershipsData: Membership[] = [
+export const memberships: Membership[] = [
   {
-    organization: 'Nova Talent',
-    role: 'Nova Member',
-    summary: 'Utvald medlem i globalt talangnätverk (Top 3% Talent).',
+    organization: 'Nova',
+    role: 'Member',
+    summary: 'Top 3% Talent Network.',
   },
   {
-    organization: 'Chalmers',
-    role: 'Chalmers AI Society',
-    summary: 'Aktiv medlem med fokus på maskininlärning och etik.',
+    organization: 'Chalmers Börssällskap (CBS)',
+    role: 'Member',
+    summary: 'Finance and investment society.',
   },
   {
-    organization: 'Ungdom',
-    role: 'Aktiespararna',
-    summary: 'Medlem och aktiv deltagare i event.',
+    organization: 'Unga Aktiespararna',
+    role: 'Member',
+    summary: 'Young Investors Association.',
+  },
+  {
+    organization: 'Chalmers AI Society',
+    role: 'Member',
+    summary: 'Artificial Intelligence interest group.',
   },
 ]
