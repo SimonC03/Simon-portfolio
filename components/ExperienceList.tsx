@@ -1,12 +1,13 @@
 'use client'
 
 import { useState } from 'react'
-import { Experience, SKILLS } from '@/data/cvData' // Importera SKILLS
+import { Experience, SKILLS } from '@/data/cvData'
 import Modal from './Modal'
 import AchievementsWidget from './achievements'
 import AttachmentSection from './AttachmentSection'
 import ReferencesSection from './ReferencesSection'
-import HardSkillRating from './HardSkillRating' // Importera komponenten
+import HardSkillRating from './HardSkillRating'
+import Link from 'next/link' // Om du vill länka till företaget
 
 export default function ExperienceList({ experiences }: { experiences: Experience[] }) {
   const [selected, setSelected] = useState<Experience | null>(null)
@@ -34,7 +35,7 @@ export default function ExperienceList({ experiences }: { experiences: Experienc
             onKeyDown={(e) => handleKeyDown(e, d)}
             role="button"
             tabIndex={0}
-            className="group focus:ring-primary-500 relative flex cursor-pointer flex-col gap-1 rounded-xl border border-gray-200 p-6 shadow-sm transition-all hover:shadow-md focus:ring-2 focus:outline-none dark:border-gray-700 dark:bg-gray-800/40"
+            className="group focus:ring-primary-500 relative flex cursor-pointer flex-col gap-1 rounded-xl border border-gray-200 bg-white p-6 shadow-sm transition-all hover:shadow-md focus:ring-2 focus:outline-none dark:border-gray-700 dark:bg-gray-800/40"
           >
             <div className="flex flex-col justify-between sm:flex-row sm:items-start">
               <div>
@@ -56,39 +57,53 @@ export default function ExperienceList({ experiences }: { experiences: Experienc
             </p>
 
             <div className="text-primary-500 mt-2 text-xs font-medium opacity-0 transition-opacity group-hover:opacity-100">
-              Klicka för att se detaljer & statistik &rarr;
+              Klicka för mer detaljer &rarr;
             </div>
           </div>
         ))}
       </div>
 
-      <Modal isOpen={!!selected} onClose={() => setSelected(null)} title={selected?.company}>
+      <Modal
+        isOpen={!!selected}
+        onClose={() => setSelected(null)}
+        title={selected?.company}
+        maxWidth="max-w-5xl"
+      >
         {selected && (
           <div className="flex h-full flex-col">
-            {/* HEADER */}
-            <div className="mb-6 border-b border-gray-100 pb-6 dark:border-gray-800">
-              <h2 className="text-3xl leading-tight font-extrabold text-gray-900 dark:text-gray-100">
-                {selected.title}
-              </h2>
-              <div className="mt-2 flex flex-wrap items-center gap-x-6 gap-y-2 text-sm text-gray-500 dark:text-gray-400">
-                <div className="flex items-center gap-1.5">
-                  <span className="text-lg">🏢</span>
-                  <span className="font-medium text-gray-900 dark:text-gray-200">
+            {/* --- HEADER HERO SECTION --- */}
+            <div className="mb-6 rounded-lg bg-gray-50 p-6 dark:bg-gray-800/50">
+              <div className="flex flex-col justify-between gap-4 md:flex-row md:items-start">
+                <div>
+                  <h2 className="text-3xl leading-tight font-extrabold text-gray-900 dark:text-gray-100">
+                    {selected.title}
+                  </h2>
+                  <div className="text-primary-600 dark:text-primary-400 mt-2 text-lg font-medium">
                     {selected.company}
-                  </span>
+                  </div>
                 </div>
-                <div className="flex items-center gap-1.5">
-                  <span className="text-lg">📍</span>
-                  <span>{selected.location}</span>
+                {selected.url && (
+                  <Link
+                    href={selected.url}
+                    target="_blank"
+                    className="transition-hover shrink-0 rounded-full bg-white px-4 py-2 text-sm font-medium text-gray-700 shadow-sm hover:bg-gray-50 dark:bg-gray-700 dark:text-gray-200 dark:hover:bg-gray-600"
+                  >
+                    Besök webbplats ↗
+                  </Link>
+                )}
+              </div>
+
+              <div className="mt-6 flex flex-wrap gap-4 text-sm text-gray-600 dark:text-gray-400">
+                <div className="flex items-center gap-1.5 rounded-md bg-white px-3 py-1.5 shadow-sm dark:bg-gray-800">
+                  <span>📍</span> {selected.location}
                 </div>
-                <div className="flex items-center gap-1.5">
-                  <span className="text-lg">🗓</span>
-                  <span>{selected.range}</span>
+                <div className="flex items-center gap-1.5 rounded-md bg-white px-3 py-1.5 shadow-sm dark:bg-gray-800">
+                  <span>🗓</span> {selected.range}
                 </div>
               </div>
             </div>
 
-            {/* TAB MENY */}
+            {/* --- TAB NAVIGERING --- */}
             <div className="no-scrollbar mb-6 flex overflow-x-auto border-b border-gray-200 dark:border-gray-700">
               <TabButton
                 label="Översikt"
@@ -118,71 +133,63 @@ export default function ExperienceList({ experiences }: { experiences: Experienc
               )}
             </div>
 
-            {/* CONTENT */}
+            {/* --- INNEHÅLL --- */}
             <div className="min-h-[300px]">
-              {/* ÖVERSIKT */}
               {activeTab === 'overview' && (
-                <div className="animate-in fade-in slide-in-from-bottom-2 duration-300">
-                  <div className="prose dark:prose-invert max-w-none">
-                    <h3 className="text-lg font-bold text-gray-900 dark:text-gray-100">
+                <div className="animate-in fade-in slide-in-from-bottom-2 grid grid-cols-1 gap-8 duration-300 md:grid-cols-3">
+                  {/* Vänster kolumn: Beskrivning (Tar upp 2/3) */}
+                  <div className="md:col-span-2">
+                    <h3 className="mb-3 text-lg font-bold text-gray-900 dark:text-gray-100">
                       Om rollen
                     </h3>
-                    <p className="text-gray-600 italic dark:text-gray-300">{selected.summary}</p>
+                    <p className="mb-6 leading-relaxed text-gray-600 dark:text-gray-300">
+                      {selected.summary}
+                    </p>
 
-                    <h4 className="mt-6 mb-3 text-sm font-bold tracking-wider text-gray-500 uppercase">
-                      Ansvarsområden
+                    <h4 className="mb-3 text-sm font-bold tracking-wider text-gray-500 uppercase">
+                      Huvudsakliga ansvarsområden
                     </h4>
-                    <ul className="space-y-2">
+                    <ul className="space-y-3">
                       {selected.description.map((point, i) => (
-                        <li
-                          key={i}
-                          className="border-primary-200 dark:border-primary-800 border-l-2 pl-2 text-gray-700 dark:text-gray-300"
-                        >
-                          {point}
+                        <li key={i} className="flex gap-3 text-gray-700 dark:text-gray-300">
+                          <span className="bg-primary-500 mt-1.5 h-1.5 w-1.5 shrink-0 rounded-full" />
+                          <span>{point}</span>
                         </li>
                       ))}
                     </ul>
                   </div>
 
-                  {/* --- SKILLS SEKTION (Vertikal Lista) --- */}
-                  {selected.relatedSkills && (
-                    <div className="mt-8 border-t border-gray-100 pt-6 dark:border-gray-800">
-                      <h4 className="mb-4 text-xs font-bold tracking-wider text-gray-400 uppercase">
-                        Hard Skills & Kompetensnivå
-                      </h4>
-
-                      {/* Flex-col för en vertikal lista av rader */}
-                      <div className="flex flex-col space-y-2">
-                        {selected.relatedSkills.map((skillId) => {
-                          const skill = SKILLS[skillId]
-                          if (!skill) return null
-                          return <HardSkillRating key={skillId} skill={skill} />
-                        })}
+                  {/* Höger kolumn: Skills & "Snabba fakta" (Tar upp 1/3) */}
+                  <div className="md:col-span-1">
+                    {selected.relatedSkills && (
+                      <div className="rounded-xl border border-gray-100 bg-gray-50/50 p-5 dark:border-gray-800 dark:bg-gray-800/30">
+                        <h4 className="mb-4 text-xs font-bold tracking-wider text-gray-500 uppercase">
+                          Teknisk Kompetens
+                        </h4>
+                        <div className="flex flex-col space-y-3">
+                          {selected.relatedSkills.map((skillId) => {
+                            const skill = SKILLS[skillId]
+                            if (!skill) return null
+                            return <HardSkillRating key={skillId} skill={skill} />
+                          })}
+                        </div>
                       </div>
-                    </div>
-                  )}
-                  {/* ------------------------------------- */}
+                    )}
+                  </div>
                 </div>
               )}
 
-              {/* ÖVRIGA FLIKAR (Samma som förut) */}
+              {/* Övriga tabbar behålls som tidigare */}
               {activeTab === 'achievements' && selected.achievements && (
                 <div className="animate-in fade-in slide-in-from-bottom-2 duration-300">
-                  <div className="mb-4">
-                    <h3 className="text-lg font-bold text-gray-900 dark:text-gray-100">
-                      Nyckeltal & Resultat
-                    </h3>
-                  </div>
                   <AchievementsWidget achievements={selected.achievements} />
                 </div>
               )}
-
               {activeTab === 'references' && selected.references && (
                 <div className="animate-in fade-in slide-in-from-bottom-2 duration-300">
                   <ReferencesSection references={selected.references} />
                 </div>
               )}
-
               {activeTab === 'attachments' && selected.attachments && (
                 <div className="animate-in fade-in slide-in-from-bottom-2 duration-300">
                   <AttachmentSection attachments={selected.attachments} />

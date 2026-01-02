@@ -1,4 +1,3 @@
-// components/Modal.tsx
 'use client'
 
 import { useEffect, useRef } from 'react'
@@ -8,18 +7,24 @@ interface ModalProps {
   onClose: () => void
   children: React.ReactNode
   title?: string
+  maxWidth?: string // Ny prop för att styra bredden
 }
 
-export default function Modal({ isOpen, onClose, children, title }: ModalProps) {
+export default function Modal({
+  isOpen,
+  onClose,
+  children,
+  title,
+  maxWidth = 'max-w-2xl', // Standardvärde (samma som förut)
+}: ModalProps) {
   const modalRef = useRef<HTMLDivElement>(null)
 
-  // Stäng om man klickar utanför eller trycker Escape
   useEffect(() => {
     const handleEsc = (e: KeyboardEvent) => {
       if (e.key === 'Escape') onClose()
     }
     if (isOpen) {
-      document.body.style.overflow = 'hidden' // Lås scroll på bakgrunden
+      document.body.style.overflow = 'hidden'
       window.addEventListener('keydown', handleEsc)
     }
     return () => {
@@ -34,7 +39,8 @@ export default function Modal({ isOpen, onClose, children, title }: ModalProps) 
     <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/60 p-4 backdrop-blur-sm">
       <div
         ref={modalRef}
-        className="relative max-h-[90vh] w-full max-w-2xl overflow-y-auto rounded-xl bg-white shadow-2xl ring-1 ring-gray-200 dark:bg-gray-900 dark:ring-gray-700"
+        // Här använder vi maxWidth-propen istället för hårdkodad bredd
+        className={`relative max-h-[90vh] w-full ${maxWidth} overflow-y-auto rounded-xl bg-white shadow-2xl ring-1 ring-gray-200 dark:bg-gray-900 dark:ring-gray-700`}
       >
         {/* Header */}
         <div className="sticky top-0 z-10 flex items-center justify-between border-b border-gray-100 bg-white/95 px-6 py-4 backdrop-blur dark:border-gray-800 dark:bg-gray-900/95">

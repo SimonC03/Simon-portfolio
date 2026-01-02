@@ -26,12 +26,8 @@ export interface Achievement {
   label: string
   value: string | number
   subtext?: string
-
-  // För progress/donut
   target?: number
   current?: number
-
-  // För bar/graph
   data?: { label: string; value: number; color?: string }[]
 }
 
@@ -39,7 +35,7 @@ export interface Skill {
   id: string
   name: string
   category: SkillCategory
-  proficiency?: number // Skala 1-5 för plupp-komponenten
+  proficiency?: number
 }
 
 export interface Experience {
@@ -57,13 +53,23 @@ export interface Experience {
   references?: Reference[]
 }
 
+// --- UTBILDNINGSDATA ---
+
+export interface Course {
+  name: string
+  code?: string
+  credits?: string // t.ex. "7.5 hp"
+  grade?: string // Valfritt betyg (t.ex. "VG", "5")
+}
+
 export interface Education {
   school: string
   degree: string
   location: string
   year: string
   summary: string
-  details?: string[]
+  details?: string[] // "Höjdpunkter"
+  courses?: Course[] // Lista med kurser
   relatedSkills?: string[]
   attachments?: Attachment[]
 }
@@ -231,7 +237,6 @@ export const experienceData: Experience[] = [
 ]
 
 // --- 3. PROJEKT (Baserat på portfölj & LinkedIn) ---
-// data/cvData.ts
 export const projectsData: Project[] = [
   {
     title: 'CampusLyan', // Måste matcha titeln i din .mdx fil
@@ -251,8 +256,14 @@ export const educationData: Education[] = [
     degree: 'BSc Business Administration',
     location: 'Göteborg',
     year: '2024 - 2027',
-    summary:
-      'Jag har byggt en stark grund inom organisatoriskt ledarskap, marknadsföring, extern redovisning, managementkontroll och ekonomi. Denna erfarenhet har gett mig värdefulla färdigheter inom affärsstrategi, finansiell styrning och ekonomisk analys, vilket har förberett mig för att hantera komplexa affärsutmaningar och aktivt bidra till organisatorisk tillväxt.',
+    summary: 'Jag har byggt en stark grund inom organisatoriskt ledarskap och ekonomi...',
+    details: ['Stipendium för bästa uppsats', 'Studentrepresentant i programrådet'],
+    courses: [
+      { name: 'Extern Redovisning', code: 'FEK101', credits: '7.5 hp', grade: 'VG' },
+      { name: 'Organisatoriskt Ledarskap', code: 'FEK102', credits: '7.5 hp', grade: 'VG' },
+      { name: 'Marknadsföring', code: 'FEK103', credits: '7.5 hp', grade: 'G' },
+      { name: 'Finansiell Styrning', code: 'FEK201', credits: '15 hp', grade: 'VG' },
+    ],
     relatedSkills: ['strategy', 'analysis', 'budget', 'management'],
   },
   {
@@ -260,21 +271,14 @@ export const educationData: Education[] = [
     degree: 'BSc Mechatronics & Automation Engineering',
     location: 'Göteborg',
     year: '2023 - 2026',
-    summary:
-      'Jag har byggt upp kompetens inom systemteknik, programmering i C/C++ och dynamisk systemdesign. Jag har arbetat med CAD-modellering i Catia V5 samt PLC-programmering för automationslösningar. Min utbildning har gett mig en stark grund inom reglerteknik, robotik och artificiell intelligens, med fokus på att integrera mekaniska, elektriska och mjukvarubaserade system för att lösa komplexa tekniska utmaningar. Mitt mål är att tillämpa denna kunskap inom automation, smart teknik och hållbara lösningar – där jag kombinerar teknisk kompetens med strategisk förståelse för att driva innovation som gör verklig skillnad.',
-    details: [
-      'Expertis inom CAD-modellering (CATIA V5) och PLC-programmering.',
-      'Aktiv medlem i Chalmers Börssällskap och Chalmers AI Society.',
+    summary: 'Jag har byggt upp kompetens inom systemteknik, programmering i C/C++...',
+    details: ['Expertis inom CAD-modellering (CATIA V5).', 'Aktiv medlem i Chalmers AI Society.'],
+    courses: [
+      { name: 'Mekatronik grundkurs', credits: '7.5 hp', grade: '5' },
+      { name: 'Linjär Algebra', credits: '7.5 hp', grade: '4' },
+      { name: 'Programmering i C', credits: '7.5 hp', grade: '5' },
     ],
     relatedSkills: ['c', 'catia', 'matlab', 'python'],
-  },
-  {
-    school: 'Linköpings universitet',
-    degree: 'Fristående Kurser',
-    location: 'Distans',
-    year: '2024 - 2024',
-    summary: '',
-    relatedSkills: ['Entreprenörskap', 'Artificiell intelligens', 'budget', 'management'],
   },
 ]
 
