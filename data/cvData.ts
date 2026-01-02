@@ -231,29 +231,17 @@ export const experienceData: Experience[] = [
 ]
 
 // --- 3. PROJEKT (Baserat på portfölj & LinkedIn) ---
+// data/cvData.ts
 export const projectsData: Project[] = [
   {
-    title: 'StuNote Platform',
-    description: 'En fullskalig plattform för studenter med marknadsplats för böcker och AI-quiz.',
-    imgSrc: '/static/images/project-stunote.jpg',
-    href: 'https://stunote.se',
+    title: 'CampusLyan', // Måste matcha titeln i din .mdx fil
+    description: 'Modern bostadsplattform för studenter...',
+    imgSrc: '/static/images/project-campuslyan.jpg',
+    // VIKTIGT: Peka på din interna sida nu, inte externa länkar
+    href: '/projects/campuslyan',
     relatedSkills: ['next', 'ts', 'sql', 'tailwind'],
   },
-  {
-    title: 'CampusLyan',
-    description:
-      'Modern bostadsplattform för studenter. Leder utvecklingen av både frontend och backend.',
-    imgSrc: '/static/images/project-campuslyan.jpg',
-    href: '/projects/campuslyan',
-    relatedSkills: ['next', 'ts', 'sql', 'tailwind', 'figma', 'strategy', 'leadership'],
-  },
-  {
-    title: 'Simon Portfolio',
-    description: 'Min personliga portföljsida byggd med Next.js, Contentlayer och Tailwind CSS.',
-    imgSrc: '/static/images/portfolio-card.png',
-    href: 'https://github.com/SimonC03/Simon-portfolio',
-    relatedSkills: ['next', 'ts', 'tailwind'],
-  },
+  // ... andra projekt
 ]
 
 // --- 4. UTBILDNING (Dubbel examen) ---

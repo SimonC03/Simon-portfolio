@@ -10,31 +10,4 @@ githubUrl: 'https://github.com/simonc03/campuslyan'
 
 ## Översikt
 
-CampusLyan är en plattform designad för att lösa bostadskrisen för studenter i Göteborg genom att effektivt matcha hyresvärdar med studenter.
-
-## Situation
-
-Studentbostadsmarknaden i Göteborg är fragmenterad. Studenter tvingas leta på dussintals olika sidor, och privata hyresvärdar har inget tryggt system för uthyrning. Det saknades en modern, snabb och mobilanpassad lösning.
-
-## Uppgift (Task)
-
-Min roll som **Founding CTO** var att bygga plattformen från noll. Målet var att skapa en MVP (Minimum Viable Product) på 3 månader som kunde hantera användarkonton, annonsflöden och realtidchatt.
-
-## Åtgärd (Action)
-
-Jag valde en tech-stack fokuserad på prestanda och snabb utvecklingstakt:
-
-- **Frontend:** Next.js (App Router) för SEO och snabba sidladdningar.
-- **Backend:** Supabase för databas (PostgreSQL) och autentisering.
-- **UI/UX:** Designade hela flödet i Figma och implementerade det med Tailwind CSS.
-
-Jag implementerade även CI/CD-pipelines via GitHub Actions för att automatisera tester och deploy.
-
-```ts
-// Exempel på hur jag strukturerade API-anropen för prestanda
-const { data, error } = await supabase
-  .from('listings')
-  .select('*')
-  .eq('active', true)
-  .order('created_at', { ascending: false })
-```
+CampusLyan är en plattform designad för att lösa bostadskrisen...

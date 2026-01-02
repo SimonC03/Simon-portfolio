@@ -1,16 +1,24 @@
 import Image from './Image'
-import Link from './Link'
+import Link from './Link' // Använder din befintliga Link-komponent (eller 'next/link')
 
-const Card = ({ title, description, imgSrc, href }) => (
+interface CardProps {
+  title: string
+  description: string
+  imgSrc?: string
+  href?: string
+}
+
+const Card = ({ title, description, imgSrc, href }: CardProps) => (
   <div className="md max-w-[544px] p-4 md:w-1/2">
     <div
       className={`${
         imgSrc && 'h-full'
-      } overflow-hidden rounded-md border-2 border-gray-200/60 dark:border-gray-700/60`}
+      } border-opacity-60 overflow-hidden rounded-md border-2 border-gray-200 dark:border-gray-700`}
     >
-      {imgSrc &&
-        (href ? (
-          <Link href={href} aria-label={`Link to ${title}`}>
+      {/* Om href finns, gör bilden klickbar */}
+      {href ? (
+        <Link href={href} aria-label={`Länk till ${title}`}>
+          {imgSrc && (
             <Image
               alt={title}
               src={imgSrc}
@@ -18,8 +26,10 @@ const Card = ({ title, description, imgSrc, href }) => (
               width={544}
               height={306}
             />
-          </Link>
-        ) : (
+          )}
+        </Link>
+      ) : (
+        imgSrc && (
           <Image
             alt={title}
             src={imgSrc}
@@ -27,11 +37,13 @@ const Card = ({ title, description, imgSrc, href }) => (
             width={544}
             height={306}
           />
-        ))}
+        )
+      )}
+
       <div className="p-6">
         <h2 className="mb-3 text-2xl leading-8 font-bold tracking-tight">
           {href ? (
-            <Link href={href} aria-label={`Link to ${title}`}>
+            <Link href={href} aria-label={`Länk till ${title}`}>
               {title}
             </Link>
           ) : (
@@ -39,13 +51,14 @@ const Card = ({ title, description, imgSrc, href }) => (
           )}
         </h2>
         <p className="prose mb-3 max-w-none text-gray-500 dark:text-gray-400">{description}</p>
+
         {href && (
           <Link
             href={href}
             className="text-primary-500 hover:text-primary-600 dark:hover:text-primary-400 text-base leading-6 font-medium"
-            aria-label={`Link to ${title}`}
+            aria-label={`Länk till ${title}`}
           >
-            Learn more &rarr;
+            Läs mer &rarr;
           </Link>
         )}
       </div>
