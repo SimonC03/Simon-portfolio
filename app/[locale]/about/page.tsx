@@ -92,7 +92,7 @@ export default function AboutPage({ params }: { params: { locale: string } }) {
 
       <div className="grid grid-cols-1 gap-12 lg:grid-cols-3">
         {/* --- VÄNSTER KOLUMN (Sidebar) --- */}
-        <div className="order-2 space-y-8 lg:col-span-1">
+        <div className="order-2 space-y-8 lg:order-1 lg:col-span-1">
           <div className="space-y-6">
             <div className="pt-6">
               <h3 className="mb-4 text-xs font-bold tracking-wider text-gray-500 uppercase">
@@ -119,7 +119,7 @@ export default function AboutPage({ params }: { params: { locale: string } }) {
         </div>
 
         {/* --- HÖGER KOLUMN (Main Content) --- */}
-        <div className="order-1 lg:col-span-2">
+        <div className="order-1 lg:order-2 lg:col-span-2">
           <div className="prose dark:prose-invert max-w-none">
             {author.description.map((paragraph, index) => (
               <p key={index}>{paragraph}</p>
