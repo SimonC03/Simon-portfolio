@@ -104,7 +104,7 @@ const MobileNav = ({ navLinks, t }: MobileNavProps) => {
 
           <div className="mt-8 flex flex-col gap-4 pb-12">
             <Link
-              href="/static/cv.pdf"
+              href="/cv.pdf"
               target="_blank"
               onClick={onToggleNav}
               className="flex items-center justify-center rounded-full border border-gray-300 bg-white py-3 text-lg font-bold text-gray-900 shadow-sm transition-colors hover:bg-gray-50 dark:border-gray-700 dark:bg-gray-800 dark:text-gray-100 dark:hover:bg-gray-700"
