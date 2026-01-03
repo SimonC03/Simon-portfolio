@@ -3,7 +3,7 @@ import type { Authors } from 'contentlayer/generated'
 import SocialIcon from '@/components/social-icons'
 import Image from '@/components/Image'
 // 1. Vi importerar bara SKILLS, eftersom skillsData inte finns i din fil längre
-import { SKILLS } from '@/data/resume/skills'
+import { SKILLS } from '@/data/sv/resume/skills'
 import HardSkillRating from '@/components/HardSkillRating'
 
 interface Props {

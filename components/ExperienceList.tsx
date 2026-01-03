@@ -2,7 +2,7 @@
 
 import { useState } from 'react'
 import { Experience } from '@/data/types' // <-- ÄNDRAD
-import { SKILLS } from '@/data/resume/skills' // <-- ÄNDRAD
+import { SKILLS } from '@/data/sv/resume/skills' // <-- ÄNDRAD
 import Modal from './Modal'
 import AchievementsWidget from './achievements'
 import AttachmentSection from './AttachmentSection'

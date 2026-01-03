@@ -2,8 +2,8 @@
 
 import { useRegisterActions } from 'kbar'
 import { useRouter } from 'next/navigation'
-import { projectsData } from '@/data/projects/projects'
-import { experienceData } from '@/data/resume/experience'
+import { projectsData } from '@/data/sv/projects/projects'
+import { experienceData } from '@/data/sv/resume/experience'
 
 export default function KBarActions() {
   const router = useRouter()

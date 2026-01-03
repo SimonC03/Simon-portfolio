@@ -3,11 +3,12 @@
 import { useState, useEffect } from 'react'
 import Link from './Link'
 import headerNavLinks from '@/data/headerNavLinks'
+import LanguageSwitch from './LanguageSwitch' // <--- IMPORTERA
 
 const MobileNav = () => {
   const [navShow, setNavShow] = useState(false)
 
-  // Hantera scroll-låsning
+  // ... (din useEffect kod är oförändrad) ...
   useEffect(() => {
     if (navShow) {
       document.body.style.overflow = 'hidden'
@@ -26,9 +27,8 @@ const MobileNav = () => {
   const mainLinks = headerNavLinks.filter((link) => link.title !== 'Kontakt')
 
   return (
-    // ÄNDRING: xl:hidden (var sm:hidden)
-    // Detta gör att hamburgermenyn visas på ALLT under 1280px
     <div className="xl:hidden">
+      {/* ... (din hamburgermeny-knapp är oförändrad) ... */}
       <button
         type="button"
         className="mr-1 ml-1 h-8 w-8 rounded py-1"
@@ -57,18 +57,19 @@ const MobileNav = () => {
         </svg>
       </button>
 
-      {/* --- MENY-OVERLAY --- */}
       <div
         className={`fixed top-0 left-0 z-50 h-full w-full transform bg-white/95 backdrop-blur-sm transition-transform duration-300 ease-in-out dark:bg-gray-950/95 ${
           navShow ? 'translate-x-0' : 'translate-x-full'
         }`}
       >
-        <div className="flex justify-end">
-          <button
-            className="mt-11 mr-5 h-8 w-8 rounded"
-            aria-label="Toggle Menu"
-            onClick={onToggleNav}
-          >
+        <div className="mt-11 mr-5 flex items-center justify-end">
+          {/* Lägg till språkval här i toppen bredvid stäng-kryss eller i menyn */}
+          <div className="mr-4">
+            <LanguageSwitch /> {/* <--- LÄGG TILL HÄR */}
+          </div>
+
+          <button className="h-8 w-8 rounded" aria-label="Toggle Menu" onClick={onToggleNav}>
+            {/* ... (ditt stäng-ikon svg) ... */}
             <svg
               xmlns="http://www.w3.org/2000/svg"
               viewBox="0 0 20 20"

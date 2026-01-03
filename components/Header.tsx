@@ -3,6 +3,7 @@ import headerNavLinks from '@/data/headerNavLinks'
 import Link from './Link'
 import MobileNav from './MobileNav'
 import ThemeSwitch from './ThemeSwitch'
+import LanguageSwitch from './LanguageSwitch' // <--- IMPORTERA
 import Image from './Image'
 
 const Header = () => {
@@ -11,7 +12,6 @@ const Header = () => {
       <header className="flex items-center justify-between py-10">
         <div>
           <Link href="/" aria-label={siteMetadata.headerTitle}>
-            {/* Använder span för att undvika hydration errors */}
             <span className="flex items-center justify-between">
               <span className="mr-3">
                 <Image
@@ -34,22 +34,18 @@ const Header = () => {
         </div>
 
         <div className="flex items-center space-x-4 leading-5 sm:space-x-6">
-          {/* TEXTLÄNKAR - Visas NU bara på XL (1280px) och uppåt */}
+          {/* Länkar... */}
           {headerNavLinks
             .filter((link) => link.href !== '/' && link.href !== '/contact')
             .map((link) => (
               <Link
                 key={link.title}
                 href={link.href}
-                // ÄNDRING: xl:block (var sm:block)
                 className="hover:text-primary-500 dark:hover:text-primary-400 hidden font-medium text-gray-900 transition-colors xl:block dark:text-gray-100"
               >
                 {link.title}
               </Link>
             ))}
-
-          {/* KNAPP-GRUPP - Visas NU bara på XL (1280px) och uppåt */}
-          {/* ÄNDRING: xl:flex (var sm:flex) */}
           <div className="hidden items-center gap-3 pl-2 xl:flex">
             <Link
               href="/static/cv.pdf"
@@ -66,8 +62,8 @@ const Header = () => {
               Kontakta mig
             </Link>
           </div>
-
           <ThemeSwitch />
+          <LanguageSwitch /> {/* <--- LÄGG TILL HÄR */}
           <MobileNav />
         </div>
       </header>

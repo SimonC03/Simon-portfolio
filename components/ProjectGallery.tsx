@@ -2,7 +2,7 @@
 
 import { useState, useMemo } from 'react'
 import { Project } from '@/data/types' // <-- ÄNDRAD
-import { SKILLS } from '@/data/resume/skills' // <-- ÄNDRAD
+import { SKILLS } from '@/data/sv/resume/skills' // <-- ÄNDRAD
 import Image from './Image'
 import Link from './Link'
 

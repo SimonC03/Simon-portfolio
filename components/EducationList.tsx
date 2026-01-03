@@ -2,7 +2,7 @@
 
 import { useState, KeyboardEvent } from 'react'
 import { Education } from '@/data/types' // <-- ÄNDRAD
-import { SKILLS } from '@/data/resume/skills' // <-- ÄNDRAD
+import { SKILLS } from '@/data/sv/resume/skills' // <-- ÄNDRAD
 import Modal from './Modal'
 import AttachmentSection from './AttachmentSection'
 import HardSkillRating from './HardSkillRating'
