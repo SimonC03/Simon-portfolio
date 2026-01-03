@@ -6,16 +6,11 @@ const siteMetadata = {
     'Double Degree Student in Mechatronics & Business | President & CEO at HandelsFöretagen',
   language: 'sv-se',
   theme: 'system', // system, dark or light
-  siteUrl: 'https://simoncarlen.se', // Uppdatera om du har en annan domän
-  siteRepo: 'https://github.com/simonc03/simon-portfolio',
-  siteLogo: '/static/images/logo.png',
+  siteUrl: 'https://simon-portfolio-wine.vercel.app', // Uppdatera om du har en annan domän
+  siteLogo: '/static/images/profile.jpg', // ÄNDRAT: Använder din profilbild som logotyp
   image: '/static/images/profile.jpg',
-  socialBanner: '/static/images/twitter-card.png',
+  socialBanner: '/static/images/profile.jpg', // ÄNDRAT: Använder profilbild som fallback för sociala medier
   email: 'simon.carlen1@gmail.com',
-  github: 'https://github.com/simonc03', // Antaget GitHub-namn baserat på mappnamn
-  twitter: '',
-  facebook: '',
-  youtube: '',
   linkedin: 'https://www.linkedin.com/in/simon-carlén',
   locale: 'sv-SE',
 }
