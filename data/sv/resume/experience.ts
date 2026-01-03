@@ -9,37 +9,70 @@ export const experienceData: Experience[] = [
     range: 'Aug 2025 - Nuvarande',
     url: 'https://handelsforetagen.se',
     summary:
-      'Leder en strategisk turnaround av Nordens största studentdrivna bolagsgrupp med sju dotterbolag och 180 medarbetare. Levererade koncernens starkaste Q3 någonsin.',
+      'Huvudansvarig för den strategiska ledningen och den operativa utvecklingen av Nordens största studentdrivna koncern. Genom att styra sex fristående dotterbolag via respektive VD och ledningsgrupp fokuserar jag på att optimera koncernsynergier, säkra finansiell hållbarhet och institutionalisera professionella affärsprocesser för drygt 180 medarbetare.',
     description: [
-      'Har totalt operativt och strategiskt ansvar för koncernens tillväxt, rekrytering och bolagsstyrning.',
-      'Implementerade en ny affärsstrategi som vände en negativ trend till rekordresultat.',
-      'Effektiviserar organisationen genom digital transformation och implementering av nya affärsprocesser.',
-      'Coachar och leder 7 dotterbolags-VD:ar och en ledningsgrupp.',
+      'Orkestrerar och coachar sex dotterbolags-VD:ar och ledningsgrupper för att säkerställa operativ samstämmighet, hög leveranskvalitet och uppfyllnad av koncernens gemensamma mål.',
+      'Utvecklat och implementerat ett datadrivet ramverk för tillväxt som konsoliderat mätetal från samtliga enheter',
+      'Med kostnadsoptimeringar genom strategisk eliminering av redundanta SaaS- och verksamhetssystem, sänkte vi systemkostnader med upp till ca 60 % och stärkte marginalerna.',
+      'Ansvarig för koncernens digitala transformationsstrategi, inklusive modernisering av infrastruktur för att stödja skalbar tillväxt och förbättra samarbetet mellan affärsenheterna.',
+      'Definierar långsiktigt hållbara tillväxtstrategier med fokus på att balansera offensiv marknadsexpansion med finansiell stabilitet och organisatorisk hälsa.',
+      'Mitt första kvartal i rollen och Q3-2025 resulterade i det starkaste Q3-resultatet i koncernens historia.',
     ],
-    relatedSkills: ['Koncernledning', 'Strategi', 'Turnaround', 'Affärsutveckling', 'Ekonomi'],
+    relatedSkills: [
+      'Koncernledning',
+      'Strategisk planering',
+      'Kostnadsoptimering',
+      'Executive Coaching',
+      'Affärsanalys',
+      'Finansiell bolagsstyrning',
+    ],
+    // Achievements-delen förblir densamma som i den engelska versionen men med svenska texter
     achievements: [
+      /*
       {
         type: 'bar',
         label: 'Intäktstillväxt Q3',
         value: '+95%',
         subtext: 'Jämförelse mot föregående år (Index)',
         data: [
-          { label: 'Föregående år', value: 100, color: '#9CA3AF' }, // Grå för "förra"
-          { label: 'Detta år', value: 195, color: '#10B981' }, // Grön för succé
+          { label: 'Föregående år', value: 100 },
+          { label: 'Detta år', value: 195 },
+        ],
+      },
+      {
+        type: 'donut',
+        label: 'Systemkostnader',
+        value: '60%',
+        current: 60,
+        subtext: 'Besparing genom strategisk eliminering',
+      },
+      {
+        type: 'graph',
+        label: 'Prestationstrend',
+        value: 'Rekordnivå',
+        subtext: 'Konsoliderat index för kvartalsprestation',
+        data: [
+          { label: 'Q4-24', value: 92 },
+          { label: 'Q1-25', value: 98 },
+          { label: 'Q2-25', value: 115 },
+          { label: 'Q3-25', value: 195 },
         ],
       },
       {
         type: 'stat',
-        label: 'Organisation',
+        label: 'Koncernstorlek',
         value: '180+',
-        subtext: 'Medarbetare & Konsulter',
+        subtext: 'Medarbetare i sju dotterbolag',
       },
       {
-        type: 'stat',
-        label: 'Dotterbolag',
-        value: '7 st',
-        subtext: 'Aktiva bolag i koncernen',
+        type: 'progress',
+        label: 'Strategiimplementering',
+        value: '7 / 7',
+        current: 7,
+        target: 7,
+        subtext: 'Dotterbolag som framgångsrikt antagit ny tillväxtstrategi',
       },
+      */
     ],
   },
   {
@@ -153,6 +186,19 @@ export const experienceData: Experience[] = [
     ],
   },
   {
+    id: 'chalmers-ta',
+    title: 'Lärarassistent i matematik',
+    company: 'Chalmers tekniska högskola',
+    location: 'Göteborg, Sverige',
+    range: 'Aug 2024 - Sep 2024',
+    summary: 'Handledde studenter i matematisk problemlösning och analys.',
+    description: [
+      'Pedagogiskt stöd för ingenjörsstudenter inom matematik',
+      'Tränade förmågan att förklara svåra koncept på ett lättförståeligt sätt.',
+    ],
+    relatedSkills: ['Matematik', 'Pedagogik', 'Presentationsteknik'],
+  },
+  {
     id: 'armed-forces',
     title: 'Gruppchef Systemteknik',
     company: 'Försvarsmakten',
@@ -166,27 +212,7 @@ export const experienceData: Experience[] = [
       'Utvecklade förmågan att fatta snabba beslut baserade på komplex information.',
     ],
     relatedSkills: ['Ledarskap', 'Teknisk felsökning', 'Krishantering', 'Radio- & Signalsystem'],
-    achievements: [
-      {
-        type: 'stat',
-        label: 'Utmärkelse',
-        value: 'Hedersmedalj',
-        subtext: 'Tilldelad för exceptionellt "Driv"',
-      },
-    ],
-  },
-  {
-    id: 'chalmers-ta',
-    title: 'Lärarassistent i matematik',
-    company: 'Chalmers tekniska högskola',
-    location: 'Göteborg, Sverige',
-    range: 'Aug 2024 - Sep 2024',
-    summary: 'Handledde studenter i matematisk problemlösning och analys.',
-    description: [
-      'Pedagogiskt stöd för ingenjörsstudenter i komplexa matematiska kurser.',
-      'Tränade förmågan att förklara svåra koncept på ett lättförståeligt sätt.',
-    ],
-    relatedSkills: ['Matematik', 'Pedagogik', 'Presentationsteknik'],
+    achievements: [],
   },
   {
     id: 'hemkop',
@@ -215,7 +241,7 @@ export const experienceData: Experience[] = [
   },
   {
     id: 'goteborgs-stad',
-    title: 'Feriearbetare',
+    title: 'Fastighetsskötare inom mark och skog',
     company: 'Göteborgs Stad',
     location: 'Göteborg, Sverige',
     range: 'Jul 2020 - Aug 2020',
@@ -225,7 +251,7 @@ export const experienceData: Experience[] = [
   },
   {
     id: 'havd-group',
-    title: 'Praktikant Design',
+    title: 'Design och Produkt Utveckling',
     company: 'HAVD Group',
     location: 'Göteborg, Sverige',
     range: 'Apr 2017 - Apr 2017',

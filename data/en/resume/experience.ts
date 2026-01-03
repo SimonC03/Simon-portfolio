@@ -9,43 +9,68 @@ export const experienceData: Experience[] = [
     range: 'Aug 2025 - Present',
     url: 'https://handelsforetagen.se',
     summary:
-      'Leading a strategic turnaround of the Nordics’ largest student-run corporate group, managing seven subsidiaries and 180 employees. Delivered the strongest Q3 in the organization’s history.',
+      'Accountable for the strategic leadership and operational development of the Nordics’ largest student-run corporate group. By steering six independent subsidiaries through their respective CEOs and management teams, I focus on optimizing group-wide synergies, ensuring financial sustainability, and institutionalizing professional business processes for over 180 employees.',
     description: [
-      'Hold full operational and strategic responsibility for corporate growth, recruitment, and governance.',
-      'Implemented a new business strategy that turned a negative trend into record-breaking results.',
-      'Streamlining the organization through digital transformation and implementation of new business processes.',
-      'Coaching and leading 7 subsidiary CEOs and a management team.',
+      'Orchestrate and coach six subsidiary CEOs and their management teams to ensure operational alignment, high service delivery, and the attainment of group-wide objectives.',
+      'Developed and implemented a data-driven growth framework that consolidated performance metrics across all entities to drive informed decision-making.',
+      'Executed a strategic cost-optimization program by eliminating redundant SaaS and operational systems, reducing system costs by approximately 60% and significantly strengthening margins.',
+      'Lead the group’s digital transformation strategy, including the modernization of infrastructure to support scalable growth and enhance cross-functional collaboration.',
+      'Define long-term sustainable growth strategies, balancing aggressive market expansion with financial stability and organizational health.',
+      'Delivered the strongest Q3 financial performance in the organization’s history during my first quarter in the role (Q3-2025).',
     ],
     relatedSkills: [
-      'Corporate Management',
-      'Strategy',
-      'Turnaround',
-      'Business Development',
-      'Finance',
+      'Group Management',
+      'Strategic Planning',
+      'Cost Optimization',
+      'Executive Coaching',
+      'Business Analytics',
+      'Financial Governance',
     ],
     achievements: [
+      /*
       {
-        type: 'bar',
+        type: 'bar', // Visualiserar den stora ökningen mot föregående år
         label: 'Revenue Growth Q3',
         value: '+95%',
-        subtext: 'Year-over-Year Comparison (Index)',
+        subtext: 'Year-over-year revenue index comparison',
         data: [
-          { label: 'Previous Year', value: 100, color: '#9CA3AF' },
-          { label: 'Current Year', value: 195, color: '#10B981' },
+          { label: 'Previous Year', value: 100 },
+          { label: 'Current Year', value: 195 },
         ],
       },
       {
-        type: 'stat',
-        label: 'Organization',
-        value: '180+',
-        subtext: 'Employees & Consultants',
+        type: 'donut', // Visualiserar kostnadsbesparingen
+        label: 'System Cost Reduction',
+        value: '60%',
+        current: 60,
+        subtext: 'Elimination of redundant software and infrastructure',
       },
       {
-        type: 'stat',
-        label: 'Subsidiaries',
-        value: '7',
-        subtext: 'Active companies in the group',
+        type: 'graph', // Visar på den stabila trenden i prestation
+        label: 'Performance Trend',
+        value: 'Record High',
+        subtext: 'Consolidated quarterly performance index',
+        data: [
+          { label: 'Q4-24', value: 92 },
+          { label: 'Q1-25', value: 98 },
+          { label: 'Q2-25', value: 115 },
+          { label: 'Q3-25', value: 195 },
+        ],
       },
+      {
+        type: 'stat', // Enkel och tydlig storlek på bolaget
+        label: 'Group Scale',
+        value: '180+',
+        subtext: 'Professionals & Consultants across 7 subsidiaries',
+      },
+      {
+        type: 'progress', // Visar att du jobbar mot ett mål med dotterbolagen
+        label: 'Sub-Org Optimization',
+        value: '7 / 7',
+        current: 7,
+        target: 7,
+        subtext: 'Subsidiaries successfully transitioned to new growth strategy',
+      },*/
     ],
   },
   {
@@ -159,6 +184,19 @@ export const experienceData: Experience[] = [
     ],
   },
   {
+    id: 'chalmers-ta',
+    title: 'Teaching Assistant in Mathematics',
+    company: 'Chalmers University of Technology',
+    location: 'Gothenburg, Sweden',
+    range: 'Aug 2024 - Sep 2024',
+    summary: 'Tutored students in mathematical problem-solving and analysis.',
+    description: [
+      'Provided pedagogical support for engineering students in mathematics.',
+      'Honed the ability to explain difficult concepts in an easily understandable way.',
+    ],
+    relatedSkills: ['Mathematics', 'Pedagogy', 'Presentation Skills'],
+  },
+  {
     id: 'armed-forces',
     title: 'Group Leader System Technician',
     company: 'Swedish Armed Forces',
@@ -177,27 +215,7 @@ export const experienceData: Experience[] = [
       'Crisis Management',
       'Radio & Signal Systems',
     ],
-    achievements: [
-      {
-        type: 'stat',
-        label: 'Award',
-        value: 'Medal of Honor',
-        subtext: 'Awarded for exceptional "Drive"',
-      },
-    ],
-  },
-  {
-    id: 'chalmers-ta',
-    title: 'Teaching Assistant in Mathematics',
-    company: 'Chalmers University of Technology',
-    location: 'Gothenburg, Sweden',
-    range: 'Aug 2024 - Sep 2024',
-    summary: 'Tutored students in mathematical problem-solving and analysis.',
-    description: [
-      'Provided pedagogical support for engineering students in complex mathematics courses.',
-      'Honed the ability to explain difficult concepts in an easily understandable way.',
-    ],
-    relatedSkills: ['Mathematics', 'Pedagogy', 'Presentation Skills'],
+    achievements: [],
   },
   {
     id: 'hemkop',
@@ -224,7 +242,7 @@ export const experienceData: Experience[] = [
   },
   {
     id: 'goteborgs-stad',
-    title: 'Seasonal Worker',
+    title: 'Caretaker in grounds & forest',
     company: 'City of Gothenburg',
     location: 'Gothenburg, Sweden',
     range: 'Jul 2020 - Aug 2020',
@@ -234,7 +252,7 @@ export const experienceData: Experience[] = [
   },
   {
     id: 'havd-group',
-    title: 'Design Intern',
+    title: 'Design and Product Development',
     company: 'HAVD Group',
     location: 'Gothenburg, Sweden',
     range: 'Apr 2017 - Apr 2017',

@@ -1,8 +1,7 @@
 'use client'
 
 import { useState } from 'react'
-import { Experience } from '@/data/types' // <-- ÄNDRAD
-import { SKILLS } from '@/data/sv/resume/skills' // <-- ÄNDRAD
+import { Experience } from '@/data/types'
 import Modal from './Modal'
 import AchievementsWidget from './achievements'
 import AttachmentSection from './AttachmentSection'
@@ -10,10 +9,55 @@ import ReferencesSection from './ReferencesSection'
 import HardSkillRating from './HardSkillRating'
 import Link from 'next/link'
 
-export default function ExperienceList({ experiences }: { experiences: Experience[] }) {
-  // ... (Resten av koden är densamma)
+// Importera båda språkens bibliotek
+import { SKILLS as SKILLS_SV } from '@/data/sv/resume/skills'
+import { SKILLS as SKILLS_EN } from '@/data/en/resume/skills'
+
+interface ExperienceListProps {
+  experiences: Experience[]
+  locale?: string
+}
+
+export default function ExperienceList({ experiences, locale = 'sv' }: ExperienceListProps) {
   const [selected, setSelected] = useState<Experience | null>(null)
   const [activeTab, setActiveTab] = useState<string>('overview')
+
+  // Översättningar baserat på locale
+  const t = {
+    sv: {
+      moreDetails: 'Klicka för mer detaljer',
+      visitWebsite: 'Besök webbplats',
+      tabs: {
+        overview: 'Översikt',
+        achievements: 'Prestationer',
+        references: 'Referenser',
+        attachments: 'Bilagor',
+      },
+      headers: {
+        about: 'Om rollen',
+        responsibilities: 'Huvudsakliga ansvarsområden & resultat',
+        skills: 'Kompetenser',
+      },
+    },
+    en: {
+      moreDetails: 'Click for more details',
+      visitWebsite: 'Visit website',
+      tabs: {
+        overview: 'Overview',
+        achievements: 'Achievements',
+        references: 'References',
+        attachments: 'Attachments',
+      },
+      headers: {
+        about: 'About the role',
+        responsibilities: 'Key Impact & Responsibilities',
+        skills: 'Competencies',
+      },
+    },
+  }[locale === 'en' ? 'en' : 'sv']
+
+  // Välj rätt kompetens-mappning
+  const CURRENT_SKILLS = locale === 'en' ? SKILLS_EN : SKILLS_SV
 
   const openModal = (exp: Experience) => {
     setSelected(exp)
@@ -59,7 +103,7 @@ export default function ExperienceList({ experiences }: { experiences: Experienc
             </p>
 
             <div className="text-primary-500 mt-2 text-xs font-medium opacity-0 transition-opacity group-hover:opacity-100">
-              Klicka för mer detaljer &rarr;
+              {t.moreDetails} &rarr;
             </div>
           </div>
         ))}
@@ -89,7 +133,7 @@ export default function ExperienceList({ experiences }: { experiences: Experienc
                     target="_blank"
                     className="transition-hover shrink-0 rounded-full bg-white px-4 py-2 text-sm font-medium text-gray-700 shadow-sm hover:bg-gray-50 dark:bg-gray-700 dark:text-gray-200 dark:hover:bg-gray-600"
                   >
-                    Besök webbplats ↗
+                    {t.visitWebsite} ↗
                   </Link>
                 )}
               </div>
@@ -106,27 +150,27 @@ export default function ExperienceList({ experiences }: { experiences: Experienc
 
             <div className="no-scrollbar mb-6 flex overflow-x-auto border-b border-gray-200 dark:border-gray-700">
               <TabButton
-                label="Översikt"
+                label={t.tabs.overview}
                 isActive={activeTab === 'overview'}
                 onClick={() => setActiveTab('overview')}
               />
               {selected.achievements && selected.achievements.length > 0 && (
                 <TabButton
-                  label="Prestationer"
+                  label={t.tabs.achievements}
                   isActive={activeTab === 'achievements'}
                   onClick={() => setActiveTab('achievements')}
                 />
               )}
               {selected.references && selected.references.length > 0 && (
                 <TabButton
-                  label="Referenser"
+                  label={t.tabs.references}
                   isActive={activeTab === 'references'}
                   onClick={() => setActiveTab('references')}
                 />
               )}
               {selected.attachments && selected.attachments.length > 0 && (
                 <TabButton
-                  label="Bilagor"
+                  label={t.tabs.attachments}
                   isActive={activeTab === 'attachments'}
                   onClick={() => setActiveTab('attachments')}
                 />
@@ -138,14 +182,14 @@ export default function ExperienceList({ experiences }: { experiences: Experienc
                 <div className="animate-in fade-in slide-in-from-bottom-2 grid grid-cols-1 gap-8 duration-300 md:grid-cols-3">
                   <div className="md:col-span-2">
                     <h3 className="mb-3 text-lg font-bold text-gray-900 dark:text-gray-100">
-                      Om rollen
+                      {t.headers.about}
                     </h3>
                     <p className="mb-6 leading-relaxed text-gray-600 dark:text-gray-300">
                       {selected.summary}
                     </p>
 
                     <h4 className="mb-3 text-sm font-bold tracking-wider text-gray-500 uppercase">
-                      Huvudsakliga ansvarsområden
+                      {t.headers.responsibilities}
                     </h4>
                     <ul className="space-y-3">
                       {selected.description.map((point, i) => (
@@ -156,56 +200,28 @@ export default function ExperienceList({ experiences }: { experiences: Experienc
                       ))}
                     </ul>
                   </div>
-
                   <div className="md:col-span-1">
-                    {selected.relatedSkills && selected.relatedSkills.length > 0 && (
-                      <div className="sticky top-6 space-y-6">
-                        <div className="rounded-xl border border-gray-100 bg-gray-50/50 p-5 dark:border-gray-800 dark:bg-gray-800/30">
-                          <h4 className="mb-4 text-xs font-bold tracking-wider text-gray-500 uppercase">
-                            Teknisk Kompetens
-                          </h4>
-                          <div className="flex flex-col space-y-4">
-                            {selected.relatedSkills.map((skillId) => {
-                              const skill = SKILLS[skillId]
-
-                              // Om färdigheten finns i din SKILLS-databas, visa med rating-bar
-                              if (skill) {
-                                return (
-                                  <div key={skillId} className="group">
-                                    <HardSkillRating skill={skill} />
-                                  </div>
-                                )
-                              }
-
-                              // Om det är en färdighet som inte har rating (t.ex. "Leadership"),
-                              // visa den som en snygg "tag" istället längst ner
-                              return null
-                            })}
-                          </div>
-
-                          {/* Sektion för övriga kompetenser/fokusområden som inte har rating */}
-                          {selected.relatedSkills.some((id) => !SKILLS[id]) && (
-                            <div className="mt-6 border-t border-gray-200 pt-6 dark:border-gray-700">
-                              <h5 className="mb-3 text-[10px] font-bold tracking-widest text-gray-400 uppercase">
-                                Fokusområden
-                              </h5>
-                              <div className="flex flex-wrap gap-2">
-                                {selected.relatedSkills.map((skillId) => {
-                                  if (!SKILLS[skillId]) {
-                                    return (
-                                      <span
-                                        key={skillId}
-                                        className="inline-flex items-center rounded-md bg-white px-2 py-1 text-xs font-medium text-gray-600 shadow-sm ring-1 ring-gray-200 ring-inset dark:bg-gray-700/50 dark:text-gray-300 dark:ring-gray-600"
-                                      >
-                                        {skillId}
-                                      </span>
-                                    )
-                                  }
-                                  return null
-                                })}
-                              </div>
-                            </div>
-                          )}
+                    {selected.relatedSkills && (
+                      <div className="rounded-xl border border-gray-100 bg-gray-50/50 p-5 dark:border-gray-800 dark:bg-gray-800/30">
+                        <h4 className="mb-4 text-xs font-bold tracking-wider text-gray-500 uppercase">
+                          {t.headers.skills}
+                        </h4>
+                        <div className="flex flex-col gap-y-4">
+                          {selected.relatedSkills.map((skillId) => {
+                            const skill = CURRENT_SKILLS[skillId]
+                            if (!skill) {
+                              return (
+                                <div
+                                  key={skillId}
+                                  className="flex items-center gap-2 text-sm text-gray-600 dark:text-gray-400"
+                                >
+                                  <span className="bg-primary-500 h-1.5 w-1.5 rounded-full" />
+                                  {skillId}
+                                </div>
+                              )
+                            }
+                            return <HardSkillRating key={skillId} skill={skill} />
+                          })}
                         </div>
                       </div>
                     )}

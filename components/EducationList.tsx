@@ -2,14 +2,65 @@
 
 import { useState, KeyboardEvent } from 'react'
 import { Education } from '@/data/types'
-import { SKILLS } from '@/data/sv/resume/skills'
 import Modal from './Modal'
 import AttachmentSection from './AttachmentSection'
 import HardSkillRating from './HardSkillRating'
 
-export default function EducationList({ education }: { education: Education[] }) {
+// Importera båda språkens bibliotek
+import { SKILLS as SKILLS_SV } from '@/data/sv/resume/skills'
+import { SKILLS as SKILLS_EN } from '@/data/en/resume/skills'
+
+export default function EducationList({
+  education,
+  locale = 'sv',
+}: {
+  education: Education[]
+  locale?: string
+}) {
   const [selected, setSelected] = useState<Education | null>(null)
   const [activeTab, setActiveTab] = useState<string>('overview')
+
+  // Översättningar
+  const t = {
+    sv: {
+      viewMore: 'Visa mer',
+      tabs: {
+        overview: 'Översikt',
+        courses: 'Kurser',
+        attachments: 'Bilagor',
+      },
+      headers: {
+        summary: 'Sammanfattning',
+        highlights: 'Höjdpunkter',
+        skills: 'Kompetenser',
+      },
+      table: {
+        course: 'Kurs',
+        credits: 'Omfattning',
+        grade: 'Betyg',
+      },
+    },
+    en: {
+      viewMore: 'View more',
+      tabs: {
+        overview: 'Overview',
+        courses: 'Courses',
+        attachments: 'Attachments',
+      },
+      headers: {
+        summary: 'Summary',
+        highlights: 'Highlights',
+        skills: 'Competencies',
+      },
+      table: {
+        course: 'Course',
+        credits: 'Credits',
+        grade: 'Grade',
+      },
+    },
+  }[locale === 'en' ? 'en' : 'sv']
+
+  const CURRENT_SKILLS = locale === 'en' ? SKILLS_EN : SKILLS_SV
 
   const openModal = (edu: Education) => {
     setSelected(edu)
@@ -28,7 +79,7 @@ export default function EducationList({ education }: { education: Education[] })
       <div className="space-y-4">
         {education.map((edu) => (
           <div
-            key={edu.school + edu.year} // Unik nyckel ifall skola förekommer flera gånger
+            key={edu.school + edu.year}
             className="group focus:ring-primary-500 flex cursor-pointer items-center justify-between rounded-xl border border-gray-200 bg-white p-5 shadow-sm transition-all hover:shadow-md focus:ring-2 focus:outline-none dark:border-gray-700 dark:bg-gray-800/40"
             onClick={() => openModal(edu)}
             onKeyDown={(e) => handleKeyDown(e, edu)}
@@ -44,7 +95,7 @@ export default function EducationList({ education }: { education: Education[] })
             <div className="text-right">
               <span className="block text-sm font-medium text-gray-500">{edu.year}</span>
               <span className="text-primary-500 text-xs font-semibold opacity-0 transition-opacity group-hover:opacity-100">
-                Visa mer &rarr;
+                {t.viewMore} &rarr;
               </span>
             </div>
           </div>
@@ -59,7 +110,6 @@ export default function EducationList({ education }: { education: Education[] })
       >
         {selected && (
           <div className="flex h-full flex-col">
-            {/* Header i Modalen */}
             <div className="mb-6 rounded-lg bg-gray-50 p-6 dark:bg-gray-800/50">
               <h2 className="text-2xl font-extrabold text-gray-900 dark:text-gray-100">
                 {selected.degree}
@@ -80,39 +130,35 @@ export default function EducationList({ education }: { education: Education[] })
               </div>
             </div>
 
-            {/* Tab Navigation */}
             <div className="no-scrollbar mb-6 flex overflow-x-auto border-b border-gray-200 dark:border-gray-700">
               <TabButton
-                label="Översikt"
+                label={t.tabs.overview}
                 isActive={activeTab === 'overview'}
                 onClick={() => setActiveTab('overview')}
               />
               {selected.courses && selected.courses.length > 0 && (
                 <TabButton
-                  label={`Kurser (${selected.courses.length})`}
+                  label={`${t.tabs.courses} (${selected.courses.length})`}
                   isActive={activeTab === 'courses'}
                   onClick={() => setActiveTab('courses')}
                 />
               )}
               {selected.attachments && selected.attachments.length > 0 && (
                 <TabButton
-                  label="Bilagor"
+                  label={t.tabs.attachments}
                   isActive={activeTab === 'attachments'}
                   onClick={() => setActiveTab('attachments')}
                 />
               )}
             </div>
 
-            {/* Innehåll */}
             <div className="min-h-[300px]">
-              {/* TAB: ÖVERSIKT */}
               {activeTab === 'overview' && (
                 <div className="animate-in fade-in slide-in-from-bottom-2 grid grid-cols-1 gap-8 duration-300 md:grid-cols-3">
-                  {/* Vänsterkolumn: Sammanfattning & Detaljer */}
                   <div className="space-y-6 md:col-span-2">
                     <div>
                       <h3 className="mb-2 text-lg font-bold text-gray-900 dark:text-gray-100">
-                        Sammanfattning
+                        {t.headers.summary}
                       </h3>
                       <p className="leading-relaxed text-gray-600 dark:text-gray-300">
                         {selected.summary}
@@ -121,7 +167,7 @@ export default function EducationList({ education }: { education: Education[] })
                     {selected.details && (
                       <div>
                         <h3 className="mb-3 text-sm font-bold tracking-wider text-gray-500 uppercase">
-                          Höjdpunkter
+                          {t.headers.highlights}
                         </h3>
                         <ul className="space-y-2">
                           {selected.details.map((detail, i) => (
@@ -135,35 +181,27 @@ export default function EducationList({ education }: { education: Education[] })
                     )}
                   </div>
 
-                  {/* Högerkolumn: FÄRDIGHETER */}
                   <div className="md:col-span-1">
-                    {selected.relatedSkills && selected.relatedSkills.length > 0 && (
+                    {selected.relatedSkills && (
                       <div className="rounded-xl border border-gray-100 bg-gray-50/50 p-5 dark:border-gray-800 dark:bg-gray-800/30">
                         <h4 className="mb-4 text-xs font-bold tracking-wider text-gray-500 uppercase">
-                          Färdigheter
+                          {t.headers.skills}
                         </h4>
-                        <div className="flex flex-col space-y-3">
-                          {selected.relatedSkills.map((skillKeyOrName, idx) => {
-                            // Försök hämta skill-objektet från SKILLS
-                            const skillObject = SKILLS[skillKeyOrName]
-
-                            if (skillObject) {
-                              // Om den finns i SKILLS, använd din HardSkillRating-komponent
-                              return <HardSkillRating key={skillKeyOrName} skill={skillObject} />
+                        <div className="flex flex-col gap-y-4">
+                          {selected.relatedSkills.map((skillId) => {
+                            const skill = CURRENT_SKILLS[skillId]
+                            if (!skill) {
+                              return (
+                                <div
+                                  key={skillId}
+                                  className="flex items-center gap-2 text-sm text-gray-600 dark:text-gray-400"
+                                >
+                                  <span className="bg-primary-500 h-1.5 w-1.5 rounded-full" />
+                                  {skillId}
+                                </div>
+                              )
                             }
-
-                            // Om den inte finns i SKILLS (bara en sträng), rendera en enkel label
-                            return (
-                              <div
-                                key={idx}
-                                className="flex items-center gap-3 rounded-lg bg-white px-3 py-2 shadow-sm dark:bg-gray-900"
-                              >
-                                <div className="h-2 w-2 rounded-full bg-gray-300 dark:bg-gray-600" />
-                                <span className="text-sm font-medium text-gray-700 dark:text-gray-300">
-                                  {skillKeyOrName}
-                                </span>
-                              </div>
-                            )
+                            return <HardSkillRating key={skillId} skill={skill} />
                           })}
                         </div>
                       </div>
@@ -172,7 +210,6 @@ export default function EducationList({ education }: { education: Education[] })
                 </div>
               )}
 
-              {/* TAB: KURSER */}
               {activeTab === 'courses' && selected.courses && (
                 <div className="animate-in fade-in slide-in-from-bottom-2 duration-300">
                   <div className="overflow-hidden rounded-lg border border-gray-200 dark:border-gray-700">
@@ -180,13 +217,13 @@ export default function EducationList({ education }: { education: Education[] })
                       <thead className="bg-gray-50 dark:bg-gray-800">
                         <tr>
                           <th className="px-6 py-3 text-left text-xs font-medium tracking-wider text-gray-500 uppercase dark:text-gray-400">
-                            Kurs
+                            {t.table.course}
                           </th>
                           <th className="px-6 py-3 text-left text-xs font-medium tracking-wider text-gray-500 uppercase dark:text-gray-400">
-                            Omfattning
+                            {t.table.credits}
                           </th>
                           <th className="px-6 py-3 text-right text-xs font-medium tracking-wider text-gray-500 uppercase dark:text-gray-400">
-                            Betyg
+                            {t.table.grade}
                           </th>
                         </tr>
                       </thead>
@@ -194,7 +231,7 @@ export default function EducationList({ education }: { education: Education[] })
                         {selected.courses.map((course, idx) => (
                           <tr key={idx} className="hover:bg-gray-50 dark:hover:bg-gray-800/50">
                             <td className="px-6 py-4 whitespace-nowrap">
-                              <div className="font-medium text-gray-900 dark:text-gray-100">
+                              <div className="font-medium text-gray-900 italic dark:text-gray-100">
                                 {course.name}
                               </div>
                               {course.code && (
@@ -221,7 +258,6 @@ export default function EducationList({ education }: { education: Education[] })
                 </div>
               )}
 
-              {/* TAB: BILAGOR */}
               {activeTab === 'attachments' && selected.attachments && (
                 <div className="animate-in fade-in slide-in-from-bottom-2 duration-300">
                   <AttachmentSection attachments={selected.attachments} />

@@ -23,7 +23,7 @@ export default function EducationPage({ params }: { params: { locale: string } }
         <p className="text-lg leading-7 text-gray-500 dark:text-gray-400">{t.description}</p>
       </div>
       <div className="py-8">
-        <EducationList education={educationData} />
+        <EducationList education={educationData} locale={locale} />
       </div>
     </div>
   )

@@ -5,42 +5,45 @@ export const BarChart = ({ item }: { item: Achievement }) => {
   const maxVal = Math.max(...item.data.map((d) => d.value))
 
   return (
-    <div className="rounded-xl border border-gray-200 bg-white p-5 shadow-sm sm:col-span-2 dark:border-gray-700 dark:bg-gray-800/50">
-      <div className="mb-6 flex items-start justify-between">
+    <div className="group rounded-2xl border border-gray-200 bg-white/50 p-6 shadow-sm backdrop-blur-sm transition-all hover:shadow-md sm:col-span-2 dark:border-gray-700/50 dark:bg-gray-800/40">
+      <div className="mb-8 flex items-start justify-between">
         <div>
-          <div className="text-sm font-bold text-gray-700 uppercase dark:text-gray-200">
-            {item.label}
-          </div>
+          <span className="text-primary-600 dark:text-primary-400 text-[11px] font-black tracking-widest uppercase">
+            Performance Metric
+          </span>
+          <h3 className="text-lg font-bold text-gray-800 dark:text-white">{item.label}</h3>
           {item.subtext && (
-            <div className="text-xs text-gray-500 dark:text-gray-400">{item.subtext}</div>
+            <p className="text-sm text-gray-500 dark:text-gray-400">{item.subtext}</p>
           )}
         </div>
-        <div className="text-primary-600 dark:text-primary-400 text-xl font-bold">{item.value}</div>
+        <div className="text-right">
+          <span className="text-3xl font-black text-gray-900 tabular-nums dark:text-white">
+            {item.value}
+          </span>
+        </div>
       </div>
 
-      <div className="flex h-32 items-end gap-2 sm:gap-4">
+      <div className="flex h-36 items-end gap-3">
         {item.data.map((bar, idx) => {
           const heightPct = (bar.value / maxVal) * 100
           return (
             <div
               key={idx}
-              className="group relative flex h-full flex-1 flex-col items-center justify-end"
+              className="group/bar relative flex h-full flex-1 flex-col items-center justify-end"
             >
-              {/* Tooltip */}
-              <div className="absolute -top-8 opacity-0 transition-opacity group-hover:opacity-100">
-                <span className="rounded bg-gray-900 px-2 py-1 text-xs text-white dark:bg-gray-100 dark:text-gray-900">
-                  {bar.value}
-                </span>
-              </div>
-              {/* Bar */}
               <div
-                className="bg-primary-200 hover:bg-primary-500 dark:bg-primary-900/50 dark:hover:bg-primary-500 w-full rounded-t-sm transition-all duration-500"
+                className="from-primary-600 to-primary-400 dark:from-primary-700 dark:to-primary-500 relative w-full rounded-t-lg bg-gradient-to-t transition-all duration-700 ease-out group-hover/bar:brightness-110"
                 style={{ height: `${heightPct}%` }}
-              />
-              {/* Label */}
-              <div className="mt-2 text-center text-[10px] font-medium text-gray-500 uppercase dark:text-gray-400">
-                {bar.label}
+              >
+                <div className="absolute -top-10 left-1/2 -translate-x-1/2 scale-90 opacity-0 transition-all group-hover/bar:scale-100 group-hover/bar:opacity-100">
+                  <span className="rounded-lg bg-gray-900 px-2.5 py-1 text-xs font-bold text-white shadow-xl dark:bg-white dark:text-gray-900">
+                    {bar.value}
+                  </span>
+                </div>
               </div>
+              <span className="mt-3 text-[10px] font-bold tracking-tighter text-gray-400 uppercase dark:text-gray-500">
+                {bar.label}
+              </span>
             </div>
           )
         })}

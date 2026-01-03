@@ -27,7 +27,7 @@ export default function ExperiencePage({ params }: { params: { locale: string } 
         <p className="text-lg leading-7 text-gray-500 dark:text-gray-400">{t.description}</p>
       </div>
       <div className="py-8">
-        <ExperienceList experiences={experienceData} />
+        <ExperienceList experiences={experienceData} locale={locale} />
       </div>
     </div>
   )
