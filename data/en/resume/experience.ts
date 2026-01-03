@@ -49,49 +49,16 @@ export const experienceData: Experience[] = [
     ],
   },
   {
-    id: 'handelsconsulting',
-    title: 'Management Consultant',
-    company: 'HandelsConsulting',
-    location: 'Gothenburg, Sweden',
-    range: 'Jan 2025 - Jul 2025',
-    url: 'https://handelsconsulting.se',
-    summary:
-      'Worked with strategy, customer insights, and digital transformation. Smashed sales targets in record time and was offered the position of Business Area Manager.',
-    description: [
-      'Performed as a top seller and was quickly promoted, receiving an offer for Business Area Manager.',
-      'Managed the full sales cycle: from identifying new business opportunities to client relations and project delivery.',
-      'Drove projects for large clients within the tech and data sectors.',
-      'Awarded the company Medal of Honor for the core value "Drive" after winning internal sales competitions.',
-    ],
-    relatedSkills: ['Management Consulting', 'B2B Sales', 'Strategy', 'Client Analysis'],
-    achievements: [
-      {
-        type: 'progress',
-        label: 'Sales Target (3 Months)',
-        value: '150%',
-        target: 100,
-        current: 150,
-        subtext: 'Target reached in just 5 weeks',
-      },
-      {
-        type: 'stat',
-        label: 'Award',
-        value: 'Medal of Honor',
-        subtext: 'For the core value "Drive"',
-      },
-    ],
-  },
-  {
     id: 'campuslyan',
     title: 'Founding CEO & CTO',
     company: 'CampusLyan',
     location: 'Gothenburg, Sweden',
-    range: 'Oct 2024 - Present',
+    range: 'Oct 2025 - Present',
     summary:
-      'Leading an engineering team of six in developing a modern housing platform tailored for students.',
+      'Leading an engineering team of ten in developing a modern housing platform tailored for students.',
     description: [
       'Responsible for both the Technical Roadmap and the Go-to-Market strategy.',
-      'Combining the role of Product Owner with hands-on development in a modern tech stack (Next.js, Supabase).',
+      'Combining the role of Product Owner with hands-on development in a modern tech stack (Next.js).',
       'Ensuring agile delivery from concept phase to launch.',
     ],
     relatedSkills: ['Product Management', 'System Architecture', 'Team Leadership', 'Next.js'],
@@ -99,7 +66,7 @@ export const experienceData: Experience[] = [
       {
         type: 'stat',
         label: 'Team',
-        value: '6',
+        value: '10',
         subtext: 'Engineers & Developers',
       },
       {
@@ -131,6 +98,39 @@ export const experienceData: Experience[] = [
         label: 'Focus',
         value: 'R&D',
         subtext: 'Virtual Verification',
+      },
+    ],
+  },
+  {
+    id: 'handelsconsulting',
+    title: 'Management Consultant',
+    company: 'HandelsConsulting',
+    location: 'Gothenburg, Sweden',
+    range: 'Jan 2025 - Jul 2025',
+    url: 'https://handelsconsulting.se',
+    summary:
+      'Worked with strategy, customer insights, and digital transformation. Smashed sales targets in record time and was offered the position of Business Area Manager.',
+    description: [
+      'Performed as a top seller and was quickly promoted, receiving an offer for Business Area Manager.',
+      'Managed the full sales cycle: from identifying new business opportunities to client relations and project delivery.',
+      'Drove projects for large clients within the tech and data sectors.',
+      'Awarded the company Medal of Honor for the core value "Drive" after winning internal sales competitions.',
+    ],
+    relatedSkills: ['Management Consulting', 'B2B Sales', 'Strategy', 'Client Analysis'],
+    achievements: [
+      {
+        type: 'progress',
+        label: 'Sales Target (3 Months)',
+        value: '150%',
+        target: 100,
+        current: 150,
+        subtext: 'Target reached in just 5 weeks',
+      },
+      {
+        type: 'stat',
+        label: 'Award',
+        value: 'Medal of Honor',
+        subtext: 'For the core value "Drive"',
       },
     ],
   },

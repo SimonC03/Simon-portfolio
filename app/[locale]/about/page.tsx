@@ -18,31 +18,28 @@ export default function AboutPage({ params }: { params: { locale: string } }) {
   const getSkill = (id: string) => skills.find((s) => s.id === id)
 
   // Gruppera skills
-  const strategySkills = [
-    getSkill('strategy'),
-    getSkill('leadership'),
-    getSkill('consulting'),
-    getSkill('entrepreneurship'),
-  ].filter((s) => s !== undefined)
-
   const techSkills = [
+    getSkill('c'),
     getSkill('nextjs'),
     getSkill('typescript'),
     getSkill('python'),
     getSkill('sql'),
   ].filter((s) => s !== undefined)
 
-  const toolSkills = [getSkill('figma'), getSkill('catia'), getSkill('git')].filter(
-    (s) => s !== undefined
-  )
+  const toolSkills = [
+    getSkill('catia'),
+    getSkill('matlab'),
+    getSkill('figma'),
+    getSkill('system-weaver'),
+    getSkill('git'),
+  ].filter((s) => s !== undefined)
 
   const authorContact = author as { email?: string; linkedin?: string }
   const email = authorContact.email || siteMetadata.email
   const linkedin = authorContact.linkedin || siteMetadata.linkedin
 
   const t = {
-    strategy: locale === 'en' ? 'Strategy & Leadership' : 'Strategi & Ledarskap',
-    tech: locale === 'en' ? 'Technical Development' : 'Teknisk Utveckling',
+    tech: locale === 'en' ? 'Selected Programming Languages' : 'Urval programspråk',
     tools: locale === 'en' ? 'Tools & Design' : 'Verktyg & Design',
     downloadCv: locale === 'en' ? 'Download CV' : 'Ladda ner CV',
     intro:
@@ -98,17 +95,6 @@ export default function AboutPage({ params }: { params: { locale: string } }) {
         <div className="space-y-8 lg:col-span-1">
           <div className="space-y-6">
             <div className="pt-6">
-              <h3 className="mb-4 text-xs font-bold tracking-wider text-gray-500 uppercase">
-                {t.strategy}
-              </h3>
-              <div className="flex flex-col gap-2">
-                {strategySkills.map(
-                  (skill) => skill && <HardSkillRating key={skill.id} skill={skill} />
-                )}
-              </div>
-            </div>
-
-            <div className="border-t border-gray-200 pt-6 dark:border-gray-700">
               <h3 className="mb-4 text-xs font-bold tracking-wider text-gray-500 uppercase">
                 {t.tech}
               </h3>

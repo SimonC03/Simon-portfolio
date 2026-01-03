@@ -158,17 +158,54 @@ export default function ExperienceList({ experiences }: { experiences: Experienc
                   </div>
 
                   <div className="md:col-span-1">
-                    {selected.relatedSkills && (
-                      <div className="rounded-xl border border-gray-100 bg-gray-50/50 p-5 dark:border-gray-800 dark:bg-gray-800/30">
-                        <h4 className="mb-4 text-xs font-bold tracking-wider text-gray-500 uppercase">
-                          Teknisk Kompetens
-                        </h4>
-                        <div className="flex flex-col space-y-3">
-                          {selected.relatedSkills.map((skillId) => {
-                            const skill = SKILLS[skillId]
-                            if (!skill) return null
-                            return <HardSkillRating key={skillId} skill={skill} />
-                          })}
+                    {selected.relatedSkills && selected.relatedSkills.length > 0 && (
+                      <div className="sticky top-6 space-y-6">
+                        <div className="rounded-xl border border-gray-100 bg-gray-50/50 p-5 dark:border-gray-800 dark:bg-gray-800/30">
+                          <h4 className="mb-4 text-xs font-bold tracking-wider text-gray-500 uppercase">
+                            Teknisk Kompetens
+                          </h4>
+                          <div className="flex flex-col space-y-4">
+                            {selected.relatedSkills.map((skillId) => {
+                              const skill = SKILLS[skillId]
+
+                              // Om färdigheten finns i din SKILLS-databas, visa med rating-bar
+                              if (skill) {
+                                return (
+                                  <div key={skillId} className="group">
+                                    <HardSkillRating skill={skill} />
+                                  </div>
+                                )
+                              }
+
+                              // Om det är en färdighet som inte har rating (t.ex. "Leadership"),
+                              // visa den som en snygg "tag" istället längst ner
+                              return null
+                            })}
+                          </div>
+
+                          {/* Sektion för övriga kompetenser/fokusområden som inte har rating */}
+                          {selected.relatedSkills.some((id) => !SKILLS[id]) && (
+                            <div className="mt-6 border-t border-gray-200 pt-6 dark:border-gray-700">
+                              <h5 className="mb-3 text-[10px] font-bold tracking-widest text-gray-400 uppercase">
+                                Fokusområden
+                              </h5>
+                              <div className="flex flex-wrap gap-2">
+                                {selected.relatedSkills.map((skillId) => {
+                                  if (!SKILLS[skillId]) {
+                                    return (
+                                      <span
+                                        key={skillId}
+                                        className="inline-flex items-center rounded-md bg-white px-2 py-1 text-xs font-medium text-gray-600 shadow-sm ring-1 ring-gray-200 ring-inset dark:bg-gray-700/50 dark:text-gray-300 dark:ring-gray-600"
+                                      >
+                                        {skillId}
+                                      </span>
+                                    )
+                                  }
+                                  return null
+                                })}
+                              </div>
+                            </div>
+                          )}
                         </div>
                       </div>
                     )}

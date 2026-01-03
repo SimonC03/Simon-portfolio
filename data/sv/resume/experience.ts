@@ -43,49 +43,16 @@ export const experienceData: Experience[] = [
     ],
   },
   {
-    id: 'handelsconsulting',
-    title: 'Managementkonsult',
-    company: 'HandelsConsulting',
-    location: 'Göteborg, Sverige',
-    range: 'Jan 2025 - Jul 2025',
-    url: 'https://handelsconsulting.se',
-    summary:
-      'Arbetade med strategi, kundinsikter och digital transformation. Slog säljmålen på rekordtid och erbjöds rollen som Affärsområdeschef.',
-    description: [
-      'Presterade som toppsäljare och blev erbjuden tjänsten som Affärsområdeschef (Business Area Manager) efter kort tid.',
-      'Ansvarade för hela säljcykeln: från identifiering av nya affärsmöjligheter till kundrelationer och projektleverans.',
-      'Drev projekt mot stora kunder inom tech- och datasektorn.',
-      'Tilldelades bolagets hedersmedalj för värdeordet "Driv" efter att ha vunnit interna säljtävlingar.',
-    ],
-    relatedSkills: ['Management Consulting', 'B2B-försäljning', 'Strategi', 'Kundanalys'],
-    achievements: [
-      {
-        type: 'progress',
-        label: 'Säljmål (3 månader)',
-        value: '150%',
-        target: 100,
-        current: 150,
-        subtext: 'Målet uppnåddes på endast 5 veckor',
-      },
-      {
-        type: 'stat',
-        label: 'Utmärkelse',
-        value: 'Hedersmedalj',
-        subtext: 'För värdeordet "Driv"',
-      },
-    ],
-  },
-  {
     id: 'campuslyan',
     title: 'Grundande VD & CTO',
     company: 'CampusLyan',
     location: 'Göteborg, Sverige',
-    range: 'Okt 2024 - Nuvarande',
+    range: 'Okt 2025 - Nuvarande',
     summary:
-      'Leder ett ingenjörsteam på sex personer i utvecklingen av en modern bostadsplattform skräddarsydd för studenter.',
+      'Leder ett ingenjörsteam på tio personer i utvecklingen av en modern bostadsplattform skräddarsydd för studenter.',
     description: [
       'Ansvarar för både den tekniska färdplanen (Technical Roadmap) och go-to-market-strategin.',
-      'Kombinerar rollen som produktägare med hands-on utveckling i modern tech-stack (Next.js, Supabase).',
+      'Kombinerar rollen som produktägare med hands-on utveckling i modern tech-stack (Next.js).',
       'Säkerställer agil leverans från konceptfas till lansering.',
     ],
     relatedSkills: ['Produktledning', 'Systemarkitektur', 'Teamledarskap', 'Next.js'],
@@ -93,7 +60,7 @@ export const experienceData: Experience[] = [
       {
         type: 'stat',
         label: 'Team',
-        value: '6',
+        value: '10',
         subtext: 'Ingenjörer & Utvecklare',
       },
       {
@@ -125,6 +92,39 @@ export const experienceData: Experience[] = [
         label: 'Fokus',
         value: 'R&D',
         subtext: 'Virtual Verification',
+      },
+    ],
+  },
+  {
+    id: 'handelsconsulting',
+    title: 'Managementkonsult',
+    company: 'HandelsConsulting',
+    location: 'Göteborg, Sverige',
+    range: 'Jan 2025 - Jul 2025',
+    url: 'https://handelsconsulting.se',
+    summary:
+      'Arbetade med strategi, kundinsikter och digital transformation. Slog säljmålen på rekordtid och erbjöds rollen som Affärsområdeschef.',
+    description: [
+      'Presterade som toppsäljare och blev erbjuden tjänsten som Affärsområdeschef (Business Area Manager) efter kort tid.',
+      'Ansvarade för hela säljcykeln: från identifiering av nya affärsmöjligheter till kundrelationer och projektleverans.',
+      'Drev projekt mot stora kunder inom tech- och datasektorn.',
+      'Tilldelades bolagets hedersmedalj för värdeordet "Driv" efter att ha vunnit interna säljtävlingar.',
+    ],
+    relatedSkills: ['Management Consulting', 'B2B-försäljning', 'Strategi', 'Kundanalys'],
+    achievements: [
+      {
+        type: 'progress',
+        label: 'Säljmål (3 månader)',
+        value: '150%',
+        target: 100,
+        current: 150,
+        subtext: 'Målet uppnåddes på endast 5 veckor',
+      },
+      {
+        type: 'stat',
+        label: 'Utmärkelse',
+        value: 'Hedersmedalj',
+        subtext: 'För värdeordet "Driv"',
       },
     ],
   },
