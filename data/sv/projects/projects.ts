@@ -47,8 +47,8 @@ export const projectsData: (Project & { slug: string; fullDescription: string[] 
     ],
     attachments: [
       { name: 'image-1', type: 'image', url: '/static/images/volvo-1.jpg' },
-      { name: 'image-1', type: 'image', url: '/static/images/volvo-2.jpg' },
-      { name: 'image-1', type: 'image', url: '/static/images/volvo-3.jpg' },
+      { name: 'image-2', type: 'image', url: '/static/images/volvo-2.jpg' },
+      { name: 'image-3', type: 'image', url: '/static/images/volvo-3.jpg' },
     ],
   },
   {

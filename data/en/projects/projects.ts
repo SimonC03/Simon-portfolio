@@ -45,9 +45,9 @@ export const projectsData: (Project & { slug: string; fullDescription: string[] 
       'The work culminated in presentations for executives as well as an open demo, where Volvo Buses employees could step into the bus and experience our solution live.',
     ],
     attachments: [
-      { type: 'image', url: '/static/images/volvo-1.jpg' },
-      { type: 'image', url: '/static/images/volvo-2.jpg' },
-      { type: 'image', url: '/static/images/volvo-3.jpg' },
+      { name: 'image-1', type: 'image', url: '/static/images/volvo-1.jpg' },
+      { name: 'image-2', type: 'image', url: '/static/images/volvo-2.jpg' },
+      { name: 'image-3', type: 'image', url: '/static/images/volvo-3.jpg' },
     ],
   },
   {
