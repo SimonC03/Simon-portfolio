@@ -55,7 +55,7 @@ const Header = ({ locale }: { locale: string }) => {
             ))}
           <div className="hidden items-center gap-3 pl-2 xl:flex">
             <Link
-              href="/static/cv.pdf"
+              href="/cv.pdf"
               target="_blank"
               className="group inline-flex items-center justify-center rounded-full bg-white px-5 py-2 text-sm font-bold text-gray-900 shadow-sm ring-1 ring-gray-300 transition-all ring-inset hover:bg-gray-50 dark:bg-gray-800 dark:text-gray-100 dark:ring-gray-700 dark:hover:bg-gray-700"
             >

@@ -82,7 +82,7 @@ export default function AboutPage({ params }: { params: { locale: string } }) {
               <SocialIcon kind="linkedin" href={linkedin} size={6} />
 
               <Link
-                href="/static/cv.pdf"
+                href="/cv.pdf"
                 target="_blank"
                 className="ml-4 inline-flex items-center rounded-full bg-gray-900 px-5 py-2 text-sm font-bold text-white transition hover:bg-gray-700 dark:bg-white dark:text-gray-900 dark:hover:bg-gray-200"
               >

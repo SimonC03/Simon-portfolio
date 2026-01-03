@@ -2,7 +2,7 @@ export const homeContent = {
   hero: {
     greeting: 'Hej, jag är',
     description:
-      'En strategisk problemlösare i gränslandet mellan mekatronik och affärsutveckling. Som VD för HandelsFöretagen och dubbelstudent drivs jag av att omvandla teknisk komplexitet till affärsnytta och leda organisationer mot mätbara resultat.',
+      'En strategisk problemlösare i gränslandet mellan mekatronik och affärsutveckling. Som VD och koncernchef för HandelsFöretagen och dubbelstudent drivs jag av att omvandla teknisk komplexitet till affärsnytta och leda organisationer mot mätbara resultat.',
     primaryButton: 'Kontakta mig',
     secondaryButton: 'Mer om mig',
   },

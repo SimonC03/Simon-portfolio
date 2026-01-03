@@ -2,7 +2,7 @@ export const homeContent = {
   hero: {
     greeting: 'Hi, I am',
     description:
-      'A strategic problem-solver at the intersection of mechatronics and business. As CEO of HandelsFöretagen and a dual-degree student, I am driven by transforming technical complexity into business value and leading organizations toward measurable results.',
+      'A strategic problem-solver at the intersection of mechatronics and business. As President & CEO of HandelsFöretagen and a dual-degree student, I am driven by transforming technical complexity into business value and leading organizations toward measurable results.',
     primaryButton: 'Contact Me',
     secondaryButton: 'More about me',
   },
