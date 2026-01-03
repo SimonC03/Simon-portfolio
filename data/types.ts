@@ -5,7 +5,7 @@ export type SkillCategory = 'Development' | 'Business' | 'Tools' | 'Languages' |
 export interface Attachment {
   name: string
   url: string
-  type: 'link' | 'file'
+  type: 'link' | 'file' | 'image' | 'video'
 }
 
 export interface Reference {

@@ -46,9 +46,9 @@ export const projectsData: (Project & { slug: string; fullDescription: string[] 
       'Arbetet avslutades med presentationer för chefer samt en öppen demo där anställda på Volvo Bussar fick kliva in i bussen och uppleva vår lösning live.',
     ],
     attachments: [
-      { type: 'image', url: '/static/images/volvo-1.jpg' },
-      { type: 'image', url: '/static/images/volvo-2.jpg' },
-      { type: 'image', url: '/static/images/volvo-3.jpg' },
+      { name: 'image-1', type: 'image', url: '/static/images/volvo-1.jpg' },
+      { name: 'image-1', type: 'image', url: '/static/images/volvo-2.jpg' },
+      { name: 'image-1', type: 'image', url: '/static/images/volvo-3.jpg' },
     ],
   },
   {
