@@ -87,20 +87,7 @@ export const experienceData: Experience[] = [
       'Ensuring agile delivery from concept phase to launch.',
     ],
     relatedSkills: ['Product Management', 'System Architecture', 'Team Leadership', 'Next.js'],
-    achievements: [
-      {
-        type: 'stat',
-        label: 'Team',
-        value: '10',
-        subtext: 'Engineers & Developers',
-      },
-      {
-        type: 'stat',
-        label: 'Role',
-        value: 'Founder',
-        subtext: 'CEO & CTO',
-      },
-    ],
+    achievements: [],
   },
   {
     id: 'volvo-buses',
@@ -113,18 +100,10 @@ export const experienceData: Experience[] = [
       'Worked within Virtual Verification & Analysis focusing on software concepts for next-generation bus platforms.',
     description: [
       'Developed application concepts for visualizing "softbuttons" in driver environments using Kotlin and Java.',
-      'Collaborated in cross-functional teams and used System Weaver for requirements management and traceability.',
       'Created prototypes integrating design (Figma) with technical functionality.',
     ],
-    relatedSkills: ['Kotlin', 'Java', 'System Weaver', 'HMI Development', 'C#'],
-    achievements: [
-      {
-        type: 'stat',
-        label: 'Focus',
-        value: 'R&D',
-        subtext: 'Virtual Verification',
-      },
-    ],
+    relatedSkills: ['Kotlin', 'Java', 'HMI Development', 'C#'],
+    achievements: [],
   },
   {
     id: 'handelsconsulting',
@@ -206,7 +185,6 @@ export const experienceData: Experience[] = [
       'Responsible for operation and troubleshooting of advanced radio systems under demanding conditions.',
     description: [
       'Led a technical squad responsible for securing communication in high-pressure and time-critical environments.',
-      'Awarded a Medal of Honor for exceptional "Drive" and leadership during service.',
       'Developed the ability to make rapid decisions based on complex information.',
     ],
     relatedSkills: [
@@ -236,7 +214,7 @@ export const experienceData: Experience[] = [
     company: 'Allakando',
     location: 'Gothenburg, Sweden',
     range: 'Jan 2021 - Jun 2021',
-    summary: 'Helped students achieve their academic goals.',
+    summary: 'Helped students achieve their academic goals, specificly in mathematics.',
     description: ['Tailored instruction to meet individual student needs and learning styles.'],
     relatedSkills: ['Pedagogy', 'Leadership'],
   },

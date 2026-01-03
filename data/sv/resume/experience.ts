@@ -89,20 +89,7 @@ export const experienceData: Experience[] = [
       'Säkerställer agil leverans från konceptfas till lansering.',
     ],
     relatedSkills: ['Produktledning', 'Systemarkitektur', 'Teamledarskap', 'Next.js'],
-    achievements: [
-      {
-        type: 'stat',
-        label: 'Team',
-        value: '10',
-        subtext: 'Ingenjörer & Utvecklare',
-      },
-      {
-        type: 'stat',
-        label: 'Roll',
-        value: 'Grundare',
-        subtext: 'VD & CTO',
-      },
-    ],
+    achievements: [],
   },
   {
     id: 'volvo-buses',
@@ -115,18 +102,10 @@ export const experienceData: Experience[] = [
       'Arbetade inom Virtual Verification & Analysis med fokus på mjukvarukoncept för nästa generations bussplattformar.',
     description: [
       'Utvecklade applikationskoncept för visualisering av "softbuttons" i förarmiljöer med Kotlin och Java.',
-      'Samarbetade i tvärfunktionella team och använde System Weaver för kravhantering och spårbarhet.',
       'Tog fram prototyper som integrerade design (Figma) med teknisk funktionalitet.',
     ],
-    relatedSkills: ['Kotlin', 'Java', 'System Weaver', 'HMI-utveckling', 'C#'],
-    achievements: [
-      {
-        type: 'stat',
-        label: 'Fokus',
-        value: 'R&D',
-        subtext: 'Virtual Verification',
-      },
-    ],
+    relatedSkills: ['Kotlin', 'Java', 'HMI-utveckling', 'C#'],
+    achievements: [],
   },
   {
     id: 'handelsconsulting',
@@ -140,8 +119,8 @@ export const experienceData: Experience[] = [
     description: [
       'Presterade som toppsäljare och blev erbjuden tjänsten som Affärsområdeschef (Business Area Manager) efter kort tid.',
       'Ansvarade för hela säljcykeln: från identifiering av nya affärsmöjligheter till kundrelationer och projektleverans.',
-      'Drev projekt mot stora kunder inom tech- och datasektorn.',
-      'Tilldelades bolagets hedersmedalj för värdeordet "Driv" efter att ha vunnit interna säljtävlingar.',
+      'Jobbade i affärsområde mot stora bolag, med nisch inom tech- och datasektorn.',
+      'Tilldelades bolagets hedersmedalj för värdeordet "Driv".',
     ],
     relatedSkills: ['Management Consulting', 'B2B-försäljning', 'Strategi', 'Kundanalys'],
     achievements: [
@@ -208,7 +187,6 @@ export const experienceData: Experience[] = [
       'Ansvarade för drift och felsökning av avancerade radiosystem under krävande förhållanden.',
     description: [
       'Ledde en teknisk grupp med ansvar för att säkra kommunikation i pressade och tidskritiska miljöer.',
-      'Tilldelades hedersutmärkelse för exceptionellt "Driv" och ledarskap under tjänstgöringen.',
       'Utvecklade förmågan att fatta snabba beslut baserade på komplex information.',
     ],
     relatedSkills: ['Ledarskap', 'Teknisk felsökning', 'Krishantering', 'Radio- & Signalsystem'],
@@ -233,7 +211,7 @@ export const experienceData: Experience[] = [
     company: 'Allakando',
     location: 'Göteborg, Sverige',
     range: 'Jan 2021 - Jun 2021',
-    summary: 'Hjälpte elever att nå sina akademiska mål.',
+    summary: 'Hjälpte elever att nå sina akademiska mål, specifikt inom matematik.',
     description: [
       'Skräddarsydde undervisning för att möta individuella elevers behov och lärstilar.',
     ],
