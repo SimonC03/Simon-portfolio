@@ -9,12 +9,6 @@ export const certificationsData: Certificate[] = [
     relatedSkills: ['Leadership', 'Business Strategy', 'Problem Solving', 'Digital Transformation'],
   },
   {
-    title: 'Logic and Cognitive Ability Test',
-    issuer: 'Alva Labs',
-    date: '2024',
-    relatedSkills: ['Analytical Skills', 'Problem Solving'],
-  },
-  {
     title: 'Hot Works Certificate', // "Heta Arbeten" standard translation
     issuer: 'Brandskyddsföreningen',
     date: '2023',

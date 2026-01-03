@@ -9,12 +9,6 @@ export const certificationsData: Certificate[] = [
     relatedSkills: ['Ledarskap', 'Affärsstrategi', 'Problemlösning', 'Digital Transformation'],
   },
   {
-    title: 'Logik- och begåvningstest',
-    issuer: 'Alva Labs', // Fyll i rätt utfärdare
-    date: '2024',
-    relatedSkills: ['Analytisk förmåga', 'Problemlösning'],
-  },
-  {
     title: 'Heta Arbeten',
     issuer: 'Brandskyddsföreningen',
     date: '2023',
