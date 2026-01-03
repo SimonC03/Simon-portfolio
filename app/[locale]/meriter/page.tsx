@@ -1,36 +1,46 @@
-import { certificationsData, awardsData, membershipsData } from '@/data/sv/resume/certificates'
-import { languagesData } from '@/data/sv/resume/languages'
+import { getCertifications, getAwards, getMemberships, getLanguages } from '@/data/index'
 import { genPageMetadata } from 'app/seo'
 
 export const metadata = genPageMetadata({ title: 'Meriter & Övrigt' })
 
-export default function MeriterPage() {
+export default function MeriterPage({ params }: { params: { locale: string } }) {
+  const locale = params.locale
+  const certificationsData = getCertifications(locale)
+  const awardsData = getAwards(locale)
+  const membershipsData = getMemberships(locale)
+  const languagesData = getLanguages(locale)
+
+  const t = {
+    title: locale === 'en' ? 'Achievements & Engagements' : 'Meriter & Engagemang',
+    description:
+      locale === 'en'
+        ? 'An overview of certifications, awards, memberships, and languages.'
+        : 'En översikt av certifieringar, priser, föreningsliv och språk.',
+    certs: locale === 'en' ? 'Certificates & Licenses' : 'Certifikat & Licenser',
+    awards: locale === 'en' ? 'Awards' : 'Utmärkelser',
+    memberships: locale === 'en' ? 'Memberships & Associations' : 'Föreningar & Medlemskap',
+    languages: locale === 'en' ? 'Languages' : 'Språk',
+  }
+
   return (
     <div className="divide-y divide-gray-200 dark:divide-gray-700">
-      {/* ... (resten av koden är exakt samma som innan) ... */}
-      {/* Behåll all JSX-kod nedanför, ändra bara imports i toppen */}
       <div className="space-y-2 pt-6 pb-8 md:space-y-5">
         <h1 className="text-3xl leading-9 font-extrabold tracking-tight text-gray-900 sm:text-4xl sm:leading-10 md:text-6xl md:leading-14 dark:text-gray-100">
-          Meriter & Engagemang
+          {t.title}
         </h1>
-        <p className="text-lg leading-7 text-gray-500 dark:text-gray-400">
-          En översikt av certifieringar, priser, föreningsliv och språk.
-        </p>
+        <p className="text-lg leading-7 text-gray-500 dark:text-gray-400">{t.description}</p>
       </div>
 
       <div className="py-10">
         <div className="grid grid-cols-1 items-start gap-16 lg:grid-cols-2">
           {/* VÄNSTER KOLUMN */}
           <div className="space-y-12">
-            {/* 1. CERTIFIKAT */}
             <section>
               <div className="mb-6 flex items-center gap-3">
                 <div className="flex h-10 w-10 items-center justify-center rounded-lg bg-blue-100 text-xl dark:bg-blue-900/30">
                   📜
                 </div>
-                <h2 className="text-2xl font-bold text-gray-900 dark:text-gray-100">
-                  Certifikat & Licenser
-                </h2>
+                <h2 className="text-2xl font-bold text-gray-900 dark:text-gray-100">{t.certs}</h2>
               </div>
               <div className="ml-2 space-y-6">
                 {certificationsData.map((cert) => (
@@ -58,13 +68,12 @@ export default function MeriterPage() {
               </div>
             </section>
 
-            {/* 2. UTMÄRKELSER */}
             <section>
               <div className="mb-6 flex items-center gap-3">
                 <span className="flex h-10 w-10 items-center justify-center rounded-lg bg-yellow-100 text-xl dark:bg-yellow-900/30">
                   🏆
                 </span>
-                <h2 className="text-2xl font-bold text-gray-900 dark:text-gray-100">Utmärkelser</h2>
+                <h2 className="text-2xl font-bold text-gray-900 dark:text-gray-100">{t.awards}</h2>
               </div>
               <div className="ml-2 space-y-6">
                 {awardsData.map((award) => (
@@ -88,21 +97,18 @@ export default function MeriterPage() {
 
           {/* HÖGER KOLUMN */}
           <div className="space-y-12">
-            {/* 3. FÖRENINGAR */}
             <section>
               <div className="mb-6 flex items-center gap-3">
                 <span className="flex h-10 w-10 items-center justify-center rounded-lg bg-green-100 text-xl dark:bg-green-900/30">
                   🤝
                 </span>
                 <h2 className="text-2xl font-bold text-gray-900 dark:text-gray-100">
-                  Föreningar & Medlemskap
+                  {t.memberships}
                 </h2>
               </div>
               <div className="ml-2 space-y-6">
                 {membershipsData.map((member) => (
                   <div key={member.organization}>
-                    {' '}
-                    {/* Notera: Kontrollera att key är unik, t.ex. organization eller title */}
                     <h3 className="text-lg font-bold text-gray-900 dark:text-gray-100">
                       {member.role}
                     </h3>
@@ -117,13 +123,14 @@ export default function MeriterPage() {
               </div>
             </section>
 
-            {/* 4. SPRÅK */}
             <section>
               <div className="mb-6 flex items-center gap-3">
                 <span className="flex h-10 w-10 items-center justify-center rounded-lg bg-purple-100 text-xl dark:bg-purple-900/30">
                   🗣️
                 </span>
-                <h2 className="text-2xl font-bold text-gray-900 dark:text-gray-100">Språk</h2>
+                <h2 className="text-2xl font-bold text-gray-900 dark:text-gray-100">
+                  {t.languages}
+                </h2>
               </div>
               <div className="ml-2 space-y-6">
                 {languagesData.map((lang) => (

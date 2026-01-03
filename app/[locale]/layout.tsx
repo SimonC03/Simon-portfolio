@@ -8,6 +8,10 @@ import siteMetadata from '@/data/siteMetadata'
 import { ThemeProviders } from '../theme-providers'
 import { Metadata } from 'next'
 
+// NYTT: Importera dessa från next-intl
+import { NextIntlClientProvider } from 'next-intl'
+import { getMessages } from 'next-intl/server'
+
 const space_grotesk = Space_Grotesk({
   subsets: ['latin'],
   display: 'swap',
@@ -51,12 +55,22 @@ export const metadata: Metadata = {
   },
 }
 
-export default function RootLayout({ children }: { children: React.ReactNode }) {
+// ÄNDRAT: Funktionen är nu async och tar emot params
+export default async function RootLayout({
+  children,
+  params: { locale },
+}: {
+  children: React.ReactNode
+  params: { locale: string }
+}) {
   const basePath = process.env.BASE_PATH || ''
+
+  // NYTT: Hämta meddelanden (konfigurationen från i18n/request.ts)
+  const messages = await getMessages()
 
   return (
     <html
-      lang={siteMetadata.language}
+      lang={locale} // ÄNDRAT: Använd dynamisk locale istället för siteMetadata.language
       className={`${space_grotesk.variable} scroll-smooth`}
       suppressHydrationWarning
     >
@@ -86,14 +100,18 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
       <meta name="msapplication-TileColor" content="#000000" />
       <meta name="theme-color" media="(prefers-color-scheme: light)" content="#fff" />
       <meta name="theme-color" media="(prefers-color-scheme: dark)" content="#000" />
+
       <body className="bg-white pl-[calc(100vw-100%)] text-black antialiased dark:bg-gray-950 dark:text-white">
-        <ThemeProviders>
-          <SectionContainer>
-            <Header />
-            <main className="mb-auto">{children}</main>
-            <Footer />
-          </SectionContainer>
-        </ThemeProviders>
+        {/* NYTT: Omslut allt innehåll med NextIntlClientProvider */}
+        <NextIntlClientProvider messages={messages}>
+          <ThemeProviders>
+            <SectionContainer>
+              <Header />
+              <main className="mb-auto">{children}</main>
+              <Footer />
+            </SectionContainer>
+          </ThemeProviders>
+        </NextIntlClientProvider>
       </body>
     </html>
   )

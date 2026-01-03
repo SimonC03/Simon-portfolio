@@ -1,16 +1,24 @@
 import Link from '@/components/Link'
 import siteMetadata from '@/data/siteMetadata'
 import Image from '@/components/Image'
+import {
+  getHomeContent,
+  getExperience,
+  getEducation,
+  getProjects,
+  getCertifications,
+  getReferences,
+} from '@/data/index'
 
-// --- IMPORTER ---
-import { homeContent } from '@/data/sv/ui/home'
-import { experienceData } from '@/data/sv/resume/experience'
-import { educationData } from '@/data/sv/resume/education'
-import { projectsData } from '@/data/sv/projects/projects'
-import { certificationsData } from '@/data/sv/resume/certificates'
-import { referencesData } from '@/data/sv/references/references'
+export default function Home({ locale }: { locale: string }) {
+  // Hämta data baserat på locale
+  const homeContent = getHomeContent(locale)
+  const experienceData = getExperience(locale)
+  const educationData = getEducation(locale)
+  const projectsData = getProjects(locale)
+  const certificationsData = getCertifications(locale)
+  const referencesData = getReferences(locale)
 
-export default function Home() {
   // --- DATA-FILTRERING ---
   const currentWork = experienceData
     .filter(
@@ -32,6 +40,18 @@ export default function Home() {
     .slice(0, 2)
   const displayEducation =
     currentEducation.length > 0 ? currentEducation : educationData.slice(0, 2)
+
+  // Enkla textöversättningar för UI-delar som saknas i data-filerna
+  const t = {
+    currentStatus: locale === 'en' ? 'Current Status' : 'Nuläget',
+    projects: locale === 'en' ? 'Selected Projects' : 'Utvalda projekt', // Eller använd homeContent.sections.projects.title
+    projectSubtitle: locale === 'en' ? 'Project' : 'Projekt',
+    references: locale === 'en' ? 'Some References' : 'Några referenser',
+    moreReferences: locale === 'en' ? 'More recommendations' : 'Fler rekommendationer',
+    merits: locale === 'en' ? 'Other Achievements' : 'Några övriga meriter',
+    showAllMerits: locale === 'en' ? 'Show all achievements' : 'Visa alla meriter',
+    certificate: locale === 'en' ? 'Certificate' : 'Certifikat',
+  }
 
   // --- KOMPONENT: ListItem ---
   const ListItem = ({
@@ -132,8 +152,7 @@ export default function Home() {
       {/* --- SEKTION: NULÄGET --- */}
       <div className="border-t border-gray-200 py-12 dark:border-gray-800">
         <h2 className="mb-10 text-3xl font-bold tracking-tight text-gray-900 dark:text-gray-100">
-          {/* Använder en statisk rubrik här då strukturen är delad, eller så kan vi lägga till en 'currentStatus' i home.ts om du vill */}
-          Nuläget
+          {t.currentStatus}
         </h2>
 
         <div className="grid grid-cols-1 gap-12 lg:grid-cols-2">
@@ -211,7 +230,7 @@ export default function Home() {
               <ListItem
                 key={d.title}
                 title={d.title}
-                subtitle="Projekt"
+                subtitle={t.projectSubtitle}
                 href={d.href}
                 description={d.description}
               />
@@ -225,13 +244,13 @@ export default function Home() {
         <div className="border-t border-gray-200 py-12 dark:border-gray-800">
           <div className="mb-10 flex items-center justify-between">
             <h2 className="text-3xl font-bold tracking-tight text-gray-900 dark:text-gray-100">
-              Några referenser
+              {t.references}
             </h2>
             <Link
               href="/referenser"
               className="text-primary-500 hover:text-primary-600 text-sm font-medium"
             >
-              Fler rekommendationer &rarr;
+              {t.moreReferences} &rarr;
             </Link>
           </div>
           <div className="grid grid-cols-1 gap-8 md:grid-cols-2">
@@ -263,13 +282,13 @@ export default function Home() {
         <div className="border-t border-gray-200 py-12 dark:border-gray-800">
           <div className="mb-10 flex items-center justify-between">
             <h2 className="text-3xl font-bold tracking-tight text-gray-900 dark:text-gray-100">
-              Några övriga meriter
+              {t.merits}
             </h2>
             <Link
               href="/meriter"
               className="text-primary-500 hover:text-primary-600 text-sm font-medium"
             >
-              Visa alla meriter &rarr;
+              {t.showAllMerits} &rarr;
             </Link>
           </div>
 
@@ -278,7 +297,7 @@ export default function Home() {
               <ListItem
                 key={cert.title}
                 title={cert.title}
-                subtitle={cert.issuer || 'Certifikat'}
+                subtitle={cert.issuer || t.certificate}
                 meta={cert.date}
                 href={cert.url}
                 description=""

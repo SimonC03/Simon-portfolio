@@ -1,26 +1,41 @@
-import { projectsData } from '@/data/sv/projects/projects'
+import { getProjects } from '@/data/index'
 import { notFound } from 'next/navigation'
 import Image from '@/components/Image'
 import Tag from '@/components/Tag'
 
-// Generera statiska parametrar för alla projekt vid build
+// Generera statiska parametrar för alla projekt vid build.
+// Notera: För att detta ska vara helt korrekt med [locale] borde vi egentligen returnera { slug, locale } för alla kombinationer.
 export async function generateStaticParams() {
-  return projectsData.map((p) => ({
-    slug: p.slug,
-  }))
+  const svProjects = getProjects('sv')
+  const enProjects = getProjects('en')
+
+  // Kombinera alla unika slugs (antar att slug är samma på båda språk, annars lista alla)
+  // Här returnerar vi bara params. slugs måste matchas mot locale i komponenten.
+  const paths = []
+  svProjects.forEach((p) => paths.push({ slug: p.slug, locale: 'sv' }))
+  enProjects.forEach((p) => paths.push({ slug: p.slug, locale: 'en' }))
+
+  return paths
 }
 
-export const generateMetadata = ({ params }: { params: { slug: string } }) => {
-  const project = projectsData.find((p) => p.slug === params.slug)
+export const generateMetadata = ({ params }: { params: { slug: string; locale: string } }) => {
+  const projects = getProjects(params.locale)
+  const project = projects.find((p) => p.slug === params.slug)
   if (!project) return {}
   return { title: project.title, description: project.description }
 }
 
-export default function ProjectPage({ params }: { params: { slug: string } }) {
-  const project = projectsData.find((p) => p.slug === params.slug)
+export default function ProjectPage({ params }: { params: { slug: string; locale: string } }) {
+  const projects = getProjects(params.locale)
+  const project = projects.find((p) => p.slug === params.slug)
 
   if (!project) {
     return notFound()
+  }
+
+  const t = {
+    technologies: params.locale === 'en' ? 'Technologies' : 'Tekniker',
+    visit: params.locale === 'en' ? 'Visit project' : 'Besök projektet',
   }
 
   return (
@@ -53,7 +68,7 @@ export default function ProjectPage({ params }: { params: { slug: string } }) {
           <div className="text-sm font-medium text-gray-500 dark:text-gray-400">
             <div className="mb-4">
               <h2 className="text-xs tracking-wide text-gray-500 uppercase dark:text-gray-400">
-                Tekniker
+                {t.technologies}
               </h2>
               <div className="mt-2 flex flex-wrap gap-2">
                 {project.relatedSkills.map((skill) => (
@@ -67,7 +82,7 @@ export default function ProjectPage({ params }: { params: { slug: string } }) {
                 target="_blank"
                 className="text-primary-500 hover:text-primary-600 font-bold"
               >
-                Besök projektet &rarr;
+                {t.visit} &rarr;
               </a>
             )}
           </div>

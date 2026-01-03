@@ -1,21 +1,21 @@
 import Image from '@/components/Image'
 import Link from '@/components/Link'
 import SocialIcon from '@/components/social-icons'
-import { SKILLS } from '@/data/sv/resume/skills'
+import { getSkills, getAboutContent } from '@/data/index'
 import HardSkillRating from '@/components/HardSkillRating'
-import { aboutContent } from '@/data/sv/ui/about'
 import siteMetadata from '@/data/siteMetadata'
 
 export const metadata = {
   title: 'Om mig',
-  description: 'Min bakgrund, min vision och mina kompetenser.',
 }
 
-export default function AboutPage() {
-  const author = aboutContent
+export default function AboutPage({ params }: { params: { locale: string } }) {
+  const locale = params.locale
+  const author = getAboutContent(locale)
+  const skills = getSkills(locale)
 
-  // Hjälpsfunktion för att hitta skills från din array baserat på id
-  const getSkill = (id: string) => SKILLS.find((s) => s.id === id)
+  // Hjälpfunktion för att hitta skills från din array baserat på id
+  const getSkill = (id: string) => skills.find((s) => s.id === id)
 
   // Gruppera skills
   const strategySkills = [
@@ -36,12 +36,20 @@ export default function AboutPage() {
     (s) => s !== undefined
   )
 
-  // HÄR ÄR LÖSNINGEN: Vi definierar en typ istället för att använda 'any'
-  // Detta gör att ESLint slutar klaga.
   const authorContact = author as { email?: string; linkedin?: string }
-
   const email = authorContact.email || siteMetadata.email
   const linkedin = authorContact.linkedin || siteMetadata.linkedin
+
+  const t = {
+    strategy: locale === 'en' ? 'Strategy & Leadership' : 'Strategi & Ledarskap',
+    tech: locale === 'en' ? 'Technical Development' : 'Teknisk Utveckling',
+    tools: locale === 'en' ? 'Tools & Design' : 'Verktyg & Design',
+    downloadCv: locale === 'en' ? 'Download CV' : 'Ladda ner CV',
+    intro:
+      locale === 'en'
+        ? 'I combine engineering with business strategy.'
+        : 'Jag kombinerar ingenjörskonst med affärsstrategi.',
+  }
 
   return (
     <div className="mx-auto max-w-5xl px-4 py-12 sm:px-6 lg:px-8">
@@ -67,11 +75,8 @@ export default function AboutPage() {
             <p className="text-primary-600 dark:text-primary-400 mt-2 text-xl font-medium">
               {author.title}
             </p>
-            <p className="mt-4 max-w-2xl text-lg text-gray-600 dark:text-gray-300">
-              Jag kombinerar ingenjörskonst med affärsstrategi.
-            </p>
+            <p className="mt-4 max-w-2xl text-lg text-gray-600 dark:text-gray-300">{t.intro}</p>
 
-            {/* Socials & Actions */}
             <div className="mt-6 flex flex-wrap justify-center gap-4 md:justify-start">
               <SocialIcon kind="mail" href={`mailto:${email}`} size={6} />
               <SocialIcon kind="linkedin" href={linkedin} size={6} />
@@ -81,7 +86,7 @@ export default function AboutPage() {
                 target="_blank"
                 className="ml-4 inline-flex items-center rounded-full bg-gray-900 px-5 py-2 text-sm font-bold text-white transition hover:bg-gray-700 dark:bg-white dark:text-gray-900 dark:hover:bg-gray-200"
               >
-                Ladda ner CV
+                {t.downloadCv}
               </Link>
             </div>
           </div>
@@ -91,11 +96,10 @@ export default function AboutPage() {
       <div className="grid grid-cols-1 gap-12 lg:grid-cols-3">
         {/* --- VÄNSTER KOLUMN (Sidebar) --- */}
         <div className="space-y-8 lg:col-span-1">
-          {/* KOMPETENSPROFIL */}
           <div className="space-y-6">
             <div className="pt-6">
               <h3 className="mb-4 text-xs font-bold tracking-wider text-gray-500 uppercase">
-                Strategi & Ledarskap
+                {t.strategy}
               </h3>
               <div className="flex flex-col gap-2">
                 {strategySkills.map(
@@ -106,7 +110,7 @@ export default function AboutPage() {
 
             <div className="border-t border-gray-200 pt-6 dark:border-gray-700">
               <h3 className="mb-4 text-xs font-bold tracking-wider text-gray-500 uppercase">
-                Teknisk Utveckling
+                {t.tech}
               </h3>
               <div className="flex flex-col gap-2">
                 {techSkills.map(
@@ -117,7 +121,7 @@ export default function AboutPage() {
 
             <div className="border-t border-gray-200 pt-6 dark:border-gray-700">
               <h3 className="mb-4 text-xs font-bold tracking-wider text-gray-500 uppercase">
-                Verktyg & Design
+                {t.tools}
               </h3>
               <div className="flex flex-col gap-2">
                 {toolSkills.map(
@@ -131,7 +135,6 @@ export default function AboutPage() {
         {/* --- HÖGER KOLUMN (Main Content) --- */}
         <div className="lg:col-span-2">
           <div className="prose dark:prose-invert max-w-none">
-            {/* Loopa igenom description-arrayen */}
             {author.description.map((paragraph, index) => (
               <p key={index}>{paragraph}</p>
             ))}

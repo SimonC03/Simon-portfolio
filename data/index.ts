@@ -3,8 +3,8 @@
 // ==========================================
 // SVENSKA IMPORTER (Från data/sv/...)
 // ==========================================
-import { projectsData as projectsSv } from './sv/projects'
-import { referencesData as referencesSv } from './sv/references'
+import { projectsData as projectsSv } from './sv/projects/projects'
+import { referencesData as referencesSv } from './sv/references/references'
 import {
   certificationsData as certificationsSv,
   awardsData as awardsSv,
@@ -21,8 +21,8 @@ import { homeContent as homeSv } from './sv/ui/home'
 // ENGELSKA IMPORTER (Från data/en/...)
 // ==========================================
 // Notera: Se till att filerna finns i 'data/en/' även om de är kopior just nu
-import { projectsData as projectsEn } from './en/projects'
-import { referencesData as referencesEn } from './en/references'
+import { projectsData as projectsEn } from './en/projects/projects'
+import { referencesData as referencesEn } from './en/references/references'
 import {
   certificationsData as certificationsEn,
   awardsData as awardsEn,

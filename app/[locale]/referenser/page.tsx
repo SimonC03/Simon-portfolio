@@ -1,22 +1,31 @@
-import { referencesData } from '@/data/sv/references/references' // Ändrad import
+import { getReferences } from '@/data/index'
 import { genPageMetadata } from 'app/seo'
 import Image from 'next/image'
+
 export const metadata = genPageMetadata({ title: 'Referenser' })
 
-export default function ReferencesPage() {
+export default function ReferencesPage({ params }: { params: { locale: string } }) {
+  const locale = params.locale
+  const referencesData = getReferences(locale)
+
+  const t = {
+    title: locale === 'en' ? 'Recommendations' : 'Rekommendationer',
+    description:
+      locale === 'en'
+        ? 'What colleagues, managers, and partners say about me.'
+        : 'Vad kollegor, chefer och samarbetspartners säger om mig.',
+  }
+
   return (
     <div className="divide-y divide-gray-200 dark:divide-gray-700">
       <div className="space-y-2 pt-6 pb-8 md:space-y-5">
         <h1 className="text-3xl leading-9 font-extrabold tracking-tight text-gray-900 sm:text-4xl sm:leading-10 md:text-6xl md:leading-14 dark:text-gray-100">
-          Rekommendationer
+          {t.title}
         </h1>
-        <p className="text-lg leading-7 text-gray-500 dark:text-gray-400">
-          Vad kollegor, chefer och samarbetspartners säger om mig.
-        </p>
+        <p className="text-lg leading-7 text-gray-500 dark:text-gray-400">{t.description}</p>
       </div>
 
       <div className="container py-12">
-        {/* Ändrat till en centrerad kolumn med max-bredd */}
         <div className="mx-auto max-w-3xl space-y-8">
           {referencesData.map((ref, i) => (
             <div
@@ -24,7 +33,6 @@ export default function ReferencesPage() {
               className="flex flex-col rounded-xl border border-gray-100 bg-gray-50 p-8 shadow-sm transition-all hover:shadow-md dark:border-gray-700 dark:bg-gray-800/50"
             >
               <div className="mb-6 flex items-center gap-5">
-                {/* Avatar / Initialer */}
                 <div className="bg-primary-100 text-primary-700 dark:bg-primary-900/30 dark:text-primary-300 flex h-16 w-16 shrink-0 items-center justify-center overflow-hidden rounded-full border-2 border-white text-xl font-bold shadow-sm dark:border-gray-800">
                   {ref.image ? (
                     <Image src={ref.image} alt={ref.name} className="h-full w-full object-cover" />

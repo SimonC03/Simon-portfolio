@@ -1,10 +1,8 @@
 // app/navigation.ts
-import { createSharedPathnamesNavigation } from 'next-intl/navigation'
+import { createNavigation } from 'next-intl/navigation'
+import { routing } from '@/i18n/routing'
 
-export const locales = ['sv', 'en'] as const
-export const localePrefix = 'always' // Eller 'as-needed' om du vill dölja /sv/ som standard
+export const { Link, redirect, usePathname, useRouter } = createNavigation(routing)
 
-export const { Link, redirect, usePathname, useRouter } = createSharedPathnamesNavigation({
-  locales,
-  localePrefix,
-})
+// Exportera locales om du behöver använda listan i andra komponenter (t.ex. språkväljare)
+export const { locales } = routing
