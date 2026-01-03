@@ -2,7 +2,7 @@ export const homeContent = {
   hero: {
     greeting: 'Hej, jag är',
     description:
-      'Dubbelexamensstudent inom Mekatronik och Ekonomi samt VD för HandelsFöretagen. Jag drivs av att kombinera teknisk expertis med strategiska affärsinsikter för att lösa komplexa utmaningar och skapa verkligt värde.',
+      'En strategisk problemlösare i gränslandet mellan mekatronik och affärsutveckling. Som VD för HandelsFöretagen och dubbelstudent drivs jag av att omvandla teknisk komplexitet till affärsnytta och leda organisationer mot mätbara resultat.',
     primaryButton: 'Kontakta mig',
     secondaryButton: 'Mer om mig',
   },
@@ -10,7 +10,7 @@ export const homeContent = {
     about: {
       title: 'Vem är jag?',
       description:
-        'Jag läser parallella kandidatexamina vid Chalmers tekniska högskola och Handelshögskolan i Göteborg. Som VD för Nordens största studentledda företagsgrupp leder jag över 180 kollegor och sju bolag. Min bakgrund spänner från management consulting och entreprenörskap till systemutveckling och militärt ledarskap.',
+        'Med en fot på Chalmers och den andra på Handelshögskolan bygger jag en profil som förenar djup teknisk förståelse med ekonomisk strategi. Idag omsätter jag teori till praktik genom att leda Nordens största studentledda företagsgrupp, med ansvar för 7 bolag och över 180 medarbetare. Min verktygslåda rymmer även erfarenheter från management consulting, systemutveckling och militärt ledarskap.',
       link: 'Läs hela min story',
     },
     work: {

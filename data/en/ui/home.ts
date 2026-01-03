@@ -2,7 +2,7 @@ export const homeContent = {
   hero: {
     greeting: 'Hi, I am',
     description:
-      'Double degree student in Mechatronics and Economics, and CEO of HandelsFöretagen. I am driven by combining technical expertise with strategic business insights to solve complex challenges and create real value.',
+      'A strategic problem-solver at the intersection of mechatronics and business. As CEO of HandelsFöretagen and a dual-degree student, I am driven by transforming technical complexity into business value and leading organizations toward measurable results.',
     primaryButton: 'Contact Me',
     secondaryButton: 'More about me',
   },
@@ -10,7 +10,7 @@ export const homeContent = {
     about: {
       title: 'Who am I?',
       description:
-        "I am pursuing parallel bachelor's degrees at Chalmers University of Technology and the School of Business, Economics and Law in Gothenburg. As CEO of the Nordic region's largest student-run business group, I lead over 180 colleagues and seven companies. My background spans from management consulting and entrepreneurship to system development and military leadership.",
+        'With one foot at Chalmers University of Technology and the other at the School of Business, Economics and Law, I am building a profile that merges deep technical understanding with economic strategy. I translate theory into practice by leading the Nordics’ largest student-run corporate group, managing seven companies and over 180 colleagues. My background also encompasses management consulting, software development, and military leadership.',
       link: 'Read my full story',
     },
     work: {

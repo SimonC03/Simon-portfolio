@@ -45,7 +45,7 @@ export default function MeriterPage({ params }: { params: { locale: string } }) 
               <div className="ml-2 space-y-6">
                 {certificationsData.map((cert) => (
                   <div key={cert.title} className="group">
-                    <h3 className="group-hover:text-primary-600 dark:group-hover:text-primary-400 text-lg font-bold text-gray-900 transition-colors dark:text-gray-100">
+                    <h3 className="text-lg font-bold text-gray-900 transition-colors dark:text-gray-100">
                       {cert.url ? (
                         <a
                           href={cert.url}

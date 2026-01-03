@@ -2,11 +2,11 @@ import { Skill } from '../../types'
 
 export const SKILLS: Skill[] = [
   // Development
-  { id: 'python', name: 'Python', category: 'Development', proficiency: 5 },
-  { id: 'c', name: 'C', category: 'Development', proficiency: 4 },
-  { id: 'cpp', name: 'C++', category: 'Development', proficiency: 4 },
+  { id: 'python', name: 'Python', category: 'Development', proficiency: 4 },
+  { id: 'c', name: 'C', category: 'Development', proficiency: 5 },
+  { id: 'cpp', name: 'C++', category: 'Development', proficiency: 3 },
   { id: 'java', name: 'Java', category: 'Development', proficiency: 4 },
-  { id: 'kotlin', name: 'Kotlin', category: 'Development', proficiency: 4 },
+  { id: 'kotlin', name: 'Kotlin', category: 'Development', proficiency: 3 },
   { id: 'csharp', name: 'C#', category: 'Development', proficiency: 3 },
   { id: 'nextjs', name: 'Next.js', category: 'Development', proficiency: 4 },
   { id: 'react', name: 'React', category: 'Development', proficiency: 4 },
@@ -16,9 +16,9 @@ export const SKILLS: Skill[] = [
 
   // Engineering
   { id: 'matlab', name: 'MATLAB', category: 'Engineering', proficiency: 4 },
-  { id: 'plc', name: 'PLC Programming', category: 'Engineering', proficiency: 4 },
+  { id: 'plc', name: 'PLC Programming', category: 'Engineering', proficiency: 5 },
   { id: 'catia', name: 'CATIA V5', category: 'Engineering', proficiency: 4 },
-  { id: 'system-weaver', name: 'System Weaver', category: 'Engineering', proficiency: 4 },
+  { id: 'system-weaver', name: 'System Weaver', category: 'Engineering', proficiency: 3 },
 
   // Tools
   { id: 'figma', name: 'Figma', category: 'Tools', proficiency: 4 },
@@ -34,6 +34,6 @@ export const SKILLS: Skill[] = [
 
   // Languages
   { id: 'swedish', name: 'Swedish (Native)', category: 'Languages', proficiency: 5 },
-  { id: 'english', name: 'English (Fluent)', category: 'Languages', proficiency: 5 },
+  { id: 'english', name: 'English (Fluent)', category: 'Languages', proficiency: 4 },
   { id: 'french', name: 'French (Basic)', category: 'Languages', proficiency: 2 },
 ]
