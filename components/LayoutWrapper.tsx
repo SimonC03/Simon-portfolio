@@ -6,17 +6,20 @@ import Header from './Header'
 
 interface Props {
   children: ReactNode
+  locale: string // <--- LÄGG TILL DENNA
 }
 
 const inter = Inter({
   subsets: ['latin'],
 })
 
-const LayoutWrapper = ({ children }: Props) => {
+// Ta emot locale i props
+const LayoutWrapper = ({ children, locale }: Props) => {
   return (
     <SectionContainer>
       <div className={`${inter.className} flex h-screen flex-col justify-between font-sans`}>
-        <Header />
+        {/* Skicka vidare locale till Header */}
+        <Header locale={locale} />
         <main className="mb-auto">{children}</main>
         <Footer />
       </div>
