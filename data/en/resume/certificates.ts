@@ -14,14 +14,14 @@ export const certificationsData: Certificate[] = [
     relatedSkills: ['Leadership', 'Business Strategy'],
   },
   {
-    title: 'Skyddsvaktsbevis',
-    issuer: 'Försvarsmakten',
+    title: 'Security Guard Certificate', // Översatt från Skyddsvaktsbevis
+    issuer: 'Swedish Armed Forces', // Översatt från Försvarsmakten
     date: '2022',
     relatedSkills: ['Security', 'Defense'],
   },
   {
-    title: 'Heta arbeten',
-    issuer: 'Brandskyddsföreningen',
+    title: 'Hot Works Certificate', // Översatt från Heta arbeten
+    issuer: 'Fire Protection Association', // Översatt från Brandskyddsföreningen
     date: '2023',
     relatedSkills: ['Safety'],
   },
@@ -54,8 +54,8 @@ export const awardsData: Award[] = [
     summary: 'Recognized as Top 3% talent.',
   },
   {
-    title: 'Hedersmedalj - Värdeordet "Driv"',
-    organization: 'Försvarsmakten',
+    title: 'Medal of Honor - Value Word "Drive"', // Översatt
+    organization: 'Swedish Armed Forces',
     summary: 'Awarded for exceptional drive and motivation during military service.',
   },
 ]

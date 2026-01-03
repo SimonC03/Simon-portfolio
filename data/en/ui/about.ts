@@ -1,10 +1,10 @@
 export const aboutContent = {
   name: 'Simon Carlén',
-  title: 'Dubbelexamensstudent & VD',
+  title: 'Double Degree Student & CEO',
   avatar: '/static/images/profile.jpg',
   description: [
-    'Jag studerar för närvarande en kandidatexamen i Mekatronik vid Chalmers tekniska högskola samt en Ekonomie kandidatexamen i Företagsekonomi vid Handelshögskolan i Göteborg. Min drivkraft ligger i att kombinera teknisk expertis med strategiska affärsinsikter för att lösa komplexa utmaningar och skapa verkligt värde.',
-    'Som VD och Koncernchef för HandelsFöretagen, Nordens största studentledda företagsgrupp, leder jag en dynamisk organisation med sju bolag och omkring 180 ambitiösa kollegor. I denna roll ansvarar jag för strategisk utveckling, bolagsöverskridande samverkan och långsiktig tillväxt.',
-    'Min bakgrund omfattar erfarenheter inom management consulting, entreprenörskap samt ledarskap genom såväl militärtjänst som akademiska uppdrag. Jag har dessutom ett starkt och långvarigt intresse för finans och aktiemarknaden, och är aktiv medlem i både Unga Aktiespararna och Chalmers Börssällskap.',
+    'I am currently pursuing a BSc in Mechatronics at Chalmers University of Technology and a BSc in Business Administration at the School of Business, Economics and Law in Gothenburg. My drive lies in combining technical expertise with strategic business insights to solve complex challenges and create real value.',
+    'As CEO and Group CEO of HandelsFöretagen, the largest student-run business group in the Nordics, I lead a dynamic organization with seven companies and around 180 ambitious colleagues. In this role, I am responsible for strategic development, cross-company collaboration, and long-term growth.',
+    'My background includes experience in management consulting, entrepreneurship, and leadership through both military service and academic assignments. I also have a strong and long-standing interest in finance and the stock market, and I am an active member of both Young Investors (Unga Aktiespararna) and Chalmers Börssällskap.',
   ],
 }

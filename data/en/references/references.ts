@@ -7,14 +7,14 @@ export const referencesData: Reference[] = [
     role: 'Business Area Manager',
     company: 'HandelsConsulting',
     quote:
-      'Simon har under den tiden vi arbetat med varandra gjort sitt allra bästa i de situationer eller problem som anträffats, oavsett tidigare erfarenhet eller kunskap inom området. Hans vilja att hela tiden bli bättre, är något som speglat hans resultat och framsteg under arbetets gång.',
+      'During the time we have worked together, Simon has done his very best in the situations or problems encountered, regardless of previous experience or knowledge in the area. His desire to constantly improve is something that has reflected his results and progress during the work.',
   },
   {
     name: 'Alireza Raghebi',
     role: 'Chief Executive Officer',
     company: 'HandelsConsulting',
     quote:
-      'Jag vill lyfta fram Simon, som på kort tid har gjort ett starkt avtryck i bolaget. Han har ett sinne för affärer och har visat stort engagemang och driv i alla delar av sitt arbete. Simon är dessutom mycket strukturerad, levererar med hög kvalitet och överträffar förväntningarna i projektarbetet. Det har varit ett nöje att arbeta med Simon och det ska bli spännande att följa hans fortsatta utveckling. Rekommenderas varmt till framtida arbetsgivare!',
+      'I want to highlight Simon, who in a short time has made a strong impression on the company. He has a business sense and has shown great commitment and drive in all parts of his work. Simon is also very structured, delivers high quality, and exceeds expectations in project work. It has been a pleasure working with Simon, and it will be exciting to follow his continued development. Warmly recommended to future employers!',
   },
   {
     name: 'Alvin Stallgård',

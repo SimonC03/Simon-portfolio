@@ -2,7 +2,7 @@
 import { Language } from '../../types'
 
 export const languagesData: Language[] = [
-  { language: 'Svenska', proficiency: 'Modersmål' },
-  { language: 'Engelska', proficiency: 'Flytande' },
-  { language: 'Franska', proficiency: 'Grundläggande' },
+  { language: 'Swedish', proficiency: 'Native' },
+  { language: 'English', proficiency: 'Fluent' },
+  { language: 'French', proficiency: 'Basic' },
 ]

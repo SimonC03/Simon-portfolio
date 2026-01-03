@@ -1,31 +1,31 @@
 export const homeContent = {
   hero: {
-    greeting: 'Hej, jag är',
+    greeting: 'Hi, I am',
     description:
-      'Dubbelexamensstudent inom Mekatronik och Ekonomi samt VD för HandelsFöretagen. Jag drivs av att kombinera teknisk expertis med strategiska affärsinsikter för att lösa komplexa utmaningar och skapa verkligt värde.',
-    primaryButton: 'Kontakta mig',
-    secondaryButton: 'Mer om mig',
+      'Double degree student in Mechatronics and Economics, and CEO of HandelsFöretagen. I am driven by combining technical expertise with strategic business insights to solve complex challenges and create real value.',
+    primaryButton: 'Contact Me',
+    secondaryButton: 'More about me',
   },
   sections: {
     about: {
-      title: 'Vem är jag?',
+      title: 'Who am I?',
       description:
-        'Jag läser parallella kandidatexamina vid Chalmers tekniska högskola och Handelshögskolan i Göteborg. Som VD för Nordens största studentledda företagsgrupp leder jag över 180 kollegor och sju bolag. Min bakgrund spänner från management consulting och entreprenörskap till systemutveckling och militärt ledarskap.',
-      link: 'Läs hela min story',
+        "I am pursuing parallel bachelor's degrees at Chalmers University of Technology and the School of Business, Economics and Law in Gothenburg. As CEO of the Nordic region's largest student-run business group, I lead over 180 colleagues and seven companies. My background spans from management consulting and entrepreneurship to system development and military leadership.",
+      link: 'Read my full story',
     },
     work: {
-      title: 'Erfarenhet',
-      subtitle: 'Karriär & Uppdrag',
-      link: 'Visa hela CV',
+      title: 'Experience',
+      subtitle: 'Career & Assignments',
+      link: 'View full CV',
     },
     education: {
-      subtitle: 'Utbildning',
-      link: 'Se utbildningar',
+      subtitle: 'Education',
+      link: 'View education',
     },
     projects: {
-      title: 'Utvalda Projekt',
+      title: 'Selected Projects',
       subtitle: 'Portfolio',
-      link: 'Visa alla projekt',
+      link: 'View all projects',
     },
   },
 }

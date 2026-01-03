@@ -5,13 +5,15 @@ import Tag from '@/components/Tag'
 
 // Generera statiska parametrar för alla projekt vid build.
 // Notera: För att detta ska vara helt korrekt med [locale] borde vi egentligen returnera { slug, locale } för alla kombinationer.
+// app/[locale]/projects/[slug]/page.tsx
+
 export async function generateStaticParams() {
   const svProjects = getProjects('sv')
   const enProjects = getProjects('en')
 
-  // Kombinera alla unika slugs (antar att slug är samma på båda språk, annars lista alla)
-  // Här returnerar vi bara params. slugs måste matchas mot locale i komponenten.
-  const paths = []
+  // Explicitly define the type for the array
+  const paths: { slug: string; locale: string }[] = []
+
   svProjects.forEach((p) => paths.push({ slug: p.slug, locale: 'sv' }))
   enProjects.forEach((p) => paths.push({ slug: p.slug, locale: 'en' }))
 
