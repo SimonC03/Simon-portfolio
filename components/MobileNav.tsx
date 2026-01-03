@@ -2,13 +2,17 @@
 
 import { useState, useEffect } from 'react'
 import Link from './Link'
-import headerNavLinks from '@/data/headerNavLinks'
-import LanguageSwitch from './LanguageSwitch' // <--- IMPORTERA
+import LanguageSwitch from './LanguageSwitch'
 
-const MobileNav = () => {
+// Definiera props
+interface MobileNavProps {
+  navLinks: { href: string; title: string }[]
+  t: { cv: string; contact: string }
+}
+
+const MobileNav = ({ navLinks, t }: MobileNavProps) => {
   const [navShow, setNavShow] = useState(false)
 
-  // ... (din useEffect kod är oförändrad) ...
   useEffect(() => {
     if (navShow) {
       document.body.style.overflow = 'hidden'
@@ -24,11 +28,11 @@ const MobileNav = () => {
     setNavShow((status) => !status)
   }
 
-  const mainLinks = headerNavLinks.filter((link) => link.title !== 'Kontakt')
+  // Filtrera bort eventuella kontakt-länkar om de finns i arrayen (baserat på href för säkerhet)
+  const mainLinks = navLinks.filter((link) => link.href !== '/contact')
 
   return (
     <div className="xl:hidden">
-      {/* ... (din hamburgermeny-knapp är oförändrad) ... */}
       <button
         type="button"
         className="mr-1 ml-1 h-8 w-8 rounded py-1"
@@ -63,13 +67,11 @@ const MobileNav = () => {
         }`}
       >
         <div className="mt-11 mr-5 flex items-center justify-end">
-          {/* Lägg till språkval här i toppen bredvid stäng-kryss eller i menyn */}
           <div className="mr-4">
-            <LanguageSwitch /> {/* <--- LÄGG TILL HÄR */}
+            <LanguageSwitch />
           </div>
 
           <button className="h-8 w-8 rounded" aria-label="Toggle Menu" onClick={onToggleNav}>
-            {/* ... (ditt stäng-ikon svg) ... */}
             <svg
               xmlns="http://www.w3.org/2000/svg"
               viewBox="0 0 20 20"
@@ -107,7 +109,7 @@ const MobileNav = () => {
               onClick={onToggleNav}
               className="flex items-center justify-center rounded-full border border-gray-300 bg-white py-3 text-lg font-bold text-gray-900 shadow-sm transition-colors hover:bg-gray-50 dark:border-gray-700 dark:bg-gray-800 dark:text-gray-100 dark:hover:bg-gray-700"
             >
-              <span className="mr-2">📄</span> Mitt CV
+              <span className="mr-2">📄</span> {t.cv}
             </Link>
 
             <Link
@@ -115,7 +117,7 @@ const MobileNav = () => {
               onClick={onToggleNav}
               className="bg-primary-600 hover:bg-primary-700 focus:ring-primary-500 flex items-center justify-center rounded-full py-3 text-lg font-bold text-white shadow-md transition-colors focus:ring-2 focus:outline-none"
             >
-              Kontakta mig
+              {t.contact}
             </Link>
           </div>
         </nav>

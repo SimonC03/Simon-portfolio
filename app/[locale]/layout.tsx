@@ -106,7 +106,7 @@ export default async function RootLayout({
         <NextIntlClientProvider messages={messages}>
           <ThemeProviders>
             <SectionContainer>
-              <Header />
+              <Header locale={locale} />
               <main className="mb-auto">{children}</main>
               <Footer />
             </SectionContainer>
