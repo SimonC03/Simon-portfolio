@@ -11,6 +11,7 @@ import { Metadata } from 'next'
 // NYTT: Importera dessa från next-intl
 import { NextIntlClientProvider } from 'next-intl'
 import { getMessages } from 'next-intl/server'
+import SnowEffect from '@/components/SnowEffect'
 
 const space_grotesk = Space_Grotesk({
   subsets: ['latin'],
@@ -110,6 +111,7 @@ export default async function RootLayout({
         {/* NYTT: Omslut allt innehåll med NextIntlClientProvider */}
         <NextIntlClientProvider messages={messages}>
           <ThemeProviders>
+            <SnowEffect />
             <SectionContainer>
               <Header locale={locale} />
               <main className="mb-auto">{children}</main>
