@@ -111,7 +111,7 @@ export default async function RootLayout({
         {/* NYTT: Omslut allt innehåll med NextIntlClientProvider */}
         <NextIntlClientProvider messages={messages}>
           <ThemeProviders>
-            <SnowEffect />
+            {/*<SnowEffect />*/}
             <SectionContainer>
               <Header locale={locale} />
               <main className="mb-auto">{children}</main>
