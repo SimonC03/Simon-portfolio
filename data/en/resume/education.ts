@@ -33,30 +33,30 @@ export const educationData: Education[] = [
       'Pursuing an extended study plan with extra courses in Data Structures and Algorithms for deepened software expertise.',
       'Gained practical experience in CAD (Catia V5), PLC programming, and embedded systems through project-based learning.',
     ],
-    /*
     courses: [
       { name: 'Calculus', credits: '7.5 hp', grade: '5' },
       { name: 'Linear Algebra & Differential Equations', credits: '7.5 hp', grade: '5' },
       { name: 'Linear Systems', credits: '7.5 hp', grade: '5' },
-      { name: 'Dynamical Systems & Control', credits: '7.5 hp', grade: '5' },
+      { name: 'Dynamical Systems & Control Engineering', credits: '7.5 hp', grade: '5' },
       { name: 'Embedded Control Systems', credits: '7.5 hp', grade: '5' },
       { name: 'Machine Oriented Programming', credits: '7.5 hp', grade: '5' },
       { name: 'Computer Programming', credits: '7.5 hp', grade: '5' },
       { name: 'Electrical Circuits', credits: '7.5 hp', grade: '5' },
       { name: 'Introduction to Computer Engineering', credits: '7.5 hp', grade: '5' },
       { name: 'Energy Systems & Sustainability', credits: '7.5 hp', grade: '5' },
-      { name: 'Transducers & Actuators', credits: '7.5 hp', grade: '5' },
+      { name: 'Transducers & Actuators, Theory and Applications', credits: '7.5 hp', grade: '5' },
       { name: 'Solid Mechanics & Materials', credits: '7.5 hp', grade: '5' },
       { name: 'Mechanics, Advanced Course', credits: '7.5 hp', grade: '5' },
-      { name: 'Mathematical Analysis in Several Variables', credits: '7.5 hp', grade: '4' },
+      { name: 'Mathematical Analysis in Several Variables', credits: '7.5 hp', grade: '5' },
+      { name: 'Machine Elements', credits: '7.5 hp', grade: '5' },
+      { name: 'Applied Control System Design', credits: '7.5 hp', grade: '5' },
       { name: 'Data Structures and Algorithms', credits: '6.0 hp', grade: '4' },
       { name: 'Mechanics', credits: '7.5 hp', grade: '4' },
       { name: 'Mechatronics Project', credits: '7.5 hp', grade: '4' },
-      { name: 'Preparatory Course in Mathematics', credits: '7.5 hp', grade: 'G' }, // G i betyg
-      { name: 'Introduction to Mechatronics', credits: '7.5 hp', grade: 'G' }, // G i betyg
-      { name: 'Logic Control Project', credits: '7.5 hp', grade: 'G' }, // G i betyg
+      { name: 'Preparatory Course in Mathematics', credits: '7.5 hp', grade: 'G' },
+      { name: 'Introduction to Mechatronics', credits: '7.5 hp', grade: 'G' },
+      { name: 'Logic Control Project', credits: '7.5 hp', grade: 'G' },
     ],
-    */
     relatedSkills: [
       'C/C++',
       'Python',
