@@ -3,12 +3,36 @@ import { Project } from '../../types'
 
 export const projectsData: (Project & { slug: string; fullDescription: string[] })[] = [
   {
+    title: 'Vehicle Dynamics Simulator for ECU Testing',
+    slug: 'volvo-buses-ecu-validation',
+    description:
+      'Developing a scalable vehicle dynamics simulation that generates CAN signals for ECU validation in Volvo Buses test rigs.',
+    imgSrc: '/static/images/volvo-buses-thesis.jpg',
+    href: '/projects/volvo-buses-ecu-validation',
+    relatedSkills: [
+      'python',
+      'can',
+      'vehicle-dynamics',
+      'simulation',
+      'software-testing',
+      'control-systems',
+      'modeling',
+    ],
+    fullDescription: [
+      'In my Bachelor’s thesis at Volvo Buses, we are developing a scalable vehicle dynamics simulation model that enables realistic, lab-based validation of vehicle software.',
+      'The model simulates bus driving scenarios and generates corresponding ECU signals, which are transmitted over CAN and injected into an existing test rig—making it possible to test and validate functionality without physically driving a bus.',
+      'By moving verification from proving grounds to the lab, the setup supports shift-left testing with faster feedback cycles, repeatable (and automatable) test cases, and earlier detection of issues—while reducing time, cost, and resource needs associated with field testing.',
+      'Technically, the architecture is modular: the driveline is modeled component-by-component and can be extended with features such as automatic transmission, cruise control with closed-loop feedback control, and a 6-DOF vehicle model. The setup also supports real-time simulation and map-based visualization for interactive scenario testing.',
+    ],
+    attachments: [],
+  },
+  {
     title: 'CampusLyan',
     slug: 'campuslyan',
     description:
       'Student housing platform aggregating listings and queue systems to simplify the search process.',
     imgSrc: '/static/images/project-campuslyan1.png',
-    href: '/projects/campuslyan',
+    href: 'https://www.campuslyan.se/',
     relatedSkills: ['next.js', 'react', 'typescript', 'sql', 'tailwind', 'ux'],
     fullDescription: [
       'CampusLyan was founded with a clear vision: to eliminate the stress associated with the student housing market. By centralizing fragmented information on housing queues and available listings, the platform creates a more transparent and secure marketplace.',

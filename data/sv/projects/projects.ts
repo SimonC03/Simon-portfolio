@@ -3,12 +3,36 @@ import { Project } from '../../types'
 
 export const projectsData: (Project & { slug: string; fullDescription: string[] })[] = [
   {
+    title: 'Fordonsdynamiksimulering för ECU-test i Volvo Bussars testriggar',
+    slug: 'volvo-buses-ecu-verifiering',
+    description:
+      'Utvecklar en skalbar fordonsdynamiksimulering som genererar CAN-signaler för mjukvaruverifiering av ECU:er i testriggar.',
+    imgSrc: '/static/images/volvo-buses-thesis.jpg',
+    href: '/projects/volvo-buses-ecu-verifiering',
+    relatedSkills: [
+      'python',
+      'can',
+      'fordonsdynamik',
+      'simulering',
+      'mjukvarutestning',
+      'reglerteknik',
+      'modellering',
+    ],
+    fullDescription: [
+      'I mitt kandidatarbete på Volvo Bussar utvecklar vi en skalbar fordonsdynamiksimulering som möjliggör realistisk, labbbaserad validering av fordonets mjukvara.',
+      'Modellen simulerar körscenarier och genererar motsvarande ECU-signaler som skickas över CAN och injiceras i en befintlig testrigg—vilket gör det möjligt att testa och verifiera funktionalitet utan att fysiskt köra en buss.',
+      'Upplägget stödjer shift-left testing genom att flytta verifiering från provbana till labb: snabbare feedbackcykler, repeterbara (och automatiserbara) testfall samt tidigare upptäckt av problem—samtidigt som tid, kostnad och resursbehov för fälttest minskar.',
+      'Tekniskt är arkitekturen modulär: drivlinan modelleras komponent för komponent och kan byggas ut med funktioner såsom automatlåda, farthållare med sluten återkoppling och en 6-DOF-fordonsmodell. Upplägget stödjer även realtidssimulering och kartbaserad visualisering för interaktiv scenariotestning.',
+    ],
+    attachments: [],
+  },
+  {
     title: 'CampusLyan',
     slug: 'campuslyan',
     description:
       'Bostadsplattform som aggregerar studentbostäder och köer för att förenkla bostadssökandet.',
     imgSrc: '/static/images/project-campuslyan1.png', // Glöm inte bilden!
-    href: '/projects/campuslyan',
+    href: 'https://www.campuslyan.se/',
     // Lägg till relevanta tekniker du använt
     relatedSkills: ['next.js', 'react', 'typescript', 'sql', 'tailwind', 'ux'],
     fullDescription: [
