@@ -4,9 +4,13 @@ import SocialIcon from '@/components/social-icons'
 import { getSkills, getAboutContent } from '@/data/index'
 import HardSkillRating from '@/components/HardSkillRating'
 import siteMetadata from '@/data/siteMetadata'
+import { genPageMetadata } from 'app/seo'
 
-export const metadata = {
-  title: 'Om mig',
+export function generateMetadata({ params }: { params: { locale: string } }) {
+  return genPageMetadata({
+    title: params.locale === 'en' ? 'About' : 'Om mig',
+    locale: params.locale,
+  })
 }
 
 export default function AboutPage({ params }: { params: { locale: string } }) {

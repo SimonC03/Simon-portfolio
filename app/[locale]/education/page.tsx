@@ -2,7 +2,12 @@ import { getEducation } from '@/data/index'
 import { genPageMetadata } from 'app/seo'
 import EducationList from '@/components/EducationList'
 
-export const metadata = genPageMetadata({ title: 'Utbildning' })
+export function generateMetadata({ params }: { params: { locale: string } }) {
+  return genPageMetadata({
+    title: params.locale === 'en' ? 'Education' : 'Utbildning',
+    locale: params.locale,
+  })
+}
 
 export default function EducationPage({ params }: { params: { locale: string } }) {
   const locale = params.locale

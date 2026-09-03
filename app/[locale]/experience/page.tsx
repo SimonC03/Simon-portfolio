@@ -2,9 +2,12 @@ import { getExperience } from '@/data/index'
 import { genPageMetadata } from 'app/seo'
 import ExperienceList from '@/components/ExperienceList'
 
-// För metadata kan vi inte använda params i den enkla config-objektet, men vi behåller titeln statisk eller
-// använder generateMetadata (async) om du vill ha den översatt i fliken.
-export const metadata = genPageMetadata({ title: 'Erfarenhet' })
+export function generateMetadata({ params }: { params: { locale: string } }) {
+  return genPageMetadata({
+    title: params.locale === 'en' ? 'Experience' : 'Erfarenhet',
+    locale: params.locale,
+  })
+}
 
 export default function ExperiencePage({ params }: { params: { locale: string } }) {
   const locale = params.locale

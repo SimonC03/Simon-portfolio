@@ -2,7 +2,12 @@ import { getReferences } from '@/data/index'
 import { genPageMetadata } from 'app/seo'
 import Image from 'next/image'
 
-export const metadata = genPageMetadata({ title: 'Referenser' })
+export function generateMetadata({ params }: { params: { locale: string } }) {
+  return genPageMetadata({
+    title: params.locale === 'en' ? 'References' : 'Referenser',
+    locale: params.locale,
+  })
+}
 
 export default function ReferencesPage({ params }: { params: { locale: string } }) {
   const locale = params.locale

@@ -2,6 +2,7 @@ import { getProjects } from '@/data/index'
 import { notFound } from 'next/navigation'
 import Image from '@/components/Image'
 import Tag from '@/components/Tag'
+import { genPageMetadata } from 'app/seo'
 
 export async function generateStaticParams() {
   const svProjects = getProjects('sv')
@@ -18,7 +19,12 @@ export const generateMetadata = ({ params }: { params: { slug: string; locale: s
   const projects = getProjects(params.locale)
   const project = projects.find((p) => p.slug === params.slug)
   if (!project) return {}
-  return { title: project.title, description: project.description }
+  return genPageMetadata({
+    title: project.title,
+    description: project.description,
+    image: project.imgSrc,
+    locale: params.locale,
+  })
 }
 
 export default function ProjectPage({ params }: { params: { slug: string; locale: string } }) {

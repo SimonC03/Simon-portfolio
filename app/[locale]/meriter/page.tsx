@@ -1,7 +1,12 @@
 import { getCertifications, getAwards, getMemberships, getLanguages } from '@/data/index'
 import { genPageMetadata } from 'app/seo'
 
-export const metadata = genPageMetadata({ title: 'Meriter & Övrigt' })
+export function generateMetadata({ params }: { params: { locale: string } }) {
+  return genPageMetadata({
+    title: params.locale === 'en' ? 'Achievements' : 'Meriter',
+    locale: params.locale,
+  })
+}
 
 export default function MeriterPage({ params }: { params: { locale: string } }) {
   const locale = params.locale

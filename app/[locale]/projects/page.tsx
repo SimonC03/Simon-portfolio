@@ -2,7 +2,12 @@ import { getProjects } from '@/data/index'
 import Card from '@/components/Card'
 import { genPageMetadata } from 'app/seo'
 
-export const metadata = genPageMetadata({ title: 'Projekt' })
+export function generateMetadata({ params }: { params: { locale: string } }) {
+  return genPageMetadata({
+    title: params.locale === 'en' ? 'Projects' : 'Projekt',
+    locale: params.locale,
+  })
+}
 
 export default function Projects({ params }: { params: { locale: string } }) {
   const locale = params.locale

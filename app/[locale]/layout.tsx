@@ -6,9 +6,9 @@ import SectionContainer from '@/components/SectionContainer'
 import Footer from '@/components/Footer'
 import siteMetadata from '@/data/siteMetadata'
 import { ThemeProviders } from '../theme-providers'
-import { Metadata } from 'next'
+import { Metadata, Viewport } from 'next'
+import { descriptionFor, ogImageFor, ogLocaleFor } from 'app/seo'
 
-// NYTT: Importera dessa från next-intl
 import { NextIntlClientProvider } from 'next-intl'
 import { getMessages } from 'next-intl/server'
 
@@ -18,44 +18,71 @@ const space_grotesk = Space_Grotesk({
   variable: '--font-space-grotesk',
 })
 
-export const metadata: Metadata = {
-  metadataBase: new URL(siteMetadata.siteUrl),
-  title: {
-    default: siteMetadata.title,
-    template: `%s | ${siteMetadata.title}`,
-  },
-  description: siteMetadata.description,
-  openGraph: {
-    title: siteMetadata.title,
-    description: siteMetadata.description,
-    url: './',
-    siteName: siteMetadata.title,
-    images: [siteMetadata.socialBanner],
-    locale: 'sv_SE',
-    type: 'website',
-  },
-  alternates: {
-    canonical: './',
-  },
-  robots: {
-    index: true,
-    follow: true,
-    googleBot: {
+export function generateMetadata({ params }: { params: { locale: string } }): Metadata {
+  const locale = params.locale
+  const description = descriptionFor(locale)
+  const ogImage = ogImageFor(locale)
+
+  return {
+    metadataBase: new URL(siteMetadata.siteUrl),
+    title: {
+      default: siteMetadata.title,
+      template: `%s | ${siteMetadata.author}`,
+    },
+    description,
+    applicationName: siteMetadata.author,
+    authors: [{ name: siteMetadata.author, url: siteMetadata.siteUrl }],
+    creator: siteMetadata.author,
+    openGraph: {
+      title: siteMetadata.title,
+      description,
+      url: './',
+      siteName: siteMetadata.title,
+      images: [{ url: ogImage, width: 1200, height: 630, alt: siteMetadata.author }],
+      locale: ogLocaleFor(locale),
+      type: 'website',
+    },
+    alternates: {
+      canonical: './',
+    },
+    robots: {
       index: true,
       follow: true,
-      'max-video-preview': -1,
-      'max-image-preview': 'large',
-      'max-snippet': -1,
+      googleBot: {
+        index: true,
+        follow: true,
+        'max-video-preview': -1,
+        'max-image-preview': 'large',
+        'max-snippet': -1,
+      },
     },
-  },
-  twitter: {
-    title: siteMetadata.title,
-    card: 'summary_large_image',
-    images: [siteMetadata.socialBanner],
-  },
+    twitter: {
+      card: 'summary_large_image',
+      title: siteMetadata.title,
+      description,
+      images: [ogImage],
+    },
+    icons: {
+      icon: [
+        { url: '/favicon.ico', sizes: '48x48' },
+        { url: '/static/favicons/favicon.svg', type: 'image/svg+xml' },
+        { url: '/static/favicons/favicon-32x32.png', sizes: '32x32', type: 'image/png' },
+        { url: '/static/favicons/favicon-16x16.png', sizes: '16x16', type: 'image/png' },
+      ],
+      apple: [{ url: '/static/favicons/apple-touch-icon.png', sizes: '180x180' }],
+      shortcut: ['/favicon.ico'],
+    },
+    manifest: '/static/favicons/site.webmanifest',
+  }
 }
 
-// ÄNDRAT: Funktionen är nu async och tar emot params
+export const viewport: Viewport = {
+  themeColor: [
+    { media: '(prefers-color-scheme: light)', color: '#ffffff' },
+    { media: '(prefers-color-scheme: dark)', color: '#030712' },
+  ],
+}
+
 export default async function RootLayout({
   children,
   params: { locale },
@@ -63,51 +90,16 @@ export default async function RootLayout({
   children: React.ReactNode
   params: { locale: string }
 }) {
-  const basePath = process.env.BASE_PATH || ''
-
-  // NYTT: Hämta meddelanden (konfigurationen från i18n/request.ts)
+  // Messages for next-intl (configured in i18n/request.ts)
   const messages = await getMessages()
 
   return (
     <html
-      lang={locale} // ÄNDRAT: Använd dynamisk locale istället för siteMetadata.language
+      lang={locale}
       className={`${space_grotesk.variable} scroll-smooth`}
       suppressHydrationWarning
     >
-      <head>
-        {/* VIKTIGT: Lägg till denna för standard favicon.ico */}
-        <link rel="shortcut icon" href={`${basePath}/static/favicons/favicon.ico`} />
-
-        <link
-          rel="apple-touch-icon"
-          sizes="76x76"
-          href={`${basePath}/static/favicons/apple-touch-icon.png`}
-        />
-        <link
-          rel="icon"
-          type="image/png"
-          sizes="32x32"
-          href={`${basePath}/static/favicons/favicon-32x32.png`}
-        />
-        <link
-          rel="icon"
-          type="image/png"
-          sizes="16x16"
-          href={`${basePath}/static/favicons/favicon-16x16.png`}
-        />
-        <link rel="manifest" href={`${basePath}/static/favicons/site.webmanifest`} />
-        <link
-          rel="mask-icon"
-          href={`${basePath}/static/favicons/safari-pinned-tab.svg`}
-          color="#5bbad5"
-        />
-        <meta name="msapplication-TileColor" content="#000000" />
-        <meta name="theme-color" media="(prefers-color-scheme: light)" content="#fff" />
-        <meta name="theme-color" media="(prefers-color-scheme: dark)" content="#000" />
-      </head>
-
       <body className="bg-white pl-[calc(100vw-100%)] text-black antialiased dark:bg-gray-950 dark:text-white">
-        {/* NYTT: Omslut allt innehåll med NextIntlClientProvider */}
         <NextIntlClientProvider messages={messages}>
           <ThemeProviders>
             <SectionContainer>
