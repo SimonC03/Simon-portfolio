@@ -19,33 +19,42 @@ export default function AboutPage({ params }: { params: { locale: string } }) {
 
   // Gruppera skills
   const techSkills = [
-    getSkill('c'),
-    getSkill('nextjs'),
-    getSkill('typescript'),
     getSkill('python'),
+    getSkill('typescript'),
+    getSkill('java'),
+    getSkill('nextjs'),
     getSkill('sql'),
   ].filter((s) => s !== undefined)
 
+  const aiSkills = [
+    getSkill('machine-learning'),
+    getSkill('time-series'),
+    getSkill('mcp'),
+    getSkill('ai-agents'),
+  ].filter((s) => s !== undefined)
+
   const toolSkills = [
-    getSkill('catia'),
-    getSkill('matlab'),
-    getSkill('figma'),
-    getSkill('system-weaver'),
+    getSkill('canoe'),
+    getSkill('docker'),
+    getSkill('gcp'),
     getSkill('git'),
+    getSkill('matlab'),
   ].filter((s) => s !== undefined)
 
   const authorContact = author as { email?: string; linkedin?: string }
   const email = authorContact.email || siteMetadata.email
   const linkedin = authorContact.linkedin || siteMetadata.linkedin
+  const github = siteMetadata.github
 
   const t = {
     tech: locale === 'en' ? 'Selected Programming Languages' : 'Urval programspråk',
-    tools: locale === 'en' ? 'Tools & Design' : 'Verktyg & Design',
+    ai: locale === 'en' ? 'AI & Data' : 'AI & Data',
+    tools: locale === 'en' ? 'Tools & Platforms' : 'Verktyg & Plattformar',
     downloadCv: locale === 'en' ? 'Download CV' : 'Ladda ner CV',
     intro:
       locale === 'en'
-        ? 'I combine engineering with business strategy.'
-        : 'Jag kombinerar ingenjörskonst med affärsstrategi.',
+        ? 'I build AI and software systems, and combine engineering with business strategy.'
+        : 'Jag bygger AI- och mjukvarusystem och förenar ingenjörskonst med affärsstrategi.',
   }
 
   return (
@@ -77,6 +86,7 @@ export default function AboutPage({ params }: { params: { locale: string } }) {
             <div className="mt-6 flex flex-wrap justify-center gap-4 md:justify-start">
               <SocialIcon kind="mail" href={`mailto:${email}`} size={6} />
               <SocialIcon kind="linkedin" href={linkedin} size={6} />
+              <SocialIcon kind="github" href={github} size={6} />
 
               <Link
                 href="/cv.pdf"
@@ -102,6 +112,15 @@ export default function AboutPage({ params }: { params: { locale: string } }) {
                 {techSkills.map(
                   (skill) => skill && <HardSkillRating key={skill.id} skill={skill} />
                 )}
+              </div>
+            </div>
+
+            <div className="border-t border-gray-200 pt-6 dark:border-gray-700">
+              <h3 className="mb-4 text-xs font-bold tracking-wider text-gray-500 uppercase">
+                {t.ai}
+              </h3>
+              <div className="flex flex-col gap-2">
+                {aiSkills.map((skill) => skill && <HardSkillRating key={skill.id} skill={skill} />)}
               </div>
             </div>
 

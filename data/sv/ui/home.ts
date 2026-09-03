@@ -2,7 +2,7 @@ export const homeContent = {
   hero: {
     greeting: 'Hej, jag är',
     description:
-      'En strategisk problemlösare i gränslandet mellan mekatronik och affärsutveckling. Som VD och koncernchef för HandelsFöretagen och dubbelstudent drivs jag av att omvandla teknisk komplexitet till affärsnytta och leda organisationer mot mätbara resultat.',
+      'Ingenjör och entreprenör i gränslandet mellan AI, mjukvara och affärer. Masterstudent i Data Science & AI på Chalmers, VD och medgrundare av CampusLyan, och senast med AI-agentinfrastruktur och prognosmodeller på Volvo Bussar. Jag drivs av att omvandla teknisk komplexitet till mätbara resultat.',
     primaryButton: 'Kontakta mig',
     secondaryButton: 'Mer om mig',
   },
@@ -10,7 +10,7 @@ export const homeContent = {
     about: {
       title: 'Vem är jag?',
       description:
-        'Med en fot på Chalmers och den andra på Handelshögskolan bygger jag en profil som förenar djup teknisk förståelse med ekonomisk strategi. Idag omsätter jag teori till praktik genom att leda Nordens största studentledda företagsgrupp, med ansvar för 7 bolag och över 180 medarbetare. Min verktygslåda rymmer även erfarenheter från management consulting, systemutveckling och militärt ledarskap.',
+        'Med en fot på Chalmers och den andra på Handelshögskolan förenar jag djup teknisk förståelse med affärsstrategi. Jag har byggt fordonssimuleringsverktyg och AI-agentinfrastruktur på Volvo Bussar, lett Nordens största studentdrivna koncern med över 180 medarbetare till dess starkaste år någonsin, och bygger nu Sveriges studentbostadsplattform som VD och medgrundare av CampusLyan.',
       link: 'Läs hela min story',
     },
     work: {

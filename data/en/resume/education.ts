@@ -2,16 +2,46 @@ import { Education } from '../../types'
 
 export const educationData: Education[] = [
   {
+    school: 'Chalmers University of Technology',
+    degree: 'MSc in Data Science & AI',
+    location: 'Gothenburg, Sweden',
+    year: '2026 - 2028',
+    summary:
+      "Master's programme focused on machine learning, artificial intelligence and statistical methods for data-driven systems. Started in autumn 2026 after completing a BSc in Automation & Mechatronics Engineering with the highest academic results in the programme.",
+    details: [
+      'Focus on machine learning, AI systems and data-driven decision-making, building on hands-on AI and ML work at Volvo Buses.',
+      'Studied in parallel with a BSc in Business Administration at the School of Business, Economics and Law.',
+    ],
+    relatedSkills: [
+      'Machine Learning',
+      'Deep Learning',
+      'Statistics',
+      'Python',
+      'Data Engineering',
+    ],
+  },
+  {
     school: 'School of Business, Economics and Law at the University of Gothenburg',
     degree: 'BSc in Business Administration',
     location: 'Gothenburg, Sweden',
     year: '2024 - 2027',
     summary:
-      'Academic program focused on quantitative financial analysis, economic theory, and corporate management processes.',
+      'Academic program focused on quantitative financial analysis, economic theory, and corporate management processes, studied in parallel with my engineering degrees.',
     details: [
       'Building a solid foundation in preparing and analyzing financial reports, cash flows, and investment calculations.',
       'Applying economic models to solve optimization problems and understand market dynamics (Economics).',
       'Developing data-driven decision-making skills by integrating accounting theory with strategic management control.',
+    ],
+    courses: [
+      { name: 'Business Administration, Organization and Leadership', credits: '7.5 hp' },
+      { name: 'Business Administration, Marketing', credits: '7.5 hp' },
+      { name: 'Business Administration, Financial Accounting', credits: '7.5 hp' },
+      { name: 'Business Administration, Management Accounting', credits: '7.5 hp' },
+      { name: 'Principles of Microeconomics', credits: '7.5 hp' },
+      { name: 'Principles of Macroeconomics', credits: '7.5 hp' },
+      { name: 'Applied Economics', credits: '5.0 hp' },
+      { name: 'Principles of International Economics', credits: '5.0 hp' },
+      { name: 'Principles of Financial Economics', credits: '5.0 hp' },
     ],
     relatedSkills: [
       'Business Administration',
@@ -23,15 +53,16 @@ export const educationData: Education[] = [
   },
   {
     school: 'Chalmers University of Technology',
-    degree: 'BSc in Automation & Mechatronics',
+    degree: 'BSc in Automation & Mechatronics Engineering',
     location: 'Gothenburg, Sweden',
     year: '2023 - 2026',
     summary:
-      'Engineering program at the intersection of mechanics, electronics, and software. The education provides a deep understanding of how modern products—from autonomous vehicles to smart home systems—interact. I have built a strong technical base in control theory, AI, and systems engineering, with practical expertise in C/C++, PLC programming, and CAD (Catia V5). To meet future demands for software-intensive technology, I am pursuing an extended study plan focusing on algorithms and data structures.',
+      'Engineering programme at the intersection of mechanics, electronics and software, completed in June 2026 with a GPA of 4.9/5.0 and the highest academic results in the programme. The education gave me a strong technical base in control theory, embedded systems and software engineering, with practical expertise in C/C++, Python, PLC programming and CAD (Catia V5). I extended the study plan with additional courses in algorithms and data structures, and wrote my bachelor thesis in computer science and engineering at Volvo Buses.',
     details: [
-      'Awarded the Adlerbertska Scholarship in years 1 and 2 for exceptional academic results.',
-      'Pursuing an extended study plan with extra courses in Data Structures and Algorithms for deepened software expertise.',
-      'Gained practical experience in CAD (Catia V5), PLC programming, and embedded systems through project-based learning.',
+      'Graduated with the highest academic results in the programme (GPA 4.9/5.0). Awarded the Adlerbert Scholarship in years 1 and 2 for exceptional academic results.',
+      'Bachelor thesis (15 hp) in computer science and engineering at Volvo Buses: a CAN-based vehicle simulation tool for shift-left verification of bus software, verified on a physical HIL test rig.',
+      'Extended study plan with extra courses in data structures and algorithms for deepened software expertise.',
+      'Practical experience in CAD (Catia V5), PLC programming and embedded systems through project-based learning.',
     ],
     courses: [
       { name: 'Calculus', credits: '7.5 hp', grade: '5' },
@@ -50,9 +81,15 @@ export const educationData: Education[] = [
       { name: 'Mathematical Analysis in Several Variables', credits: '7.5 hp', grade: '5' },
       { name: 'Machine Elements', credits: '7.5 hp', grade: '5' },
       { name: 'Applied Control System Design', credits: '7.5 hp', grade: '5' },
+      { name: 'Statistics with Applications', credits: '7.5 hp', grade: '5' },
       { name: 'Data Structures and Algorithms', credits: '6.0 hp', grade: '4' },
       { name: 'Mechanics', credits: '7.5 hp', grade: '4' },
       { name: 'Mechatronics Project', credits: '7.5 hp', grade: '4' },
+      {
+        name: 'Degree Project in Computer Science and Engineering (Bachelor Thesis)',
+        credits: '15.0 hp',
+        grade: 'G',
+      },
       { name: 'Preparatory Course in Mathematics', credits: '7.5 hp', grade: 'G' },
       { name: 'Introduction to Mechatronics', credits: '7.5 hp', grade: 'G' },
       { name: 'Logic Control Project', credits: '7.5 hp', grade: 'G' },
@@ -60,8 +97,9 @@ export const educationData: Education[] = [
     relatedSkills: [
       'C/C++',
       'Python',
-      'Matlab',
+      'MATLAB',
       'Control Systems',
+      'Embedded Systems',
       'CAD (Catia V5)',
       'System Engineering',
     ],
@@ -70,18 +108,25 @@ export const educationData: Education[] = [
     school: 'Linköping University',
     degree: 'Standalone Courses',
     location: 'Remote',
-    year: 'Summer 2024',
+    year: '2024 - 2026',
     summary:
-      'Proactive studies to broaden competence within AI technology and business-creating innovation processes.',
+      'Standalone courses taken alongside my degrees to broaden my competence within AI, innovation and cybersecurity.',
     details: [
       'Innovation & Entrepreneurship: Deep dive into business modeling, market strategies, and the commercialization of ideas.',
       "Elements of AI: Studies in machine learning (k-NN, logistic regression), neural networks, and Bayes' theorem, as well as the societal impact of AI.",
+      'Cybersecurity – Fundamentals and Awareness (2026): introductory course in cybersecurity principles and security awareness.',
     ],
     courses: [
-      { name: 'Elements of AI', credits: '2.0 hp', grade: 'Pass' },
+      { name: 'Cybersecurity – Fundamentals and Awareness', credits: '3.0 hp', grade: 'Pass' },
       { name: 'Innovation and Entrepreneurship', credits: '6.0 hp', grade: 'Pass' },
+      { name: 'Elements of AI', credits: '2.0 hp', grade: 'Pass' },
     ],
-    relatedSkills: ['Artificial Intelligence', 'Business Development', 'Innovation'],
+    relatedSkills: [
+      'Artificial Intelligence',
+      'Business Development',
+      'Innovation',
+      'Cybersecurity',
+    ],
   },
   {
     school: 'Swedish Armed Forces',

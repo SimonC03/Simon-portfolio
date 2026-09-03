@@ -30,6 +30,12 @@ export const certificationsData: Certificate[] = [
 
 export const awardsData: Award[] = [
   {
+    title: 'Nova 111 Student List 2026',
+    organization: 'Nova',
+    summary:
+      'Utvald som en av Sveriges 10 främsta ingenjörsstudenter 2026, bland över 1 000 sökande.',
+  },
+  {
     title: 'Adlerbertska Stipendiet 2025',
     organization: 'Adlerbertska Stiftelserna',
     summary:

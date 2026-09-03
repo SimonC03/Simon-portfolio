@@ -2,7 +2,7 @@ export const homeContent = {
   hero: {
     greeting: 'Hi, I am',
     description:
-      'A strategic problem-solver at the intersection of mechatronics and business. As President & CEO of HandelsFöretagen and a dual-degree student, I am driven by transforming technical complexity into business value and leading organizations toward measurable results.',
+      'An engineer and entrepreneur working at the intersection of AI, software and business. M.Sc. student in Data Science & AI at Chalmers, CEO & Co-Founder of CampusLyan, and most recently building AI agent infrastructure and forecasting models at Volvo Buses. I am driven by turning technical complexity into measurable results.',
     primaryButton: 'Contact Me',
     secondaryButton: 'More about me',
   },
@@ -10,7 +10,7 @@ export const homeContent = {
     about: {
       title: 'Who am I?',
       description:
-        'With one foot at Chalmers University of Technology and the other at the School of Business, Economics and Law, I am building a profile that merges deep technical understanding with economic strategy. I translate theory into practice by leading the Nordics’ largest student-run corporate group, managing seven companies and over 180 colleagues. My background also encompasses management consulting, software development, and military leadership.',
+        "With one foot at Chalmers University of Technology and the other at the School of Business, Economics and Law, I combine deep technical understanding with business strategy. I have built vehicle simulation tools and AI agent infrastructure at Volvo Buses, led the Nordics' largest student-run corporate group with 180+ colleagues to its strongest year ever, and am now building Sweden's student housing platform as CEO & Co-Founder of CampusLyan.",
       link: 'Read my full story',
     },
     work: {

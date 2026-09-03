@@ -189,7 +189,9 @@ export default function EducationList({
                         </h4>
                         <div className="flex flex-col gap-y-4">
                           {selected.relatedSkills.map((skillId) => {
-                            const skill = CURRENT_SKILLS[skillId]
+                            const skill = CURRENT_SKILLS.find(
+                              (s) => s.id === skillId || s.name === skillId
+                            )
                             if (!skill) {
                               return (
                                 <div

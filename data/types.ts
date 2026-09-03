@@ -1,6 +1,12 @@
 // data/types.ts
 
-export type SkillCategory = 'Development' | 'Business' | 'Tools' | 'Languages' | 'Engineering'
+export type SkillCategory =
+  | 'Development'
+  | 'AI & Data'
+  | 'Engineering'
+  | 'Tools'
+  | 'Business'
+  | 'Languages'
 
 export interface Attachment {
   name: string

@@ -3,7 +3,7 @@ const siteMetadata = {
   author: 'Simon Carlén',
   headerTitle: 'Simon Carlén',
   description:
-    'Double Degree Student in Mechatronics & Business | President & CEO at HandelsFöretagen',
+    'M.Sc. Data Science & AI student at Chalmers | Double B.Sc. in Mechatronics Engineering & Business Administration | CEO & Co-Founder at CampusLyan',
   language: 'sv-se',
   theme: 'system', // system, dark or light
   siteUrl: 'https://simon-portfolio-wine.vercel.app', // Uppdatera om du har en annan domän
@@ -11,7 +11,8 @@ const siteMetadata = {
   image: '/static/images/profile.jpg',
   socialBanner: '/static/images/profile.jpg', // ÄNDRAT: Använder profilbild som fallback för sociala medier
   email: 'simon.carlen1@gmail.com',
-  linkedin: 'https://www.linkedin.com/in/simon-carlén',
+  linkedin: 'https://www.linkedin.com/in/simon-carlen/',
+  github: 'https://github.com/SimonC03',
   locale: 'sv-SE',
 }
 

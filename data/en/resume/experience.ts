@@ -2,21 +2,122 @@ import { Experience } from '../../types'
 
 export const experienceData: Experience[] = [
   {
+    id: 'volvo-buses-ai',
+    title: 'Applied AI & Machine Learning Intern',
+    company: 'Volvo Buses',
+    location: 'Gothenburg, Sweden',
+    range: 'Jun 2026 - Sep 2026',
+    url: 'https://www.volvobuses.com',
+    summary:
+      'Summer internship in applied AI and machine learning, building agent infrastructure and forecasting models on large-scale bus data. Offered a continued position within the AI, machine learning and agent infrastructure area after the summer.',
+    description: [
+      'Built MCP (Model Context Protocol) servers and AI tooling that integrate internal Volvo systems with agent-based workflows.',
+      'Developed machine learning models on large-scale bus time-series data to forecast energy and power consumption.',
+      "Delivered a browser-based AI agent extension for internal applications as part of Volvo Buses' AI infrastructure.",
+      'Offered a continued position within AI, machine learning and agent infrastructure after the internship.',
+    ],
+    relatedSkills: [
+      'Machine Learning',
+      'Time-Series Forecasting',
+      'MCP Servers',
+      'AI Agents & Tooling',
+      'Python',
+    ],
+    achievements: [],
+  },
+  {
+    id: 'volvo-buses-thesis-extension',
+    title: 'Full-time Thesis Extension – Vehicle Software Verification',
+    company: 'Volvo Buses',
+    location: 'Gothenburg, Sweden',
+    range: 'May 2026 - Jun 2026',
+    url: 'https://www.volvobuses.com',
+    summary:
+      'Full-time extension of my bachelor thesis: taking the CAN-based simulation tool further by integrating Vector CANoe into a larger test environment and developing advanced tests for safety systems such as AEBS. The role transitioned into the summer internship in applied AI and machine learning.',
+    description: [
+      'Integrated Vector CANoe into a larger verification environment around the simulation tool developed in the thesis.',
+      'Developed advanced test cases for the Advanced Emergency Braking System (AEBS) and similar safety functions.',
+    ],
+    relatedSkills: [
+      'Vector CANoe / CANalyzer',
+      'CAN / DBC',
+      'HIL Testing',
+      'Python',
+      'Software Testing & Verification',
+    ],
+    achievements: [],
+  },
+  {
+    id: 'volvo-buses-thesis',
+    title: 'Bachelor Thesis – CAN-Based Vehicle Simulation for Shift-Left Verification',
+    company: 'Volvo Buses & Chalmers University of Technology',
+    location: 'Gothenburg, Sweden',
+    range: 'Jan 2026 - May 2026',
+    url: 'https://www.volvobuses.com',
+    summary:
+      'Developed a CAN-based vehicle simulation tool for early verification of vehicle behaviour in a laboratory and HIL environment. The result was a functional prototype combining a software-based vehicle model, a real-time graphical user interface and a CAN communication module, verified both in virtual CAN and on a physical test rig.',
+    description: [
+      'Built a mathematical vehicle dynamics model simulating key states such as velocity, acceleration, orientation, gear selection, engine speed, steering behaviour and wheel-related variables.',
+      'Mapped simulated signals to DBC-defined CAN messages, encoded them with python-can and transmitted them through a Vector CAN interface into vehicle ECUs in an existing test rig.',
+      'Verified the signal chain in both virtual CAN testing and a physical HIL/test rig environment, where the generated signals were observed and analysed in CANalyzer.',
+      'Enabled shift-left testing by moving verification from proving grounds to the lab: faster feedback loops, repeatable test cases and earlier detection of issues, at lower time, cost and resource needs than field testing.',
+      'The thesis was extended into a full-time role in May–June 2026 to continue developing the tool.',
+    ],
+    relatedSkills: [
+      'Python',
+      'python-can',
+      'CAN / DBC',
+      'Vector CANalyzer',
+      'HIL Testing',
+      'Vehicle Dynamics',
+      'Software Testing & Verification',
+    ],
+    achievements: [],
+  },
+  {
+    id: 'campuslyan',
+    title: 'Co-Founder, CEO & CTO',
+    company: 'CampusLyan Nordics AB',
+    location: 'Gothenburg, Sweden',
+    range: 'Oct 2025 - Present',
+    url: 'https://www.campuslyan.se/',
+    summary:
+      "Co-founded and incorporated CampusLyan Nordics AB to build Sweden's student housing platform. Responsible for both the technical roadmap and the go-to-market strategy, combining the CEO role with hands-on architecture and development.",
+    description: [
+      "Founded and incorporated the company to build Sweden's student housing platform.",
+      'Secured pre-launch pilot agreements by selling the platform vision, creating financing runway for several years.',
+      "Signed agreements with one of Sweden's largest student housing companies and several municipal housing companies.",
+      'Lead the engineering team and own the technical roadmap, with hands-on development in Next.js, TypeScript, React and Java, REST APIs, Docker and Google Cloud Platform.',
+    ],
+    relatedSkills: [
+      'Product Management',
+      'System Architecture',
+      'Team Leadership',
+      'Next.js',
+      'TypeScript',
+      'Java',
+      'REST APIs',
+      'Docker',
+      'Google Cloud Platform (GCP)',
+    ],
+    achievements: [],
+  },
+  {
     id: 'handelsforetagen',
-    title: 'President & CEO',
+    title: 'President & Group CEO',
     company: 'HandelsFöretagen',
     location: 'Gothenburg, Sweden',
-    range: 'Aug 2025 - Present',
+    range: 'Jun 2025 - Aug 2026',
     url: 'https://handelsforetagen.se',
     summary:
-      'Accountable for the strategic leadership and operational development of the Nordics’ largest student-run corporate group. By steering six independent subsidiaries through their respective CEOs and management teams, I focus on optimizing group-wide synergies, ensuring financial sustainability, and institutionalizing professional business processes for over 180 employees.',
+      "Executive responsibility for the Nordics' largest student-run corporate group: a parent company and six subsidiaries with 180+ employees. Led strategy, finance and operations through the subsidiary CEOs and management teams, and delivered the strongest year in the group's history.",
     description: [
-      'Orchestrate and coach six subsidiary CEOs and their management teams to ensure operational alignment, high service delivery, and the attainment of group-wide objectives.',
+      'Delivered the strongest year in group history: SEK 8.36M revenue (+36% YoY) and SEK 2.11M profit (+637% YoY).',
+      'Turned four subsidiaries profitable, so that every group company ended the year with a positive result, and raised the group margin from 4.6% to 25.2%.',
+      'Orchestrated and coached six subsidiary CEOs and their management teams to ensure operational alignment, high service delivery and the attainment of group-wide objectives.',
       'Developed and implemented a data-driven growth framework that consolidated performance metrics across all entities to drive informed decision-making.',
-      'Executed a strategic cost-optimization program by eliminating redundant SaaS and operational systems, reducing system costs by approximately 60% and significantly strengthening margins.',
-      'Lead the group’s digital transformation strategy, including the modernization of infrastructure to support scalable growth and enhance cross-functional collaboration.',
-      'Define long-term sustainable growth strategies, balancing aggressive market expansion with financial stability and organizational health.',
-      'Delivered the strongest Q3 financial performance in the organization’s history during my first quarter in the role (Q3-2025).',
+      'Executed a strategic cost-optimization program by eliminating redundant SaaS and operational systems, reducing system costs by approximately 60%.',
+      "Led the group's digital transformation strategy, including the modernization of infrastructure to support scalable growth and cross-functional collaboration.",
     ],
     relatedSkills: [
       'Group Management',
@@ -27,90 +128,55 @@ export const experienceData: Experience[] = [
       'Financial Governance',
     ],
     achievements: [
-      /*
       {
-        type: 'bar', // Visualiserar den stora ökningen mot föregående år
-        label: 'Revenue Growth Q3',
-        value: '+95%',
-        subtext: 'Year-over-year revenue index comparison',
+        type: 'bar',
+        label: 'Revenue (SEK M)',
+        value: 'SEK 8.36M',
+        subtext: '+36% year over year',
         data: [
-          { label: 'Previous Year', value: 100 },
-          { label: 'Current Year', value: 195 },
+          { label: 'Previous year', value: 6.15 },
+          { label: 'This year', value: 8.36 },
         ],
       },
       {
-        type: 'donut', // Visualiserar kostnadsbesparingen
+        type: 'bar',
+        label: 'Profit (SEK M)',
+        value: 'SEK 2.11M',
+        subtext: '+637% year over year',
+        data: [
+          { label: 'Previous year', value: 0.29 },
+          { label: 'This year', value: 2.11 },
+        ],
+      },
+      {
+        type: 'donut',
+        label: 'Group Margin',
+        value: '25.2%',
+        current: 25.2,
+        subtext: 'Up from 4.6% the previous year',
+      },
+      {
+        type: 'progress',
+        label: 'Profitable Subsidiaries',
+        value: '6 / 6',
+        current: 6,
+        target: 6,
+        subtext: 'Four subsidiaries turned profitable during the year',
+      },
+      {
+        type: 'stat',
+        label: 'Group Scale',
+        value: '180+',
+        subtext: 'Employees across a parent company and six subsidiaries',
+      },
+      {
+        type: 'donut',
         label: 'System Cost Reduction',
         value: '60%',
         current: 60,
         subtext: 'Elimination of redundant software and infrastructure',
       },
-      {
-        type: 'graph', // Visar på den stabila trenden i prestation
-        label: 'Performance Trend',
-        value: 'Record High',
-        subtext: 'Consolidated quarterly performance index',
-        data: [
-          { label: 'Q4-24', value: 92 },
-          { label: 'Q1-25', value: 98 },
-          { label: 'Q2-25', value: 115 },
-          { label: 'Q3-25', value: 195 },
-        ],
-      },
-      {
-        type: 'stat', // Enkel och tydlig storlek på bolaget
-        label: 'Group Scale',
-        value: '180+',
-        subtext: 'Professionals & Consultants across 7 subsidiaries',
-      },
-      {
-        type: 'progress', // Visar att du jobbar mot ett mål med dotterbolagen
-        label: 'Sub-Org Optimization',
-        value: '7 / 7',
-        current: 7,
-        target: 7,
-        subtext: 'Subsidiaries successfully transitioned to new growth strategy',
-      },*/
     ],
-  },
-  {
-    id: 'campuslyan',
-    title: 'Founding CEO & CTO',
-    company: 'CampusLyan',
-    location: 'Gothenburg, Sweden',
-    range: 'Oct 2025 - Present',
-    summary:
-      'Leading an engineering team of ten in developing a modern housing platform tailored for students.',
-    description: [
-      'Responsible for both the Technical Roadmap and the Go-to-Market strategy.',
-      'Combining the role of Product Owner with hands-on development in a modern tech stack (Next.js).',
-      'Ensuring agile delivery from concept phase to launch.',
-    ],
-    relatedSkills: ['Product Management', 'System Architecture', 'Team Leadership', 'Next.js'],
-    achievements: [],
-  },
-  {
-    id: 'volvo-buses-thesis',
-    title: 'Bachelor Thesis',
-    company: 'Volvo Buses',
-    location: 'Gothenburg, Sweden',
-    range: 'Jan 2026 - Present',
-    url: 'https://www.volvobuses.com',
-    summary:
-      'Building a mathematical vehicle dynamics model to simulate realistic bus driving scenarios and generate corresponding signals for ECU validation in a lab environment.',
-    description: [
-      'Develop a mathematical vehicle dynamics model to simulate realistic bus driving scenarios and generate corresponding signals.',
-      'Transmit signals via CAN and inject them into vehicle ECUs in an existing test rig, enabling rigorous software validation without physically driving a bus.',
-      'Support shift-left testing by moving verification from proving grounds to the lab—enabling faster feedback loops, repeatable test cases, and earlier issue detection while reducing time, cost, and resources required for field testing.',
-    ],
-    relatedSkills: [
-      'Python',
-      'Controller Area Network (CAN)',
-      'Simulation Modeling',
-      'Software Testing & Verification',
-      'Applied Mathematics',
-    ],
-    achievements: [],
   },
   {
     id: 'volvo-buses',
@@ -245,7 +311,7 @@ export const experienceData: Experience[] = [
     company: 'Allakando',
     location: 'Gothenburg, Sweden',
     range: 'Jan 2021 - Jun 2021',
-    summary: 'Helped students achieve their academic goals, specificly in mathematics.',
+    summary: 'Helped students achieve their academic goals, specifically in mathematics.',
     description: ['Tailored instruction to meet individual student needs and learning styles.'],
     relatedSkills: ['Pedagogy', 'Leadership'],
   },
