@@ -1,10 +1,12 @@
 import 'css/tailwind.css'
+import 'lenis/dist/lenis.css'
 
 import { Hanken_Grotesk } from 'next/font/google'
 import Header from '@/components/Header'
 import SectionContainer from '@/components/SectionContainer'
 import Footer from '@/components/Footer'
 import RevealObserver from '@/components/RevealObserver'
+import SmoothScroll from '@/components/SmoothScroll'
 import siteMetadata from '@/data/siteMetadata'
 import { ThemeProviders } from '../theme-providers'
 import { Metadata, Viewport } from 'next'
@@ -97,7 +99,7 @@ export default async function RootLayout({
   return (
     <html
       lang={locale}
-      className={`${hanken.variable} scroll-smooth [scrollbar-gutter:stable]`}
+      className={`${hanken.variable} [scrollbar-gutter:stable]`}
       suppressHydrationWarning
     >
       <body className="bg-bg text-body text-ink overflow-x-clip antialiased">
@@ -108,6 +110,7 @@ export default async function RootLayout({
               <main className="mb-auto">{children}</main>
               <Footer />
               <RevealObserver />
+              <SmoothScroll />
             </SectionContainer>
           </ThemeProviders>
         </NextIntlClientProvider>

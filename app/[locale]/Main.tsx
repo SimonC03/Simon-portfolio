@@ -151,7 +151,7 @@ export default function Home({ locale }: { locale: string }) {
       {/* Right now: work and studies */}
       <section aria-labelledby="now-title" className="reveal mt-32 md:mt-44">
         <SectionHead id="now-title" title={t.currentStatus} />
-        <div className="grid grid-cols-1 gap-16 lg:grid-cols-2 lg:gap-12">
+        <div className="reveal grid grid-cols-1 gap-16 lg:grid-cols-2 lg:gap-12">
           <div>
             <div className="mb-8 flex items-baseline justify-between gap-4">
               <h3 className="text-lead font-medium">{homeContent.sections.work.subtitle}</h3>
@@ -206,7 +206,7 @@ export default function Home({ locale }: { locale: string }) {
             href="/projects"
             linkLabel={homeContent.sections.projects.link}
           />
-          <ul className="grid grid-cols-1 gap-x-8 gap-y-16 md:grid-cols-2">
+          <ul className="reveal grid grid-cols-1 gap-x-8 gap-y-16 md:grid-cols-2">
             {featuredProjects.map((d) => (
               <li key={d.slug}>
                 <Link href={`/projects/${d.slug}`} className="group block">
@@ -239,7 +239,7 @@ export default function Home({ locale }: { locale: string }) {
             href="/referenser"
             linkLabel={t.moreReferences}
           />
-          <div className="bg-surface grid grid-cols-1 gap-12 p-8 md:grid-cols-2 md:p-14">
+          <div className="reveal bg-surface grid grid-cols-1 gap-12 p-8 md:grid-cols-2 md:p-14">
             {referencesData.slice(0, 2).map((ref) => (
               <figure key={ref.name} className="flex flex-col">
                 <blockquote className="text-lead leading-[1.45]">
@@ -274,7 +274,7 @@ export default function Home({ locale }: { locale: string }) {
             href="/meriter"
             linkLabel={t.showAllMerits}
           />
-          <ul className="grid grid-cols-1 gap-x-8 gap-y-8 sm:grid-cols-2 lg:grid-cols-4">
+          <ul className="reveal grid grid-cols-1 gap-x-8 gap-y-8 sm:grid-cols-2 lg:grid-cols-4">
             {certificationsData.slice(0, 4).map((cert) => (
               <li key={cert.title}>
                 {cert.url ? (
