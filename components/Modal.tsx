@@ -48,7 +48,10 @@ export default function Modal({
   if (!isOpen) return null
 
   return (
-    <div className="fixed inset-0 z-50 flex items-center justify-center bg-[#0b0c0d]/70 p-4">
+    <div
+      data-lenis-prevent
+      className="fixed inset-0 z-50 flex items-center justify-center bg-[#0b0c0d]/70 p-4"
+    >
       <div
         ref={panelRef}
         role="dialog"

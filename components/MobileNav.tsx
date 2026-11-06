@@ -39,6 +39,7 @@ const MobileNav = ({ navLinks, t }: MobileNavProps) => {
       </button>
 
       <div
+        data-lenis-prevent
         className={`bg-bg fixed inset-0 z-50 flex flex-col px-4 pt-6 pb-10 transition-[opacity,transform] duration-300 ease-out sm:px-6 ${
           navShow ? 'visible translate-y-0 opacity-100' : 'invisible -translate-y-2 opacity-0'
         }`}

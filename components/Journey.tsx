@@ -14,6 +14,8 @@ interface Props {
   content: { title: string; intro: string; chapters: Chapter[] }
 }
 
+const RUN_PER_STEP = 90 // svh of scrolling per chapter
+
 const canRun3d = () => {
   if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return false
   try {
@@ -30,7 +32,7 @@ export default function Journey({ content }: Props) {
   const section = useRef<HTMLElement>(null)
   const stage = useRef<HTMLDivElement>(null)
   const [pinned, setPinned] = useState(false)
-  const [active, setActive] = useState(0) // 0 = intro, k = chapter k-1
+  const [active, setActive] = useState(0) // 0 = intro, k = chapter k
   const [scrollbar, setScrollbar] = useState(0)
   const states = content.chapters.length + 1
 
@@ -46,41 +48,44 @@ export default function Journey({ content }: Props) {
   useEffect(() => {
     if (!pinned) return
     const el = section.current!
-    let scene: { setProgress: (p: number) => void; dispose: () => void } | null = null
+    let scene: { dispose: () => void } | null = null
     let disposed = false
 
+    // 0 at the top of the section, states - 1 when the sticky stage is about to release
     const progress = () => {
       const r = el.getBoundingClientRect()
       const run = Math.max(1, r.height - window.innerHeight)
       return Math.max(0, Math.min(1, -r.top / run)) * (states - 1)
     }
-    const onScroll = () => {
-      const p = progress()
-      setActive(Math.round(p))
-      scene?.setProgress(p)
-    }
-    window.addEventListener('scroll', onScroll, { passive: true })
-    onScroll()
 
-    // Fetch three.js only when the section is getting close.
+    // Warm the three.js chunk while the page is idle, then build the scene as the section nears.
+    const load = () => import('./journeyScene')
+    const idle = window.requestIdleCallback ?? ((cb: () => void) => window.setTimeout(cb, 400))
+    idle(() => void load().catch(() => {}))
     const io = new IntersectionObserver(
       async ([entry]) => {
         if (!entry.isIntersecting || scene) return
         io.disconnect()
-        const { createJourneyScene } = await import('./journeyScene')
-        if (disposed || !stage.current) return
-        const shapes = ['cloud', ...content.chapters.map((c) => c.shape)] as Shape[]
-        scene = createJourneyScene(stage.current, shapes, window.innerWidth < 768)
-        scene.setProgress(progress())
+        try {
+          const { createJourneyScene } = await load()
+          if (disposed || !stage.current) return
+          const shapes = ['cloud', ...content.chapters.map((c) => c.shape)] as Shape[]
+          scene = createJourneyScene(stage.current, shapes, {
+            small: window.innerWidth < 768,
+            getTarget: progress,
+            onStep: setActive,
+          })
+        } catch {
+          if (!disposed) setPinned(false) // no three.js: show the plain list
+        }
       },
-      { rootMargin: '800px 0px' }
+      { rootMargin: '1200px 0px' }
     )
     io.observe(el)
 
     return () => {
       disposed = true
       io.disconnect()
-      window.removeEventListener('scroll', onScroll)
       scene?.dispose()
     }
   }, [pinned, content, states])
@@ -89,10 +94,12 @@ export default function Journey({ content }: Props) {
     <section
       ref={section}
       aria-labelledby="journey-title"
-      className="relative left-1/2 mt-32 -translate-x-1/2 bg-[#111214] text-[#eff0f1] md:mt-44"
+      className="relative mt-32 bg-[#111214] text-[#eff0f1] md:mt-44"
       style={{
+        // full-bleed without a transform, so the tall section never becomes a huge layer
         width: `calc(100vw - ${scrollbar}px)`,
-        height: pinned ? `${(states - 1) * 80 + 100}svh` : undefined,
+        marginLeft: `calc(50% - (100vw - ${scrollbar}px) / 2)`,
+        height: pinned ? `${(states - 1) * RUN_PER_STEP + 100}svh` : undefined,
       }}
     >
       <div className={pinned ? 'sticky top-0 h-svh overflow-hidden' : ''}>
@@ -106,8 +113,8 @@ export default function Journey({ content }: Props) {
             {content.title}
           </h2>
           <p
-            className={`text-lead mt-4 max-w-[34ch] text-[#a3a5aa] transition-opacity duration-500 ${
-              pinned && active > 0 ? 'opacity-0' : ''
+            className={`text-lead mt-4 max-w-[34ch] text-[#a3a5aa] transition-[opacity,transform] duration-700 ease-[cubic-bezier(0.2,0.7,0,1)] ${
+              pinned && active > 0 ? '-translate-y-3 opacity-0' : ''
             }`}
           >
             {content.intro}
@@ -119,15 +126,18 @@ export default function Journey({ content }: Props) {
             }
           >
             {content.chapters.map((c, i) => {
-              const on = active === i + 1
+              const k = i + 1
+              const on = active === k
+              // passed chapters leave upwards, coming ones wait below
+              const hidden = active > k ? '-translate-y-6' : 'translate-y-6'
               return (
                 <li
                   key={c.year + c.title}
                   aria-current={pinned && on ? 'step' : undefined}
                   className={
                     pinned
-                      ? `absolute bottom-0 left-0 max-w-[34rem] transition-[opacity,transform] duration-500 ease-out ${
-                          on ? 'opacity-100' : 'pointer-events-none translate-y-4 opacity-0'
+                      ? `absolute bottom-0 left-0 max-w-[34rem] transition-[opacity,transform] duration-700 ease-[cubic-bezier(0.2,0.7,0,1)] ${
+                          on ? 'opacity-100' : `pointer-events-none opacity-0 ${hidden}`
                         }`
                       : 'max-w-[34rem]'
                   }
@@ -152,7 +162,7 @@ export default function Journey({ content }: Props) {
             {content.chapters.map((c, i) => (
               <li
                 key={c.year}
-                className={`tabular-nums transition-colors duration-300 ${
+                className={`tabular-nums transition-colors duration-500 ${
                   active === i + 1 ? 'text-[#eff0f1]' : 'text-[#8b8e94]'
                 }`}
               >

@@ -4,6 +4,14 @@ import * as THREE from 'three'
 
 export type Shape = 'cloud' | 'signal' | 'gears' | 'growth' | 'bus' | 'network'
 
+export interface JourneySceneOptions {
+  small: boolean
+  // Scroll progress, 0 (first shape) to shapes.length - 1 (last); read once per frame.
+  getTarget: () => number
+  // Called when the nearest whole step changes (0 = intro, k = chapter k).
+  onStep: (step: number) => void
+}
+
 const W = 640
 const H = 400
 type Draw = (c: CanvasRenderingContext2D) => void
@@ -161,20 +169,24 @@ const vertexShader = /* glsl */ `
   varying vec3 vColor;
   varying float vAlpha;
   void main() {
-    // particles leave at slightly different moments, and arc outwards on the way
+    // particles leave at slightly different moments
     float m = smoothstep(0.0, 1.0, clamp((uMix - aSeed * 0.3) / 0.7, 0.0, 1.0));
+    float wave = sin(m * 3.14159);
+    // on the way: arc outwards, twist around the vertical axis, grow and warm up
     vec3 dir = normalize(vec3(sin(aSeed * 91.7), cos(aSeed * 47.3), sin(aSeed * 13.1)) + 1e-4);
-    vec3 p = mix(position, aTo, m) + dir * sin(m * 3.14159) * 0.35;
+    vec3 p = mix(position, aTo, m) + dir * wave * 0.3;
+    float ang = wave * (0.35 + aSeed * 0.45);
+    p.xz = vec2(p.x * cos(ang) - p.z * sin(ang), p.x * sin(ang) + p.z * cos(ang));
     p += vec3(sin(uTime * 0.7 + aSeed * 40.0), cos(uTime * 0.6 + aSeed * 30.0), sin(uTime * 0.5 + aSeed * 20.0)) * 0.012;
     vec4 mv = modelViewMatrix * vec4(p, 1.0);
     vec4 clip = projectionMatrix * mv;
-    // push particles away from the cursor
+    // a small ripple away from the cursor
     vec2 d = clip.xy / clip.w - uMouse;
     float dist = length(d * vec2(uAspect, 1.0));
     clip.xy += normalize(d + 1e-5) * smoothstep(0.13, 0.0, dist) * 0.035 * clip.w;
     gl_Position = clip;
-    gl_PointSize = uSize * (0.5 + aSeed) / -mv.z;
-    vColor = aColor;
+    gl_PointSize = uSize * (0.5 + aSeed) * (1.0 + wave * 0.7) / -mv.z;
+    vColor = mix(aColor, vec3(1.0, 0.42, 0.2), wave * 0.35);
     vAlpha = 0.35 + 0.5 * aSeed;
   }
 `
@@ -187,9 +199,18 @@ const fragmentShader = /* glsl */ `
   }
 `
 
-export function createJourneyScene(host: HTMLElement, shapes: Shape[], small: boolean) {
-  const renderer = new THREE.WebGLRenderer({ antialias: false, alpha: true })
-  const dpr = Math.min(window.devicePixelRatio, 2)
+// Frame-rate independent exponential approach: `lambda` per second.
+const damp = (a: number, b: number, lambda: number, dt: number) =>
+  a + (b - a) * (1 - Math.exp(-lambda * dt))
+
+export function createJourneyScene(host: HTMLElement, shapes: Shape[], opts: JourneySceneOptions) {
+  const renderer = new THREE.WebGLRenderer({
+    antialias: false,
+    alpha: false,
+    powerPreference: 'high-performance',
+  })
+  renderer.setClearColor(0x111214, 1)
+  const dpr = Math.min(window.devicePixelRatio, 1.5)
   renderer.setPixelRatio(dpr)
   host.appendChild(renderer.domElement)
 
@@ -199,7 +220,7 @@ export function createJourneyScene(host: HTMLElement, shapes: Shape[], small: bo
   const group = new THREE.Group()
   scene.add(group)
 
-  const n = small ? 7000 : 14000
+  const n = opts.small ? 7000 : 14000
   let seed = 20260611
   const rand = () => (seed = (seed * 16807) % 2147483647) / 2147483647
   const targets = shapes.map((s) => (s === 'cloud' ? cloud(n, rand) : sample(DRAW[s], n, rand)))
@@ -222,7 +243,7 @@ export function createJourneyScene(host: HTMLElement, shapes: Shape[], small: bo
   const uniforms = {
     uMix: { value: 0 },
     uTime: { value: 0 },
-    uSize: { value: (small ? 26 : 22) * dpr },
+    uSize: { value: (opts.small ? 26 : 22) * dpr },
     uMouse: { value: new THREE.Vector2(9, 9) },
     uAspect: { value: 1 },
   }
@@ -237,10 +258,6 @@ export function createJourneyScene(host: HTMLElement, shapes: Shape[], small: bo
   const points = new THREE.Points(geo, material)
   points.frustumCulled = false
   group.add(points)
-
-  let seg = 0
-  let pointerX = 0
-  let pointerY = 0
 
   const resize = () => {
     const w = host.clientWidth || 1
@@ -257,6 +274,8 @@ export function createJourneyScene(host: HTMLElement, shapes: Shape[], small: bo
   }
   resize()
 
+  let pointerX = 0
+  let pointerY = 0
   const onPointer = (e: PointerEvent) => {
     const r = host.getBoundingClientRect()
     pointerX = ((e.clientX - r.left) / r.width) * 2 - 1
@@ -266,36 +285,55 @@ export function createJourneyScene(host: HTMLElement, shapes: Shape[], small: bo
   window.addEventListener('pointermove', onPointer, { passive: true })
   window.addEventListener('resize', resize)
 
+  // Scroll progress is eased towards its target every frame, so stepped wheel input
+  // (and the segment swaps) never show as jumps.
+  let p = opts.getTarget()
+  let seg = -1
+  let step = -1
+  const apply = (value: number) => {
+    const s = Math.max(0, Math.min(Math.floor(value), shapes.length - 2))
+    if (s !== seg) {
+      from.set(targets[s])
+      to.set(targets[s + 1])
+      from.needsUpdate = to.needsUpdate = true
+      seg = s
+    }
+    // each step: hold a quarter, morph over the middle half, hold a quarter
+    uniforms.uMix.value = Math.max(0, Math.min(1, (value - s - 0.25) / 0.5))
+    const k = Math.round(value)
+    if (k !== step) {
+      step = k
+      opts.onStep(k)
+    }
+  }
+  apply(p)
+
   let raf = 0
   let visible = false
   const clock = new THREE.Clock()
   const frame = () => {
-    const t = clock.getElapsedTime()
+    const dt = Math.min(clock.getDelta(), 0.05)
+    const t = clock.elapsedTime
     uniforms.uTime.value = t
-    group.rotation.y += (Math.sin(t * 0.25) * 0.18 + pointerX * 0.25 - group.rotation.y) * 0.05
-    group.rotation.x += (-pointerY * 0.12 - group.rotation.x) * 0.05
+    p = damp(p, opts.getTarget(), 9, dt)
+    apply(p)
+    group.rotation.y = damp(group.rotation.y, Math.sin(t * 0.25) * 0.18 + pointerX * 0.25, 3, dt)
+    group.rotation.x = damp(group.rotation.x, -pointerY * 0.12, 3, dt)
     renderer.render(scene, camera)
     raf = visible ? requestAnimationFrame(frame) : 0
   }
   const io = new IntersectionObserver(([entry]) => {
     visible = entry.isIntersecting
-    if (visible && !raf) raf = requestAnimationFrame(frame)
+    if (visible && !raf) {
+      // coming back after a while: start from where the scroll actually is
+      p = opts.getTarget()
+      clock.getDelta()
+      raf = requestAnimationFrame(frame)
+    }
   })
   io.observe(host)
 
   return {
-    // p runs from 0 (first shape) to shapes.length - 1 (last); each step holds, then morphs.
-    setProgress(p: number) {
-      const s = Math.max(0, Math.min(Math.floor(p), shapes.length - 2))
-      if (s !== seg) {
-        from.set(targets[s])
-        to.set(targets[s + 1])
-        from.needsUpdate = to.needsUpdate = true
-        seg = s
-      }
-      const f = Math.max(0, Math.min(1, (p - s - 0.3) / 0.4))
-      uniforms.uMix.value = f
-    },
     dispose() {
       cancelAnimationFrame(raf)
       io.disconnect()
