@@ -1,13 +1,14 @@
 'use client'
 
-import { useEffect, useRef } from 'react'
+import { useEffect, useId, useRef } from 'react'
+import { useLocale } from 'next-intl'
 
 interface ModalProps {
   isOpen: boolean
   onClose: () => void
   children: React.ReactNode
   title?: string
-  maxWidth?: string // Ny prop för att styra bredden
+  maxWidth?: string // Tailwind max-w-* class for the panel
 }
 
 export default function Modal({
@@ -15,9 +16,11 @@ export default function Modal({
   onClose,
   children,
   title,
-  maxWidth = 'max-w-2xl', // Standardvärde (samma som förut)
+  maxWidth = 'max-w-2xl',
 }: ModalProps) {
-  const modalRef = useRef<HTMLDivElement>(null)
+  const panelRef = useRef<HTMLDivElement>(null)
+  const titleId = useId()
+  const closeLabel = useLocale() === 'en' ? 'Close' : 'Stäng'
 
   useEffect(() => {
     const handleEsc = (e: KeyboardEvent) => {
@@ -33,28 +36,44 @@ export default function Modal({
     }
   }, [isOpen, onClose])
 
+  // Move focus into the dialog on open and back to the opener on close.
+  // Separate effect: callers pass a new onClose every render, which must not refire this.
+  useEffect(() => {
+    if (!isOpen) return
+    const opener = document.activeElement as HTMLElement | null
+    panelRef.current?.focus()
+    return () => opener?.focus()
+  }, [isOpen])
+
   if (!isOpen) return null
 
   return (
-    <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/60 p-4 backdrop-blur-sm">
+    <div className="fixed inset-0 z-50 flex items-center justify-center bg-[#0b0c0d]/70 p-4">
       <div
-        ref={modalRef}
-        // Här använder vi maxWidth-propen istället för hårdkodad bredd
-        className={`relative max-h-[90vh] w-full ${maxWidth} overflow-y-auto rounded-xl bg-white shadow-2xl ring-1 ring-gray-200 dark:bg-gray-900 dark:ring-gray-700`}
+        ref={panelRef}
+        role="dialog"
+        aria-modal="true"
+        aria-labelledby={title ? titleId : undefined}
+        tabIndex={-1}
+        className={`bg-bg relative max-h-[90svh] w-full ${maxWidth} overflow-y-auto outline-none`}
       >
-        {/* Header */}
-        <div className="sticky top-0 z-10 flex items-center justify-between border-b border-gray-100 bg-white/95 px-6 py-4 backdrop-blur dark:border-gray-800 dark:bg-gray-900/95">
-          <h3 className="text-xl font-bold text-gray-900 dark:text-gray-100">{title}</h3>
+        <div className="bg-bg sticky top-0 z-10 flex items-center justify-between gap-6 px-6 pt-5 pb-4 md:px-10 md:pt-7">
+          <p id={titleId} className="font-medium">
+            {title}
+          </p>
           <button
+            type="button"
             onClick={onClose}
-            className="rounded-full p-2 text-gray-400 transition-colors hover:bg-gray-100 hover:text-gray-500 dark:hover:bg-gray-800"
+            aria-label={closeLabel}
+            className="text-muted hover:text-ink -mr-2 flex h-10 w-10 shrink-0 items-center justify-center transition-colors"
           >
-            ✕
+            <svg viewBox="0 0 20 20" className="h-5 w-5" aria-hidden="true">
+              <path d="M4 4l12 12M16 4L4 16" stroke="currentColor" strokeWidth="1.5" />
+            </svg>
           </button>
         </div>
 
-        {/* Content */}
-        <div className="p-6">{children}</div>
+        <div className="px-6 pb-10 md:px-10 md:pb-14">{children}</div>
       </div>
     </div>
   )

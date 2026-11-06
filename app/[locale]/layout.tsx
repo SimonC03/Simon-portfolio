@@ -1,9 +1,10 @@
 import 'css/tailwind.css'
 
-import { Space_Grotesk } from 'next/font/google'
+import { Hanken_Grotesk } from 'next/font/google'
 import Header from '@/components/Header'
 import SectionContainer from '@/components/SectionContainer'
 import Footer from '@/components/Footer'
+import RevealObserver from '@/components/RevealObserver'
 import siteMetadata from '@/data/siteMetadata'
 import { ThemeProviders } from '../theme-providers'
 import { Metadata, Viewport } from 'next'
@@ -12,10 +13,10 @@ import { descriptionFor, ogImageFor, ogLocaleFor } from 'app/seo'
 import { NextIntlClientProvider } from 'next-intl'
 import { getMessages } from 'next-intl/server'
 
-const space_grotesk = Space_Grotesk({
+const hanken = Hanken_Grotesk({
   subsets: ['latin'],
   display: 'swap',
-  variable: '--font-space-grotesk',
+  variable: '--font-hanken',
 })
 
 export function generateMetadata({ params }: { params: { locale: string } }): Metadata {
@@ -78,8 +79,8 @@ export function generateMetadata({ params }: { params: { locale: string } }): Me
 
 export const viewport: Viewport = {
   themeColor: [
-    { media: '(prefers-color-scheme: light)', color: '#ffffff' },
-    { media: '(prefers-color-scheme: dark)', color: '#030712' },
+    { media: '(prefers-color-scheme: light)', color: '#eff0f1' },
+    { media: '(prefers-color-scheme: dark)', color: '#18191b' },
   ],
 }
 
@@ -96,16 +97,17 @@ export default async function RootLayout({
   return (
     <html
       lang={locale}
-      className={`${space_grotesk.variable} scroll-smooth`}
+      className={`${hanken.variable} scroll-smooth [scrollbar-gutter:stable]`}
       suppressHydrationWarning
     >
-      <body className="bg-white pl-[calc(100vw-100%)] text-black antialiased dark:bg-gray-950 dark:text-white">
+      <body className="bg-bg text-body text-ink overflow-x-clip antialiased">
         <NextIntlClientProvider messages={messages}>
           <ThemeProviders>
             <SectionContainer>
               <Header locale={locale} />
               <main className="mb-auto">{children}</main>
               <Footer />
+              <RevealObserver />
             </SectionContainer>
           </ThemeProviders>
         </NextIntlClientProvider>

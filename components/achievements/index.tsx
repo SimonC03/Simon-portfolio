@@ -9,7 +9,7 @@ const AchievementsWidget = ({ achievements }: { achievements: Achievement[] }) =
   if (!achievements || achievements.length === 0) return null
 
   return (
-    <div className="grid grid-cols-1 gap-4 sm:grid-cols-2">
+    <div className="bg-surface grid grid-cols-1 gap-x-12 gap-y-14 p-6 sm:grid-cols-2 md:p-10">
       {achievements.map((item, index) => {
         switch (item.type) {
           case 'stat':

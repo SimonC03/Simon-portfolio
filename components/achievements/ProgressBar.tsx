@@ -6,26 +6,15 @@ export const ProgressBar = ({ item }: { item: Achievement }) => {
   const percentage = Math.min(100, Math.round((current / target) * 100))
 
   return (
-    <div className="flex flex-col justify-between rounded-xl border border-gray-200 bg-white p-5 shadow-sm dark:border-gray-700 dark:bg-gray-800/50">
-      <div className="mb-2 flex items-end justify-between">
-        <span className="text-sm font-bold text-gray-700 uppercase dark:text-gray-200">
-          {item.label}
-        </span>
-        <span className="text-primary-600 dark:text-primary-400 text-2xl font-bold">
-          {item.value}
-        </span>
+    <div>
+      <p className="text-small text-muted">{item.label}</p>
+      <p className="text-head mt-2 leading-[1.05] font-medium tracking-[-0.03em] tabular-nums">
+        {item.value}
+      </p>
+      <div className="bg-bg mt-5 h-1.5" aria-hidden="true">
+        <div className="bg-accent h-full" style={{ width: `${percentage}%` }} />
       </div>
-
-      <div className="h-3 w-full overflow-hidden rounded-full bg-gray-100 dark:bg-gray-700">
-        <div
-          className="bg-primary-500 h-full transition-all duration-1000 ease-out"
-          style={{ width: `${percentage}%` }}
-        />
-      </div>
-
-      {item.subtext && (
-        <div className="mt-3 text-xs text-gray-500 dark:text-gray-400">{item.subtext}</div>
-      )}
+      {item.subtext && <p className="text-small text-muted mt-4 max-w-[40ch]">{item.subtext}</p>}
     </div>
   )
 }

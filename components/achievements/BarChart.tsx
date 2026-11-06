@@ -1,53 +1,36 @@
+import { useLocale } from 'next-intl'
 import { Achievement } from '@/data/types'
 
 export const BarChart = ({ item }: { item: Achievement }) => {
+  const locale = useLocale()
   if (!item.data) return null
   const maxVal = Math.max(...item.data.map((d) => d.value))
+  const last = item.data.length - 1
 
   return (
-    <div className="group rounded-2xl border border-gray-200 bg-white/50 p-6 shadow-sm backdrop-blur-sm transition-all hover:shadow-md sm:col-span-2 dark:border-gray-700/50 dark:bg-gray-800/40">
-      <div className="mb-8 flex items-start justify-between">
-        <div>
-          <span className="text-primary-600 dark:text-primary-400 text-[11px] font-black tracking-widest uppercase">
-            Performance Metric
-          </span>
-          <h3 className="text-lg font-bold text-gray-800 dark:text-white">{item.label}</h3>
-          {item.subtext && (
-            <p className="text-sm text-gray-500 dark:text-gray-400">{item.subtext}</p>
-          )}
-        </div>
-        <div className="text-right">
-          <span className="text-3xl font-black text-gray-900 tabular-nums dark:text-white">
-            {item.value}
-          </span>
-        </div>
-      </div>
+    <div className={item.data.length > 4 ? 'sm:col-span-2' : undefined}>
+      <p className="text-small text-muted">{item.label}</p>
+      <p className="text-head mt-2 leading-[1.05] font-medium tracking-[-0.03em] tabular-nums">
+        {item.value}
+      </p>
+      {item.subtext && <p className="text-small text-muted mt-4 max-w-[40ch]">{item.subtext}</p>}
 
-      <div className="flex h-36 items-end gap-3">
-        {item.data.map((bar, idx) => {
-          const heightPct = (bar.value / maxVal) * 100
-          return (
-            <div
-              key={idx}
-              className="group/bar relative flex h-full flex-1 flex-col items-center justify-end"
-            >
-              <div
-                className="from-primary-600 to-primary-400 dark:from-primary-700 dark:to-primary-500 relative w-full rounded-t-lg bg-gradient-to-t transition-all duration-700 ease-out group-hover/bar:brightness-110"
-                style={{ height: `${heightPct}%` }}
-              >
-                <div className="absolute -top-10 left-1/2 -translate-x-1/2 scale-90 opacity-0 transition-all group-hover/bar:scale-100 group-hover/bar:opacity-100">
-                  <span className="rounded-lg bg-gray-900 px-2.5 py-1 text-xs font-bold text-white shadow-xl dark:bg-white dark:text-gray-900">
-                    {bar.value}
-                  </span>
-                </div>
-              </div>
-              <span className="mt-3 text-[10px] font-bold tracking-tighter text-gray-400 uppercase dark:text-gray-500">
-                {bar.label}
-              </span>
+      <ul className="mt-6 space-y-3">
+        {item.data.map((bar, idx) => (
+          <li key={idx}>
+            <div className="text-small flex justify-between gap-4">
+              <span className="text-muted">{bar.label}</span>
+              <span className="tabular-nums">{bar.value.toLocaleString(locale)}</span>
             </div>
-          )
-        })}
-      </div>
+            <div className="bg-bg mt-1.5 h-1.5" aria-hidden="true">
+              <div
+                className={`h-full ${idx === last ? 'bg-accent' : 'bg-muted'}`}
+                style={{ width: `${maxVal > 0 ? (bar.value / maxVal) * 100 : 0}%` }}
+              />
+            </div>
+          </li>
+        ))}
+      </ul>
     </div>
   )
 }

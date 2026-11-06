@@ -6,48 +6,52 @@
 
 /* Core theme configuration */
 @theme {
-  /* Font families */
-  --font-sans:
-    var(--font-space-grotesk), ui-sans-serif, system-ui, sans-serif, 'Apple Color Emoji',
-    'Segoe UI Emoji', 'Segoe UI Symbol', 'Noto Color Emoji';
+  --font-sans: var(--font-hanken), ui-sans-serif, system-ui, sans-serif;
 
-  /* Colors */
-  /* Copied from https://tailwindcss.com/docs/theme#default-theme-variable-reference */
-  --color-primary-50: oklch(0.97 0.02 240);
-  --color-primary-100: oklch(0.95 0.04 240);
-  --color-primary-200: oklch(0.9 0.08 240);
-  --color-primary-300: oklch(0.82 0.13 240);
-  --color-primary-400: oklch(0.7 0.18 240);
-  --color-primary-500: oklch(0.58 0.22 240); /* Huvudfärg */
-  --color-primary-600: oklch(0.48 0.22 240);
-  --color-primary-700: oklch(0.4 0.2 240);
-  --color-primary-800: oklch(0.32 0.15 240);
-  --color-primary-900: oklch(0.25 0.1 240);
-  --color-primary-950: oklch(0.18 0.06 240);
+  /* Legacy scales kept for third-party pieces (pliny). Site code uses the tokens below. */
+  --color-primary-400: #ff7a57;
+  --color-primary-500: #ff4a1f;
+  --color-primary-600: #b8320e;
 
-  /* Behåll gråskalan och övriga inställningar... */
-  --color-gray-50: oklch(0.985 0.002 247.839);
-  --color-gray-100: oklch(0.967 0.003 264.542);
-  --color-gray-200: oklch(0.928 0.006 264.531);
-  --color-gray-300: oklch(0.872 0.01 258.338);
-  --color-gray-400: oklch(0.707 0.022 261.325);
-  --color-gray-500: oklch(0.551 0.027 264.364);
-  --color-gray-600: oklch(0.446 0.03 256.802);
-  --color-gray-700: oklch(0.373 0.034 259.733);
-  --color-gray-800: oklch(0.278 0.033 256.848);
-  --color-gray-900: oklch(0.21 0.034 264.665);
-  --color-gray-950: oklch(0.13 0.028 261.692);
+  /* Type steps: small, body, lead, head, display */
+  --text-small: 0.875rem;
+  --text-body: clamp(1.0625rem, 1rem + 0.25vw, 1.1875rem);
+  --text-lead: clamp(1.25rem, 1.1rem + 0.6vw, 1.5rem);
+  --text-head: clamp(2rem, 1.5rem + 1.8vw, 2.75rem);
+  --text-display: clamp(2.75rem, 1.6rem + 4.4vw, 5.25rem);
 
-  /* Line heights */
-  --line-height-11: 2.75rem;
-  --line-height-12: 3rem;
-  --line-height-13: 3.25rem;
-  --line-height-14: 3.5rem;
-
-  /* Z-index values */
   --z-60: 60;
   --z-70: 70;
   --z-80: 80;
+}
+
+/* Colour tokens: graphite + cool grey, one orange accent. Light and dark. */
+:root {
+  --bg: #eff0f1;
+  --surface: #e3e5e7;
+  --ink: #18191b;
+  --muted: #55585e;
+  --accent: #ff4a1f;
+  --accent-text: #b8320e;
+  --accent-ink: #18191b;
+}
+.dark {
+  --bg: #18191b;
+  --surface: #232528;
+  --ink: #eff0f1;
+  --muted: #a3a5aa;
+  --accent: #ff4a1f;
+  --accent-text: #ff7a57;
+  --accent-ink: #18191b;
+}
+@theme inline {
+  --color-bg: var(--bg);
+  --color-surface: var(--surface);
+  --color-ink: var(--ink);
+  --color-muted: var(--muted);
+  --color-accent: var(--accent);
+  --color-accent-text: var(--accent-text);
+  --color-accent-ink: var(--accent-ink);
 }
 
 /*
@@ -64,57 +68,37 @@
   ::before,
   ::backdrop,
   ::file-selector-button {
-    border-color: var(--color-gray-200, currentColor);
-  }
-
-  a,
-  button {
-    outline-color: var(--color-primary-500);
+    border-color: var(--surface, currentColor);
   }
 
   a:focus-visible,
-  button:focus-visible {
-    outline: 2px solid;
-    border-radius: var(--radius-sm);
-    outline-color: var(--color-primary-500);
+  button:focus-visible,
+  [role='button']:focus-visible,
+  summary:focus-visible {
+    outline: 2px solid var(--accent);
+    outline-offset: 3px;
+  }
+
+  ::selection {
+    background: var(--accent);
+    color: var(--accent-ink);
   }
 }
 
 @layer utilities {
   .prose {
+    --tw-prose-body: var(--ink);
+    --tw-prose-headings: var(--ink);
+    --tw-prose-bold: var(--ink);
+    --tw-prose-links: var(--accent-text);
+    --tw-prose-bullets: var(--muted);
+    --tw-prose-quotes: var(--ink);
     & a {
-      color: var(--color-primary-500);
-      &:hover {
-        color: var(--color-primary-600);
-      }
-      & code {
-        color: var(--color-primary-400);
-      }
+      text-underline-offset: 3px;
     }
-    & :where(h1, h2) {
-      font-weight: 700;
-      letter-spacing: var(--tracking-tight);
-    }
-    & h3 {
-      font-weight: 600;
-    }
-    & :where(code):not(pre code) {
-      color: var(--color-indigo-500);
-    }
-  }
-
-  .prose-invert {
-    & a {
-      color: var(--color-primary-500);
-      &:hover {
-        color: var(--color-primary-400);
-      }
-      & code {
-        color: var(--color-primary-400);
-      }
-    }
-    & :where(h1, h2, h3, h4, h5, h6) {
-      color: var(--color-gray-100);
+    & :where(h1, h2, h3) {
+      font-weight: 500;
+      letter-spacing: -0.02em;
     }
   }
 }
@@ -128,7 +112,47 @@
 }
 
 .footnotes {
-  @apply mt-12 border-t border-gray-200 pt-8 dark:border-gray-700;
+  @apply mt-12 pt-8;
+}
+
+/* Load-in (.enter) and scroll entrances (.reveal, driven by RevealObserver). */
+@keyframes rise {
+  from {
+    opacity: 0;
+    transform: translateY(24px);
+  }
+  to {
+    opacity: 1;
+    transform: none;
+  }
+}
+@media (prefers-reduced-motion: no-preference) {
+  .enter {
+    animation: rise 0.9s cubic-bezier(0.2, 0.7, 0, 1) both;
+  }
+  .enter-2 {
+    animation-delay: 90ms;
+  }
+  .enter-3 {
+    animation-delay: 180ms;
+  }
+  .js-reveal .reveal > * {
+    opacity: 0;
+    transform: translateY(24px);
+    transition:
+      opacity 0.8s cubic-bezier(0.2, 0.7, 0, 1),
+      transform 0.8s cubic-bezier(0.2, 0.7, 0, 1);
+  }
+  .js-reveal .reveal > .is-in {
+    opacity: 1;
+    transform: none;
+  }
+}
+@media print {
+  .js-reveal .reveal > * {
+    opacity: 1 !important;
+    transform: none !important;
+  }
 }
 
 .data-footnote-backref {

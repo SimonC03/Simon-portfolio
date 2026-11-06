@@ -1,69 +1,52 @@
 import Image from './Image'
-import Link from './Link' // Använder din befintliga Link-komponent (eller 'next/link')
+import Link from './Link'
 
 interface CardProps {
   title: string
   description: string
   imgSrc?: string
   href?: string
+  // Lead tile: image and text side by side across the whole grid row (md and up).
+  wide?: boolean
 }
 
-const Card = ({ title, description, imgSrc, href }: CardProps) => (
-  <div className="md max-w-[544px] p-4 md:w-1/2">
-    <div
-      className={`${
-        imgSrc && 'h-full'
-      } border-opacity-60 overflow-hidden rounded-md border-2 border-gray-200 dark:border-gray-700`}
-    >
-      {/* Om href finns, gör bilden klickbar */}
-      {href ? (
-        <Link href={href} aria-label={`Länk till ${title}`}>
-          {imgSrc && (
-            <Image
-              alt={title}
-              src={imgSrc}
-              className="object-cover object-center md:h-36 lg:h-48"
-              width={544}
-              height={306}
-            />
-          )}
-        </Link>
-      ) : (
-        imgSrc && (
+// Project tile: image on bg-surface, title and one muted line under it. Without imgSrc it is a plain text entry.
+const Card = ({ title, description, imgSrc, href, wide }: CardProps) => {
+  const className = `group ${wide ? 'grid grid-cols-1 gap-6 md:grid-cols-12 md:items-end md:gap-8' : 'block'}`
+  const body = (
+    <>
+      {imgSrc && (
+        <div
+          className={`bg-surface relative overflow-hidden ${wide ? 'aspect-square md:col-span-6' : 'aspect-[16/10]'}`}
+        >
+          {/* object-left: most images are site screenshots whose content starts at the left edge */}
           <Image
-            alt={title}
             src={imgSrc}
-            className="object-cover object-center md:h-36 lg:h-48"
-            width={544}
-            height={306}
+            alt=""
+            fill
+            sizes={wide ? '(min-width: 768px) 50vw, 100vw' : '(min-width: 768px) 45vw, 100vw'}
+            className="object-cover object-left transition-transform duration-700 ease-out group-hover:scale-[1.03]"
           />
-        )
+        </div>
       )}
-
-      <div className="p-6">
-        <h2 className="mb-3 text-2xl leading-8 font-bold tracking-tight">
-          {href ? (
-            <Link href={href} aria-label={`Länk till ${title}`}>
-              {title}
-            </Link>
-          ) : (
-            title
-          )}
+      <div className={wide ? 'md:col-span-5 md:col-start-8' : imgSrc ? 'mt-6' : undefined}>
+        <h2
+          className={`text-lead leading-[1.25] font-medium transition-colors ${href ? 'group-hover:text-accent-text' : ''}`}
+        >
+          {title}
         </h2>
-        <p className="prose mb-3 max-w-none text-gray-500 dark:text-gray-400">{description}</p>
-
-        {href && (
-          <Link
-            href={href}
-            className="text-primary-500 hover:text-primary-600 dark:hover:text-primary-400 text-base leading-6 font-medium"
-            aria-label={`Länk till ${title}`}
-          >
-            Läs mer &rarr;
-          </Link>
-        )}
+        <p className="text-muted mt-3 max-w-[60ch]">{description}</p>
       </div>
-    </div>
-  </div>
-)
+    </>
+  )
+
+  return href ? (
+    <Link href={href} className={className}>
+      {body}
+    </Link>
+  ) : (
+    <div className={className}>{body}</div>
+  )
+}
 
 export default Card

@@ -1,22 +1,35 @@
 import Link from './Link'
 import siteMetadata from '@/data/siteMetadata'
-import SocialIcon from '@/components/social-icons'
 
 export default function Footer() {
+  const links = [
+    { label: siteMetadata.email, href: `mailto:${siteMetadata.email}` },
+    { label: 'LinkedIn', href: siteMetadata.linkedin },
+    { label: 'GitHub', href: siteMetadata.github },
+    { label: 'CV (PDF)', href: '/cv.pdf' },
+  ]
+
   return (
-    <footer>
-      <div className="mt-16 flex flex-col items-center">
-        <div className="mb-3 flex space-x-4">
-          <SocialIcon kind="mail" href={`mailto:${siteMetadata.email}`} size={6} />
-          <SocialIcon kind="linkedin" href={siteMetadata.linkedin} size={6} />
-          <SocialIcon kind="github" href={siteMetadata.github} size={6} />
-        </div>
-        <div className="mb-2 flex space-x-2 text-sm text-gray-500 dark:text-gray-400">
-          <div>{`© ${new Date().getFullYear()}`}</div>
-          <div>{` • `}</div>
-          <Link href="/">{siteMetadata.title}</Link>
-        </div>
-      </div>
+    <footer className="mt-32 pb-10 md:mt-48">
+      <p className="text-display leading-[0.95] font-medium tracking-[-0.045em]">
+        {siteMetadata.author}
+      </p>
+      <ul className="mt-8 flex flex-wrap gap-x-8 gap-y-3">
+        {links.map((l) => (
+          <li key={l.label}>
+            <Link
+              href={l.href}
+              target={l.href.startsWith('/') ? '_blank' : undefined}
+              className="text-ink decoration-accent hover:text-accent-text underline decoration-1 underline-offset-4 transition-colors"
+            >
+              {l.label}
+            </Link>
+          </li>
+        ))}
+      </ul>
+      <p className="text-small text-muted mt-12">
+        © {new Date().getFullYear()} {siteMetadata.author} · Göteborg
+      </p>
     </footer>
   )
 }

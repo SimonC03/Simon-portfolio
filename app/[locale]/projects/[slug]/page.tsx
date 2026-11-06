@@ -1,6 +1,9 @@
 import { getProjects } from '@/data/index'
 import { notFound } from 'next/navigation'
+import { Fragment } from 'react'
 import Image from '@/components/Image'
+import Link from '@/components/Link'
+import PageTitle from '@/components/PageTitle'
 import Tag from '@/components/Tag'
 import { genPageMetadata } from 'app/seo'
 
@@ -41,94 +44,84 @@ export default function ProjectPage({ params }: { params: { slug: string; locale
     gallery: params.locale === 'en' ? 'Project Gallery' : 'Projektgalleri',
   }
 
+  // Some projects link to their own page; a "visit" link back to itself is pointless.
+  const visitHref = project.href !== `/projects/${project.slug}` ? project.href : undefined
+
   return (
-    <div className="xl:divide-y xl:divide-gray-200 xl:dark:divide-gray-700">
-      <header className="pt-6 xl:pb-6">
-        <div className="space-y-1 text-center">
-          <h1 className="text-3xl leading-9 font-extrabold tracking-tight text-gray-900 sm:text-4xl sm:leading-10 md:text-5xl md:leading-14 dark:text-gray-100">
-            {project.title}
-          </h1>
-        </div>
-      </header>
+    <>
+      {/* Long Swedish compounds would overflow on phones; break-words covers browsers without a sv hyphenation dictionary */}
+      <PageTitle
+        title={<span className="break-words hyphens-auto">{project.title}</span>}
+        description={project.description}
+      />
 
-      <div
-        className="divide-y divide-gray-200 pb-8 xl:grid xl:grid-cols-4 xl:gap-x-6 xl:divide-y-0 dark:divide-gray-700"
-        style={{ gridTemplateRows: 'auto 1fr' }}
-      >
-        {/* Vänster kolumn: Huvudbild och Meta */}
-        <div className="pt-6 xl:pt-11">
-          {project.imgSrc && (
-            <div className="mb-6 overflow-hidden rounded-lg">
-              <Image
-                src={project.imgSrc}
-                alt={project.title}
-                width={600}
-                height={400}
-                className="object-cover shadow-lg transition-transform duration-500 hover:scale-105"
-              />
-            </div>
-          )}
-          <div className="text-sm font-medium text-gray-500 dark:text-gray-400">
-            <div className="mb-4">
-              <h2 className="text-xs tracking-wide text-gray-500 uppercase dark:text-gray-400">
-                {t.technologies}
-              </h2>
-              <div className="mt-2 flex flex-wrap gap-2">
-                {project.relatedSkills.map((skill) => (
-                  <Tag key={skill} text={skill} />
-                ))}
-              </div>
-            </div>
-            {project.href && (
-              <a
-                href={project.href}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="text-primary-500 hover:text-primary-600 flex items-center gap-1 font-bold"
-              >
-                {t.visit} &rarr;
-              </a>
-            )}
-          </div>
+      {project.imgSrc && (
+        <figure className="enter enter-3 mt-16 md:mt-24">
+          {/* Natural aspect ratio, capped by the viewport height, so posters are not cropped */}
+          <Image
+            src={project.imgSrc}
+            alt={project.title}
+            width={1920}
+            height={1080}
+            sizes="(min-width: 1280px) 1280px, 100vw"
+            className="h-auto max-h-[80svh] w-auto max-w-full"
+            priority
+          />
+        </figure>
+      )}
+
+      <div className="reveal mt-16 grid grid-cols-1 gap-12 md:mt-24 md:grid-cols-12 md:gap-8">
+        <div className="max-w-[65ch] space-y-6 leading-[1.65] md:col-span-7">
+          {project.fullDescription.map((paragraph, i) => (
+            <p key={i}>{paragraph}</p>
+          ))}
         </div>
 
-        {/* Höger kolumn: Beskrivning och Galleri */}
-        <div className="divide-y divide-gray-200 xl:col-span-3 xl:row-span-2 xl:pb-0 dark:divide-gray-700">
-          <div className="prose dark:prose-invert max-w-none pt-10 pb-8">
-            {project.fullDescription.map((paragraph, i) => (
-              <p key={i} className="mb-4 text-lg leading-relaxed text-gray-700 dark:text-gray-300">
-                {paragraph}
-              </p>
+        <aside className="md:col-span-4 md:col-start-9">
+          <h2 className="font-medium">{t.technologies}</h2>
+          <p className="text-small text-muted mt-3 leading-[1.7]">
+            {project.relatedSkills.map((skill, i) => (
+              <Fragment key={skill}>
+                {i > 0 && ' · '}
+                <Tag text={skill} />
+              </Fragment>
             ))}
-          </div>
-
-          {/* Förbättrat Bildgalleri */}
-          {project.attachments && project.attachments.length > 0 && (
-            <div className="pt-10 pb-8">
-              <h2 className="mb-8 text-2xl font-bold tracking-tight text-gray-900 dark:text-gray-100">
-                {t.gallery}
-              </h2>
-              <div className="columns-1 gap-4 sm:columns-2">
-                {project.attachments.map((img, index) => (
-                  <div
-                    key={index}
-                    className="group relative mb-4 break-inside-avoid overflow-hidden rounded-2xl border border-gray-100 bg-gray-100 shadow-sm transition-all duration-300 hover:shadow-xl dark:border-gray-800 dark:bg-gray-800"
-                  >
-                    <Image
-                      src={img.url}
-                      alt={`Project screenshot ${index + 1}`}
-                      width={800}
-                      height={600}
-                      className="h-auto w-full object-cover transition-transform duration-500 group-hover:scale-[1.02]"
-                    />
-                    <div className="absolute inset-0 bg-gradient-to-t from-black/20 to-transparent opacity-0 transition-opacity duration-300 group-hover:opacity-100" />
-                  </div>
-                ))}
-              </div>
-            </div>
+          </p>
+          {visitHref && (
+            <Link
+              href={visitHref}
+              className="text-accent-text mt-10 inline-block font-medium underline-offset-4 hover:underline"
+            >
+              {t.visit} →
+            </Link>
           )}
-        </div>
+        </aside>
       </div>
-    </div>
+
+      {project.attachments && project.attachments.length > 0 && (
+        <section aria-labelledby="gallery-title" className="reveal mt-24 md:mt-32">
+          <h2
+            id="gallery-title"
+            className="text-head mb-10 leading-[1.05] font-medium tracking-[-0.03em] md:mb-14"
+          >
+            {t.gallery}
+          </h2>
+          {/* Uniform crop so mixed portrait/landscape photos read as one calm contact sheet */}
+          <ul className="grid grid-cols-1 gap-8 sm:grid-cols-3">
+            {project.attachments.map((img, index) => (
+              <li key={index} className="bg-surface relative aspect-[4/5] overflow-hidden">
+                <Image
+                  src={img.url}
+                  alt={`Project screenshot ${index + 1}`}
+                  fill
+                  sizes="(min-width: 640px) 33vw, 100vw"
+                  className="object-cover"
+                />
+              </li>
+            ))}
+          </ul>
+        </section>
+      )}
+    </>
   )
 }

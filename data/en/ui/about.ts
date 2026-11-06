@@ -2,7 +2,7 @@ export const aboutContent = {
   name: 'Simon Carlén',
   title:
     'M.Sc. Data Science & AI | Double B.Sc. Mechatronics Engineering & Business Administration | CEO & Co-Founder @ CampusLyan',
-  avatar: '/static/images/profile.jpg',
+  avatar: '/static/images/simon-carlen-portrait.jpg',
   description: [
     "I am an engineer and entrepreneur working at the intersection of AI, software and business. In autumn 2026 I started the M.Sc. programme in Data Science & AI at Chalmers University of Technology, after completing a B.Sc. in Automation & Mechatronics Engineering with the highest academic results in the programme (GPA 4.9/5.0). In parallel I am pursuing a B.Sc. in Business Administration at the School of Business, Economics and Law. My academic work has been recognized with the Adlerbert Scholarship two years in a row, the Chalmers Mastercard Scholarship, and a place on the Nova 111 Student List 2026 as one of Sweden's top ten engineering students.",
     'At Volvo Buses I have spent the past year moving from vehicle software verification to applied AI. My bachelor thesis produced a CAN-based vehicle simulation tool for shift-left verification of bus software, verified on a physical HIL test rig, and was extended into a full-time role integrating Vector CANoe and developing advanced AEBS tests. During the summer of 2026 I worked as an Applied AI & Machine Learning intern, building MCP servers and AI agent tooling, forecasting models on large-scale bus time-series data and a browser-based AI agent extension, and was offered a continued position in the AI and agent infrastructure area.',

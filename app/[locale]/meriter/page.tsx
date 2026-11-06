@@ -1,4 +1,7 @@
+import { ReactNode } from 'react'
 import { getCertifications, getAwards, getMemberships, getLanguages } from '@/data/index'
+import Link from '@/components/Link'
+import PageTitle from '@/components/PageTitle'
 import { genPageMetadata } from 'app/seo'
 
 export function generateMetadata({ params }: { params: { locale: string } }) {
@@ -6,6 +9,41 @@ export function generateMetadata({ params }: { params: { locale: string } }) {
     title: params.locale === 'en' ? 'Achievements' : 'Meriter',
     locale: params.locale,
   })
+}
+
+// One group: heading in the left columns, its entries in columns on the right.
+function Group({
+  id,
+  title,
+  cols = 'sm:grid-cols-2',
+  children,
+}: {
+  id: string
+  title: string
+  cols?: string
+  children: ReactNode
+}) {
+  return (
+    <section
+      aria-labelledby={id}
+      className="reveal mt-24 grid grid-cols-1 gap-10 first:mt-16 md:mt-32 md:grid-cols-12 md:gap-8 md:first:mt-24"
+    >
+      <h2 id={id} className="text-head leading-[1.05] font-medium tracking-[-0.03em] md:col-span-4">
+        {title}
+      </h2>
+      <ul className={`grid grid-cols-1 gap-x-8 gap-y-10 md:col-span-8 ${cols}`}>{children}</ul>
+    </section>
+  )
+}
+
+function Item({ name, meta, text }: { name: ReactNode; meta: string; text?: string }) {
+  return (
+    <li>
+      <h3 className="font-medium">{name}</h3>
+      <p className="text-small text-muted mt-1">{meta}</p>
+      {text && <p className="text-muted mt-3 max-w-[60ch]">{text}</p>}
+    </li>
+  )
 }
 
 export default function MeriterPage({ params }: { params: { locale: string } }) {
@@ -28,131 +66,59 @@ export default function MeriterPage({ params }: { params: { locale: string } }) 
   }
 
   return (
-    <div className="divide-y divide-gray-200 dark:divide-gray-700">
-      <div className="space-y-2 pt-6 pb-8 md:space-y-5">
-        <h1 className="text-3xl leading-9 font-extrabold tracking-tight text-gray-900 sm:text-4xl sm:leading-10 md:text-6xl md:leading-14 dark:text-gray-100">
-          {t.title}
-        </h1>
-        <p className="text-lg leading-7 text-gray-500 dark:text-gray-400">{t.description}</p>
+    <>
+      <PageTitle title={t.title} description={t.description} />
+
+      <div>
+        <Group id="certs-title" title={t.certs}>
+          {certificationsData.map((cert) => (
+            <Item
+              key={cert.title}
+              name={
+                cert.url ? (
+                  <Link
+                    href={cert.url}
+                    className="hover:text-accent-text underline-offset-4 transition-colors hover:underline"
+                  >
+                    {cert.title}
+                  </Link>
+                ) : (
+                  cert.title
+                )
+              }
+              meta={`${cert.issuer} · ${cert.date}`}
+            />
+          ))}
+        </Group>
+
+        <Group id="awards-title" title={t.awards}>
+          {awardsData.map((award) => (
+            <Item
+              key={award.title}
+              name={award.title}
+              meta={award.organization}
+              text={award.summary}
+            />
+          ))}
+        </Group>
+
+        <Group id="memberships-title" title={t.memberships}>
+          {membershipsData.map((member) => (
+            <Item
+              key={member.organization}
+              name={member.organization}
+              meta={member.role}
+              text={member.summary}
+            />
+          ))}
+        </Group>
+
+        <Group id="languages-title" title={t.languages} cols="sm:grid-cols-3">
+          {languagesData.map((lang) => (
+            <Item key={lang.language} name={lang.language} meta={lang.proficiency} />
+          ))}
+        </Group>
       </div>
-
-      <div className="py-10">
-        <div className="grid grid-cols-1 items-start gap-16 lg:grid-cols-2">
-          {/* VÄNSTER KOLUMN */}
-          <div className="space-y-12">
-            <section>
-              <div className="mb-6 flex items-center gap-3">
-                <div className="flex h-10 w-10 items-center justify-center rounded-lg bg-blue-100 text-xl dark:bg-blue-900/30">
-                  📜
-                </div>
-                <h2 className="text-2xl font-bold text-gray-900 dark:text-gray-100">{t.certs}</h2>
-              </div>
-              <div className="ml-2 space-y-6">
-                {certificationsData.map((cert) => (
-                  <div key={cert.title} className="group">
-                    <h3 className="text-lg font-bold text-gray-900 transition-colors dark:text-gray-100">
-                      {cert.url ? (
-                        <a
-                          href={cert.url}
-                          target="_blank"
-                          rel="noopener noreferrer"
-                          className="flex items-center gap-2"
-                        >
-                          {cert.title} <span className="text-xs opacity-50">↗</span>
-                        </a>
-                      ) : (
-                        cert.title
-                      )}
-                    </h3>
-                    <span className="text-primary-600 dark:text-primary-400 mb-1 block text-sm font-bold">
-                      {cert.issuer}
-                    </span>
-                    <p className="text-sm text-gray-500 dark:text-gray-400">{cert.date}</p>
-                  </div>
-                ))}
-              </div>
-            </section>
-
-            <section>
-              <div className="mb-6 flex items-center gap-3">
-                <span className="flex h-10 w-10 items-center justify-center rounded-lg bg-yellow-100 text-xl dark:bg-yellow-900/30">
-                  🏆
-                </span>
-                <h2 className="text-2xl font-bold text-gray-900 dark:text-gray-100">{t.awards}</h2>
-              </div>
-              <div className="ml-2 space-y-6">
-                {awardsData.map((award) => (
-                  <div key={award.title} className="group">
-                    <h3 className="text-lg leading-tight font-bold text-gray-900 dark:text-gray-100">
-                      {award.title}
-                    </h3>
-                    <span className="text-primary-600 dark:text-primary-400 mt-1 block text-sm font-bold">
-                      {award.organization}
-                    </span>
-                    {award.summary && (
-                      <p className="mt-1 text-sm leading-relaxed text-gray-600 dark:text-gray-400">
-                        {award.summary}
-                      </p>
-                    )}
-                  </div>
-                ))}
-              </div>
-            </section>
-          </div>
-
-          {/* HÖGER KOLUMN */}
-          <div className="space-y-12">
-            <section>
-              <div className="mb-6 flex items-center gap-3">
-                <span className="flex h-10 w-10 items-center justify-center rounded-lg bg-green-100 text-xl dark:bg-green-900/30">
-                  🤝
-                </span>
-                <h2 className="text-2xl font-bold text-gray-900 dark:text-gray-100">
-                  {t.memberships}
-                </h2>
-              </div>
-              <div className="ml-2 space-y-6">
-                {membershipsData.map((member) => (
-                  <div key={member.organization}>
-                    <h3 className="text-lg font-bold text-gray-900 dark:text-gray-100">
-                      {member.role}
-                    </h3>
-                    <span className="text-primary-600 dark:text-primary-400 mb-1 block text-sm font-bold">
-                      {member.organization}
-                    </span>
-                    <p className="text-sm leading-relaxed text-gray-600 dark:text-gray-400">
-                      {member.summary}
-                    </p>
-                  </div>
-                ))}
-              </div>
-            </section>
-
-            <section>
-              <div className="mb-6 flex items-center gap-3">
-                <span className="flex h-10 w-10 items-center justify-center rounded-lg bg-purple-100 text-xl dark:bg-purple-900/30">
-                  🗣️
-                </span>
-                <h2 className="text-2xl font-bold text-gray-900 dark:text-gray-100">
-                  {t.languages}
-                </h2>
-              </div>
-              <div className="ml-2 space-y-6">
-                {languagesData.map((lang) => (
-                  <div key={lang.language}>
-                    <h3 className="text-lg font-bold text-gray-900 dark:text-gray-100">
-                      {lang.language}
-                    </h3>
-                    <span className="text-primary-600 dark:text-primary-400 block text-sm font-bold">
-                      {lang.proficiency}
-                    </span>
-                  </div>
-                ))}
-              </div>
-            </section>
-          </div>
-        </div>
-      </div>
-    </div>
+    </>
   )
 }

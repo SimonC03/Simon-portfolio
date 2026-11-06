@@ -16,6 +16,7 @@ import { languagesData as languagesSv } from './sv/resume/languages'
 import { SKILLS as skillsSv } from './sv/resume/skills'
 import { aboutContent as aboutSv } from './sv/ui/about'
 import { homeContent as homeSv } from './sv/ui/home'
+import { journeyContent as journeySv } from './sv/ui/journey'
 
 // ==========================================
 // ENGELSKA IMPORTER (Från data/en/...)
@@ -34,6 +35,7 @@ import { languagesData as languagesEn } from './en/resume/languages'
 import { SKILLS as skillsEn } from './en/resume/skills'
 import { aboutContent as aboutEn } from './en/ui/about'
 import { homeContent as homeEn } from './en/ui/home'
+import { journeyContent as journeyEn } from './en/ui/journey'
 
 // ==========================================
 // HELPER FUNCTIONS (Getters)
@@ -61,3 +63,5 @@ export const getSkills = (locale: string) => (locale === 'en' ? skillsEn : skill
 export const getAboutContent = (locale: string) => (locale === 'en' ? aboutEn : aboutSv)
 
 export const getHomeContent = (locale: string) => (locale === 'en' ? homeEn : homeSv)
+
+export const getJourney = (locale: string) => (locale === 'en' ? journeyEn : journeySv)
