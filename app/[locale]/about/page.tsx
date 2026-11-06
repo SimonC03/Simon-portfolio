@@ -1,7 +1,8 @@
 import Image from '@/components/Image'
 import Link from '@/components/Link'
-import SocialIcon from '@/components/social-icons'
+import PageTitle from '@/components/PageTitle'
 import { getSkills, getAboutContent } from '@/data/index'
+import { Skill } from '@/data/types'
 import HardSkillRating from '@/components/HardSkillRating'
 import siteMetadata from '@/data/siteMetadata'
 import { genPageMetadata } from 'app/seo'
@@ -13,37 +14,16 @@ export function generateMetadata({ params }: { params: { locale: string } }) {
   })
 }
 
+const textLink =
+  'text-ink hover:text-accent-text font-medium underline decoration-1 underline-offset-4 transition-colors'
+
 export default function AboutPage({ params }: { params: { locale: string } }) {
   const locale = params.locale
   const author = getAboutContent(locale)
   const skills = getSkills(locale)
 
-  // Hjälpfunktion för att hitta skills från din array baserat på id
-  const getSkill = (id: string) => skills.find((s) => s.id === id)
-
-  // Gruppera skills
-  const techSkills = [
-    getSkill('python'),
-    getSkill('typescript'),
-    getSkill('java'),
-    getSkill('nextjs'),
-    getSkill('sql'),
-  ].filter((s) => s !== undefined)
-
-  const aiSkills = [
-    getSkill('machine-learning'),
-    getSkill('time-series'),
-    getSkill('mcp'),
-    getSkill('ai-agents'),
-  ].filter((s) => s !== undefined)
-
-  const toolSkills = [
-    getSkill('canoe'),
-    getSkill('docker'),
-    getSkill('gcp'),
-    getSkill('git'),
-    getSkill('matlab'),
-  ].filter((s) => s !== undefined)
+  const pick = (ids: string[]) =>
+    ids.map((id) => skills.find((s) => s.id === id)).filter((s): s is Skill => !!s)
 
   const authorContact = author as { email?: string; linkedin?: string }
   const email = authorContact.email || siteMetadata.email
@@ -59,97 +39,98 @@ export default function AboutPage({ params }: { params: { locale: string } }) {
       locale === 'en'
         ? 'I build AI and software systems, and combine engineering with business strategy.'
         : 'Jag bygger AI- och mjukvarusystem och förenar ingenjörskonst med affärsstrategi.',
+    story: locale === 'en' ? 'Background' : 'Bakgrund',
+    skills: locale === 'en' ? 'Skills' : 'Kompetenser',
+    portrait: locale === 'en' ? 'Portrait of Simon Carlén' : 'Porträtt av Simon Carlén',
   }
 
+  const skillGroups = [
+    { title: t.tech, items: pick(['python', 'typescript', 'java', 'nextjs', 'sql']) },
+    { title: t.ai, items: pick(['machine-learning', 'time-series', 'mcp', 'ai-agents']) },
+    { title: t.tools, items: pick(['canoe', 'docker', 'gcp', 'git', 'matlab']) },
+  ]
+
   return (
-    <div className="mx-auto max-w-5xl px-4 py-12 sm:px-6 lg:px-8">
-      {/* --- HERO SECTION --- */}
-      <div className="mb-12 border-b border-gray-200 pb-12 dark:border-gray-700">
-        <div className="flex flex-col items-center gap-8 text-center md:flex-row md:items-start md:text-left">
-          <div className="relative h-40 w-40 shrink-0 overflow-hidden rounded-full border-4 border-white shadow-lg md:h-48 md:w-48 dark:border-gray-800">
-            {author.avatar && (
-              <Image
-                src={author.avatar}
-                alt="Avatar"
-                width={192}
-                height={192}
-                className="h-full w-full object-cover"
-                priority
-              />
-            )}
-          </div>
-          <div className="flex-1 pt-4">
-            <h1 className="text-4xl font-extrabold tracking-tight text-gray-900 sm:text-5xl dark:text-gray-100">
-              {author.name}
-            </h1>
-            <p className="text-primary-600 dark:text-primary-400 mt-2 text-xl font-medium">
-              {author.title}
-            </p>
-            <p className="mt-4 max-w-2xl text-lg text-gray-600 dark:text-gray-300">{t.intro}</p>
-
-            <div className="mt-6 flex flex-wrap justify-center gap-4 md:justify-start">
-              <SocialIcon kind="mail" href={`mailto:${email}`} size={6} />
-              <SocialIcon kind="linkedin" href={linkedin} size={6} />
-              <SocialIcon kind="github" href={github} size={6} />
-
+    <>
+      <div className="grid grid-cols-1 items-end gap-10 md:grid-cols-12 md:gap-8">
+        <div className="md:col-span-7 md:pb-4">
+          <PageTitle title={author.name} description={t.intro}>
+            <ul className="enter enter-2 text-muted mt-8 space-y-1">
+              {author.title.split(' | ').map((line) => (
+                <li key={line}>{line}</li>
+              ))}
+            </ul>
+            <div className="enter enter-3 mt-10 flex flex-wrap items-center gap-x-8 gap-y-4">
               <Link
                 href="/cv.pdf"
                 target="_blank"
-                className="ml-4 inline-flex items-center rounded-full bg-gray-900 px-5 py-2 text-sm font-bold text-white transition hover:bg-gray-700 dark:bg-white dark:text-gray-900 dark:hover:bg-gray-200"
+                className="bg-accent text-accent-ink hover:bg-ink hover:text-bg inline-flex h-12 items-center px-6 font-medium transition-colors"
               >
                 {t.downloadCv}
               </Link>
+              <a href={`mailto:${email}`} className={textLink}>
+                {email}
+              </a>
+              <Link href={linkedin} className={textLink}>
+                LinkedIn
+              </Link>
+              <Link href={github} className={textLink}>
+                GitHub
+              </Link>
             </div>
-          </div>
+          </PageTitle>
         </div>
+        {author.avatar && (
+          <figure className="enter enter-2 bg-surface relative aspect-[4/3] overflow-hidden md:col-span-5 md:aspect-[4/5]">
+            <Image
+              src={author.avatar}
+              alt={t.portrait}
+              fill
+              sizes="(min-width: 768px) 40vw, 100vw"
+              className="object-cover object-[50%_20%]"
+              priority
+            />
+          </figure>
+        )}
       </div>
 
-      <div className="grid grid-cols-1 gap-12 lg:grid-cols-3">
-        {/* --- VÄNSTER KOLUMN (Sidebar) --- */}
-        <div className="order-2 space-y-8 lg:order-1 lg:col-span-1">
-          <div className="space-y-6">
-            <div className="pt-6">
-              <h3 className="mb-4 text-xs font-bold tracking-wider text-gray-500 uppercase">
-                {t.tech}
-              </h3>
-              <div className="flex flex-col gap-2">
-                {techSkills.map(
-                  (skill) => skill && <HardSkillRating key={skill.id} skill={skill} />
-                )}
-              </div>
-            </div>
-
-            <div className="border-t border-gray-200 pt-6 dark:border-gray-700">
-              <h3 className="mb-4 text-xs font-bold tracking-wider text-gray-500 uppercase">
-                {t.ai}
-              </h3>
-              <div className="flex flex-col gap-2">
-                {aiSkills.map((skill) => skill && <HardSkillRating key={skill.id} skill={skill} />)}
-              </div>
-            </div>
-
-            <div className="border-t border-gray-200 pt-6 dark:border-gray-700">
-              <h3 className="mb-4 text-xs font-bold tracking-wider text-gray-500 uppercase">
-                {t.tools}
-              </h3>
-              <div className="flex flex-col gap-2">
-                {toolSkills.map(
-                  (skill) => skill && <HardSkillRating key={skill.id} skill={skill} />
-                )}
-              </div>
-            </div>
-          </div>
+      <section
+        aria-labelledby="story-title"
+        className="reveal mt-24 grid gap-8 md:mt-32 md:grid-cols-12"
+      >
+        <h2
+          id="story-title"
+          className="text-head leading-[1.05] font-medium tracking-[-0.03em] md:col-span-4"
+        >
+          {t.story}
+        </h2>
+        <div className="max-w-[65ch] space-y-6 leading-[1.7] md:col-span-8">
+          {author.description.map((paragraph, index) => (
+            <p key={index}>{paragraph}</p>
+          ))}
         </div>
+      </section>
 
-        {/* --- HÖGER KOLUMN (Main Content) --- */}
-        <div className="order-1 lg:order-2 lg:col-span-2">
-          <div className="prose dark:prose-invert max-w-none">
-            {author.description.map((paragraph, index) => (
-              <p key={index}>{paragraph}</p>
-            ))}
-          </div>
+      <section aria-labelledby="skills-title" className="reveal mt-24 md:mt-32">
+        <h2
+          id="skills-title"
+          className="text-head mb-10 leading-[1.05] font-medium tracking-[-0.03em] md:mb-14"
+        >
+          {t.skills}
+        </h2>
+        <div className="grid grid-cols-1 gap-12 md:grid-cols-3 md:gap-8">
+          {skillGroups.map((group) => (
+            <div key={group.title}>
+              <h3 className="text-lead mb-6 font-medium">{group.title}</h3>
+              <div className="flex flex-col gap-2">
+                {group.items.map((skill) => (
+                  <HardSkillRating key={skill.id} skill={skill} />
+                ))}
+              </div>
+            </div>
+          ))}
         </div>
-      </div>
-    </div>
+      </section>
+    </>
   )
 }

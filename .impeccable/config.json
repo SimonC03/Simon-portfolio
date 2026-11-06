@@ -1,0 +1,43 @@
+{
+  "detector": {
+    "ignoreRules": [],
+    "ignoreFiles": [],
+    "ignoreValues": [
+      {
+        "rule": "low-contrast",
+        "value": "*",
+        "files": [".superpowers/brainstorm/131-1793985594/content/resan-koncept.html"],
+        "createdAt": "2026-11-06T17:20:56.346Z",
+        "reason": "Claude: throwaway scaled-down brainstorm thumbnail, not shipped UI"
+      },
+      {
+        "rule": "tiny-text",
+        "value": "*",
+        "files": [".superpowers/brainstorm/131-1793985594/content/resan-koncept.html"],
+        "createdAt": "2026-11-06T17:20:56.457Z",
+        "reason": "Claude: throwaway scaled-down brainstorm thumbnail, not shipped UI"
+      },
+      {
+        "rule": "undersized-ui-text",
+        "value": "*",
+        "files": [".superpowers/brainstorm/131-1793985594/content/resan-koncept.html"],
+        "createdAt": "2026-11-06T17:21:09.615Z",
+        "reason": "Claude: throwaway scaled-down brainstorm thumbnail, not shipped UI"
+      },
+      {
+        "rule": "tight-leading",
+        "value": "*",
+        "files": [".superpowers/brainstorm/131-1793985594/content/resan-prototyp.html"],
+        "createdAt": "2026-11-06T17:39:35.148Z",
+        "reason": "Claude: line-height under 1 only on oversized display headings (name, year, chapter titles); body text is 1.45"
+      },
+      {
+        "rule": "low-contrast",
+        "value": "*",
+        "files": [".superpowers/brainstorm/131-1793985594/content/resan-prototyp.html"],
+        "createdAt": "2026-11-06T18:04:55.782Z",
+        "reason": "Claude: nav is #fff with mix-blend-mode:difference so it renders dark on light sections; verified legible in light and dark screenshots; throwaway prototype"
+      }
+    ]
+  }
+}
