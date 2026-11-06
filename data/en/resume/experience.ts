@@ -2,6 +2,29 @@ import { Experience } from '../../types'
 
 export const experienceData: Experience[] = [
   {
+    id: 'ernstromgruppen-ai',
+    title: 'AI Intern',
+    company: 'Ernströmgruppen',
+    location: 'Gothenburg, Sweden',
+    range: 'Nov 2026 - Present',
+    url: 'https://www.ernstromgruppen.com',
+    summary:
+      'AI and automation internship at Ernströmgruppen, a family-owned industrial group with 50+ companies, around SEK 5 billion in revenue and 1,500+ employees across the Nordics and Northern Europe. Identifying, evaluating and implementing AI-driven workflows across the group companies.',
+    description: [
+      'Identify AI and automation opportunities across sales, operational workflows and acquisition processes.',
+      'Evaluate AI tools and platforms, from no-code automation to machine learning-based solutions, and assess the impact, feasibility and ROI of AI use cases.',
+      'Build prototypes and proofs of concept together with business units and support the implementation of AI-driven workflows across the group companies.',
+    ],
+    relatedSkills: [
+      'AI Strategy',
+      'Automation',
+      'Machine Learning',
+      'Prototyping',
+      'Business Analysis',
+    ],
+    achievements: [],
+  },
+  {
     id: 'volvo-buses-ai',
     title: 'Applied AI & Machine Learning Intern',
     company: 'Volvo Buses',

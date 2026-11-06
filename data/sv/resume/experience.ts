@@ -2,6 +2,29 @@ import { Experience } from '../../types'
 
 export const experienceData: Experience[] = [
   {
+    id: 'ernstromgruppen-ai',
+    title: 'AI Intern',
+    company: 'Ernströmgruppen',
+    location: 'Göteborg, Sverige',
+    range: 'Nov 2026 - Nuvarande',
+    url: 'https://www.ernstromgruppen.com',
+    summary:
+      'Praktik inom AI och automation på Ernströmgruppen, en familjeägd industrikoncern med över 50 bolag, cirka 5 miljarder kronor i omsättning och över 1 500 medarbetare i Norden och norra Europa. Identifierar, utvärderar och implementerar AI-drivna arbetsflöden i koncernens bolag.',
+    description: [
+      'Identifierar möjligheter för AI och automation inom försäljning, operativa arbetsflöden och förvärvsprocesser.',
+      'Utvärderar AI-verktyg och plattformar, från no-code-automation till maskininlärningsbaserade lösningar, och bedömer nytta, genomförbarhet och ROI.',
+      'Tar fram prototyper och proof-of-concept tillsammans med affärsenheterna och stöttar implementeringen av AI-drivna arbetsflöden i koncernens bolag.',
+    ],
+    relatedSkills: [
+      'AI-strategi',
+      'Automation',
+      'Maskininlärning',
+      'Prototyputveckling',
+      'Affärsanalys',
+    ],
+    achievements: [],
+  },
+  {
     id: 'volvo-buses-ai',
     title: 'Praktikant inom tillämpad AI & maskininlärning',
     company: 'Volvo Bussar',
